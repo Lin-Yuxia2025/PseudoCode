@@ -146,6 +146,7 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
     borderRadius: 8,
     border: '1px solid #555',
     background: '#ffffff',
+    color: '#111',          // 文字色を固定 (ダークモード対策)
     cursor: 'pointer',
     fontSize: '2rem',
     display: 'flex',
@@ -276,6 +277,7 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
               style={{
                 fontSize: '1.1rem',
                 fontWeight: 'bold',
+                color: '#111',
                 marginBottom: '0.8rem',
                 whiteSpace: 'pre-wrap',   // 空白や改行文字を保持しつつ、テキストが必要に応じて折り返し
               }}
@@ -293,6 +295,7 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
                 border: '1px solid #555',
                 cursor: 'pointer',
                 fontSize: '0.9rem',
+                color: '#111',
                 background: '#f5f5f5',
               }}
             >

@@ -293,6 +293,8 @@ function VariablesPanel({ globalVars, callStack, problemText, answerChoices, cho
       : `calc((100% - ${totalGapRem}rem) / ${choiceitemsRow})`;
 
 
+
+      
   return (
     <div
       style={{
@@ -305,6 +307,7 @@ function VariablesPanel({ globalVars, callStack, problemText, answerChoices, cho
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',                    // 絶対配置の基準
+        color: '#111',
       }}
     >
       {/* 中身：変数一覧 or 問題文（領域を最大限使う） */}
@@ -333,7 +336,7 @@ function VariablesPanel({ globalVars, callStack, problemText, answerChoices, cho
         {/* 問題文と解答 */}
         {/* タブが問題文なら表示 */}
         {activeTab === 'problem' && (
-          <div style={{ padding: '0.5rem 0', fontSize: '0.9rem', lineHeight: 1.6 }}>
+          <div style={{ padding: '0.5rem 0', fontSize: '0.9rem', color: '#111', lineHeight: 1.6 }}>
             {/* 問題文 */}
             {/* 問題文があるなら表示 */}
             {problemText && (
@@ -417,6 +420,7 @@ function VariablesPanel({ globalVars, callStack, problemText, answerChoices, cho
           position: 'absolute',
           right: '0.15rem',
           bottom: '-2.17rem', // マイナスで外側にはみ出させる
+          color: '#111',
         }}
       >
         <div style={tabWrapperStyle}>

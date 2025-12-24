@@ -1,0 +1,223 @@
+[
+  [
+    "サンプル問題1",
+    "変数の代入",
+    "整数型: x ← 1\n整数型: y ← 2\n整数型: z ← 3\nx ← y\ny ← z\nz ← x\ny を 出力する\nz を 出力する",
+    "このプログラムを実行すると整数値が2回出力される。\n実行した際に出力されるものが、出力される順に並んだものを\n解答群の中から選んでください。",
+    [
+      { "id": "ア", "text": "1,2", "answer": "incorrect" },
+      { "id": "イ", "text": "1,3", "answer": "incorrect" },
+      { "id": "ウ", "text": "2,1", "answer": "incorrect" },
+      { "id": "エ", "text": "2,3", "answer": "incorrect" },
+      { "id": "オ", "text": "3,1", "answer": "incorrect" },
+      { "id": "カ", "text": "3,2", "answer": "correct" }
+    ],
+    3,
+    null
+  ],
+  [
+    "サンプル問題3",
+    "配列の加算",
+    "整数型の配列: array ← {3, 2, 1, 6, 5, 4}\n整数型の配列: result ← {}  // 要素数0の配列\n\nresult ← makeNewArray(array)\n\n〇整数型の配列: makeNewArray(整数型の配列: in)\n  整数型の配列: out ← {}   // 要素数0の配列\n  整数型: i\n  整数型: tail\n  out の末尾に in[1] の値を追加する\n  for (i を 2 から inの要素数 まで 1 ずつ増やす)\n    tail ← out[outの要素数]\n    outの末尾に(tail + in[i]) の結果を追加する\n  endfor\n  return out\n",
+    "次の記述中の 【空欄】 に入れる正しい答えを、解答群の中から選んでください。また、配列の要素番号は 1 から始まります。\n\n関数 makeNewArrayは、要素数2以上の整数型の配列を引数にとり、整数型の配列を返す関数である。\n関数 makeNewArrayを makeNewArray(array) として呼び出した時、戻り値の配列の要素番号5の値は 【空欄】 となる。\n",
+    [
+      { "id": "ア", "text": "5", "answer": "incorrect" },
+      { "id": "イ", "text": "6", "answer": "incorrect" },
+      { "id": "ウ", "text": "9", "answer": "incorrect" },
+      { "id": "エ", "text": "11", "answer": "incorrect" },
+      { "id": "オ", "text": "12", "answer": "incorrect" },
+      { "id": "カ", "text": "17", "answer": "correct" },
+      { "id": "キ", "text": "21", "answer": "incorrect" }
+    ],
+    null,
+    null
+  ],
+  [
+    "サンプル問題4",
+    "最大公約数",
+    "整数型: result ← gcd(36, 60)\nresultを出力する\n\n〇整数型: gcd(整数型: num1, 整数型: num2)\n  整数型: x ← num1\n  整数型: y ← num2\n  A                                             // 空欄A\n    if ( B )                                    // 空欄B\n      x ← x - y\n    else\n      y ← y - x\n    endif\n  C                                             // 空欄C\n  return x\n",
+    "次のプログラム中のA, B, Cに入れる正しい答えの組み合わせを、解答群の中から選んでください。\n\n関数 gcd は、引数で与えられた二つの正の整数 num1 と num2 の最大公約数を、次の(1)~(3)の性質を利用して求める。\n(1) num1 と num2 が等しい時、num1 と num2 の最大公約数は num1 である。\n(2) num1 が num2 より大きい時、num1 と num2 の最大公約数は、(num1 - num2)と num2 の最大公約数と等しい。\n(3) num2 が num1 より大きい時、num1 と num2 最大公約数は、(num2 - num1) とnum1 の最大公約数と等しい。 \n\n",
+    [
+      { "id": "ア", "text": "A: \u00A0 if (x ≠ y) \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 x < y \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 C: \u00A0 endif", "answer": "incorrect" },
+      { "id": "イ", "text": "A: \u00A0 if (x ≠ y) \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 x > y \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 C: \u00A0 endif", "answer": "incorrect" },
+      { "id": "ウ", "text": "A: \u00A0 while (x ≠ y) \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 x < y \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 C: \u00A0 endwhile", "answer": "incorrect" },
+      { "id": "エ", "text": "A: \u00A0 while (x ≠ y) \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 x > y \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 C: \u00A0 endwhile", "answer": "correct" }
+    ],
+    1,
+    [
+      [
+        { "text": "  if (x ≠ y)", "line": 6 },
+        { "text": "    if ( x < y )", "line": 7 },
+        { "text": "  endif", "line": 12 }
+      ],
+      [
+        { "text": "  if (x ≠ y)", "line": 6 },
+        { "text": "    if ( x > y )", "line": 7 },
+        { "text": "  endif", "line": 12 }
+      ],
+      [
+        { "text": "  while (x ≠ y)", "line": 6 },
+        { "text": "    if ( x < y )", "line": 7 },
+        { "text": "  endwhile", "line": 12 }
+      ],
+      [
+        { "text": "  while (x ≠ y)", "line": 6 },
+        { "text": "    if ( x > y )", "line": 7 },
+        { "text": "  endwhile", "line": 12 }
+      ]
+    ]
+  ],
+  [
+    "サンプル問題7",
+    "再帰関数(階乗)",
+    "整数型: result\nresult ← factorial(5)\nresultを出力する\n\n〇整数型: factorial(整数型: n)\n  整数型:f\n  if(n = 0)    \n    return 1\n  endif \n  f ← factorial(A)                  // 空欄A\n  return B                          // 空欄B\n",
+    "次のプログラム中の空欄A, Bに入れる正しい答えを、解答群の中から選べ。\n\n関数 factorial は非負の整数 n を引数にとり、その階乗を返す関数である。\n非負の整数 n の階乗は n が0のときに1になり、\nそれ以外の場合は1から n までの整数を全て掛け合わせた数となる。",
+    [
+      { "id": "ア", "text": "A: \u00A0 n \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 f \u00A0\u00A0\u00A0\u00A0\u00A0", "answer": "incorrect" },
+      { "id": "イ", "text": "A: \u00A0 n \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 n × f", "answer": "incorrect" },
+      { "id": "ウ", "text": "A: \u00A0 n - 1 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 f \u00A0\u00A0\u00A0\u00A0\u00A0", "answer": "incorrect" },
+      { "id": "エ", "text": "A: \u00A0 n - 1 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 n × f", "answer": "correct" }
+    ],
+    1,
+    [
+      [
+        { "text": "  f ← factorial(n)", "line": 9 },
+        { "text": "  return f", "line": 10 }
+      ],
+      [
+        { "text": "  f ← factorial(n)", "line": 9 },
+        { "text": "  return n × f", "line": 10 }
+      ],
+      [
+        { "text": "  f ← factorial(n-1)", "line": 9 },
+        { "text": "  return f", "line": 10 }
+      ],
+      [
+        { "text": "  f ← factorial(n-1)", "line": 9 },
+        { "text": "  return n × f", "line": 10 }
+      ]
+    ]
+  ],
+  [
+    "サンプル問題13",
+    "配列から探索",
+    "整数型の配列: array ← {1,2}\n整数型: result\nresult ← search(array, 2)\n\n〇整数型: search(整数型の配列: data, 整数型: target)\n  整数型: low\n  整数型: high\n  整数型: middle\n\n  low ← 1\n  high ← dataの要素数\n\n  while (low ≦ high)\n    middle ← (low + high) ÷ 2 の商\n    if (data[middle] < target)\n      low ← middle\n    elseif (data[middle] > target)\n      high ← middle\n    else\n      return middle\n    endif\n  endwhile\n\n  return -1\n",
+    "次の記述中の【空欄】に入れる正しい答えを、解答群の中から選んでください。ここで、配列の要素番号は 1 から始まるとします。\n\n関数 search は、引数 data で指定された配列に、引数 target で指定された値が含まれていればその要素番号を返し、\n含まれていなければ -1 を返す。 data は昇順に整列されており、値に重複はない。\n関数 search には不具合がある。例えば、 data の 【空欄】 場合は、無限ループになる。",
+    [
+      { "id": "ア", "text": "要素数が 1 で、target がその要素の値と等しい", "answer": "incorrect" },
+      { "id": "イ", "text": "要素数が 2 で、target が data の先頭要素と等しい", "answer": "incorrect" },
+      { "id": "ウ", "text": "要素数が 2 で、target が data の末尾要素の値と等しい", "answer": "correct" },
+      { "id": "エ", "text": "要素に -1 が含まれている", "answer": "incorrect" }
+    ],
+    1,
+    null
+  ],
+  [
+    "テスト",
+    "関数呼び出し",
+    "funcA(100)\n// コメントアウトテスト1\n〇funcA(整数型: paramA)\n  整数型: x ← 1                         // コメントアウトテスト2\n  x ← paramA\n  x を 出力する\n\n  return\n",
+    "",
+    null,
+    null,
+    null
+  ],
+  [
+    "テスト",
+    "配列",
+    "整数型の配列: problemArray ← {3, 2, 1, 6, 5, 4}  // 出題用のグローバル変数\nmakeNewArray(problemArray)\n\n〇makeNewArray(整数型の配列: in)\n  整数型の配列: out ← {}  // 要素数0の配列\n  整数型: i\n  整数型: tail\n  outの末尾にin[1]の値を追加する\n  return",
+    "",
+    null,
+    null,
+    null
+  ],
+  [
+    "スライド用",
+    "",
+    "functionA(4)\n\nfunctionB()\n\n〇functionA(整数型: paramA)\n  整数型: x ← 1\n  整数型: y ← 2\n  整数型: z ← 3\n  x ← y\n  y ← z\n  z ← x\n  x ← paramA\n  x を 出力する\n  y を 出力する\n  z を 出力する\n\n  return\n\n〇functionB()\n  整数型の配列: array ← {1, 2, 3, 4, 5}\n  arrayを出力する\n  \n  return",
+    "",
+    null,
+    null,
+    null
+  ],
+  [
+    "テスト",
+    "関数内で関数呼び出し",
+    "整数型: Z ← 500\nfuncA()\n  \n〇funcA()\n  整数型: A ← 1\n  Aを出力する\n  funcB()\n\n  return\n\n〇funcB()\n  整数型: B ← 2\n  Bを出力する\n  funcC()\n\n  return\n\n〇funcC()\n  整数型: C ← 3\n  Cを出力する\n\n  return",
+    "",
+    null,
+    null,
+    null
+  ],
+  [
+    "テスト",
+    "関数の返り値を代入",
+    "整数型: x\nx ← funcA()\n\n〇funcA()\n  整数型: y ← 1\n  \n  return y",
+    "",
+    null,
+    null,
+    null
+  ],
+  [
+    "テスト",
+    "if文",
+    "整数型: result\nresult ← factorial(5)\n\n〇整数型: factorial(整数型: n)\n  整数型:f\n  if(n = 0)    \n    return 1\n  endif \n  f ← factorial(n-1) \n  return n × f",
+    "",
+    null,
+    null,
+    null
+  ],
+  [
+    "テスト",
+    "for文",
+    "func()\n\n〇func()\n  整数型: i\n  for(i を 1 から 5 まで 1 ずつ増やす)\n    i を 出力する\n  endfor\n",
+    "",
+    null,
+    null,
+    null
+  ],
+  [
+    "テスト",
+    "while文",
+    "整数型:a ← 1\n\nwhile (a < 5)\n  a を出力する\n  a ← a + 1\nendwhile\n",
+    "",
+    null,
+    null,
+    null
+  ],
+  [
+    "テスト",
+    "do while",
+    "整数型: i ← 0\ndo  \n  i ← i + 1\nwhile(i < 3)\n",
+    "",
+    null,
+    null,
+    null
+  ],
+  [
+    "テスト",
+    "while, do_while ネスト",
+    "// ネスト、インデント\n整数型: do1 ← 0\n整数型: do2 ← 0\n整数型: w1 ← 0\n整数型: w2 ← 0\n\ndo                      // 一つ目のdowhile      1\n  while (w1 < 2)        // 一つ目のwhile        2\n    do                  // 二つ目のdowhile      3\n      while(w2 < 2)     // 二つ目のwhile        4\n        w2 ← w2 + 1\n      endwhile          // 二つ目のwhile最後     4\n      do2 ← do2 + 1     \n    while(do2 < 2)      // 二つ目のdowhile最後   3\n    w1 ← w1 + 1         \n  endwhile              // 一つ目のwhile最後     2\n  do1 ← do1 + 1\nwhile(do1 < 2)          // 一つ目のdowhile最後   1\n",
+    "",
+    null,
+    null,
+    null
+  ],
+  [
+    "テスト",
+    "変数,配列表示",
+    "// 変数表示テスト\n整数型: g ← 100\ng を 出力する\n整数型の配列: array1 ← {1}\n整数型の配列: array2 ← {1, 2, 3}\n整数型の配列: array3 ← {1, 2, 3, 4, 5}\n整数型の配列: array4 ← {111, 2, 3, 4, 5}\n整数型の配列: array5 ← {1, 22, 333, 4444, 55555}\n\nfuncA(200)\n\n〇funcA(整数型: paramA)\n  整数型: a ← paramA\n  整数型の配列: array2 ← {1, 2, 3, 4, 5}\n  funcB(300)\n  return\n\n〇funcB(整数型: paramB)\n  整数型: b ← paramB                    \n  整数型の配列: array3 ← {1, 2, 3, 4, 5}    \n  return\n",
+    "",
+    null,
+    null,
+    null
+  ],
+  [
+    "テスト",
+    "宣言と同時に戻り値",
+    "\n整数型: x\nx ← funcA()\n\n整数型: y ← funcB()\n\n〇整数型: funcA()\n  整数型: a ← 100\n  return a\n \n〇funcB()\n  整数型: b ← 200                        \n  return b\n\n",
+    "",
+    null,
+    null,
+    null
+  ]
+]

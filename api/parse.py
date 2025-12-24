@@ -1704,8 +1704,8 @@ def parse(source):
         delattr(parser, "error")
     elif terror_message:                             # トークンエラー
         result["p_error"] = terror_message
-    elif oerror_message:
-        result["p_error"] = oerror_message           # その他のエラー（現在は無限ループのみ）
+    elif oerror_message:                             # その他のエラー（現在は無限ループのみ）
+        result["p_error"] = oerror_message           
 
 
     return result

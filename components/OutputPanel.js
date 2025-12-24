@@ -16,7 +16,7 @@ function OutputPanel({ output }) {
   const outentries = Object.entries(output);
 
   return (
-    <div style={{ border: '1px solid #ddd', borderRadius: 8, padding: '1rem', background: '#fafafa',   
+    <div style={{ border: '1px solid #ddd', borderRadius: 8, padding: '1rem', background: '#fafafa', color: '#111',   
       height: 140,
       overflow: 'auto',           // はみ出したらスクロール
       }}>  
