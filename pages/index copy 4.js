@@ -44,7 +44,7 @@ export default function Home() {
   return (
     <div style={{ display: 'flex', gap: '1rem', height: "100vh" }}>
       {/* 左側 Editor*/}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', flex: '1 1 50%' }}>  
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', flex: '1 1 50%', minHeight: 0 }}>  
         <EditorPanel problemCode={problemCode} setResult={setglobalVars} globalVars={globalVars} setOutput={setOutput} output={output} 
           setcallStack={setcallStack} callStack={callStack} insertChoicedata={insertChoicedata} setinsertChoicedata={setinsertChoicedata} setinsertChoiceNumber={setinsertChoiceNumber}
           selectedProblemIndex={selectedProblemIndex} setSelectedProblemIndex={setSelectedProblemIndex} 
@@ -57,11 +57,10 @@ export default function Home() {
           flex: '1 1 50%',         // エディタとの横幅
           display: 'flex',
           flexDirection: 'column', // 縦並び
-          gap: '3.0rem',
-          minHeight: 0,            // 縮めるように（出力パネルを押し出さない）
+          gap: '3.0rem',  
         }}>
         {/* 変数一覧に載せる、globalVars, callStack(local変数が入ってる)を渡す */}
-        <div style={{ flex: 1, minHeight: 0}}>
+        <div style={{height: 380}}>
           <VariablesPanel globalVars={globalVars} callStack={callStack} problemText={problemText}
            answerChoices={answerChoices} choiceitemsRow={choiceitemsRow} setinsertChoiceNumber={setinsertChoiceNumber} insertChoiceList={insertChoiceList}/>
         </div>

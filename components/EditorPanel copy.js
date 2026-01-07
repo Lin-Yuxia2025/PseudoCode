@@ -2,15 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import AceEditor from 'react-ace';
 import 'brace/mode/ruby';
 import 'brace/theme/xcode';
-import SelectProblem from './SelectProblem';
 
-import { FlagIcon } from '@heroicons/react/20/solid';
-
-
-// 親(index)から渡された props 中の値を分割代入
-function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, setcallStack, callStack, insertChoicedata, setinsertChoicedata, setinsertChoiceNumber, 
-  selectedProblemIndex, setSelectedProblemIndex,
-}) {
+// 親(index)から渡された props 中の problemCode, setResult, globalVars setOutput output を分割代入 (直接使える)
+function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, setcallStack, callStack, insertChoicedata, setinsertChoicedata, setinsertChoiceNumber }) {
   const [text, setText] = useState(problemCode);          // エディタのコード　(初期値は渡された problemCode)
   const [currentLine, setCurrentLine] = useState(0);      // 現在の行番号
   const [functions, setFunctions] = useState({});         // 関数定義の行番号など
@@ -34,8 +28,6 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
     setcallStack([]);             // 関数呼び出しリセット
     setinsertChoicedata(null);    // 置き換えデータ
     setinsertChoiceNumber(null)   // 置き換えボタン番号 （置き換えボタンが押された）
-    setBreakPoint(new Set())      // ブレークポイント
-    
 
     
 
@@ -77,27 +69,6 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
     } 
   }, [currentLine, text]);  // currentLine または text が変わったとき、処理
 
-  // BreakPointの行に付ける印(B)の切り替え
-  useEffect(() => {
-    const editor = editorRef.current?.editor;
-    if (!editor) return;
-
-    const session = editor.getSession();
-    const total = session.getLength();
-
-    // リセット
-    for (let i = 0; i < total; i++) {
-      session.removeGutterDecoration(i, 'breakpoint-marker');
-    }
-
-    // BreakPointの行にBを付ける
-    for (const line of breakPoint) {
-      session.addGutterDecoration(line, 'breakpoint-marker');
-    }
-  }, [breakPoint, text]);
-
-  
-
 
 
   // 解析・実行
@@ -111,17 +82,14 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
       return;
     }
 
-    
     // エディタのtextをpyで構文解析するため、APIに送る  async(非同期)
-    const breakPointArray = [...breakPoint];                      // Setオブジェクトを配列に変換
-
     const res = await fetch('/api/run-python', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      // lines(コードを分けた配列)、 現在の変数、 、グローバルスコープのステート、 出力、 次に実行する行番号、 関数定義の情報、　関数呼び出し、実行ボタン、　ブレークポイント設定行を JSON文字列に変換して送る
+      // lines(コードを分けた配列)、 現在の変数、 、グローバルスコープのステート、 出力、 次に実行する行番号、 関数定義の情報、　関数呼び出し、実行ボタンを JSON文字列に変換して送る
       body: JSON.stringify({ text: lines, globalVars, globalState, output, currentLine, functions, callStack,
-        runButton: runbutton, breakPointArray}),   
-      // req.body.xxx で送った値を取り出せる
+        runButton: runbutton}),   
+      // ↑  req.body.text (globalVars)(currentLine) で送った値を取り出せる
     });
 
     // 返ってきたResponseオブジェクト(res)に入ったJSON形式の値をJavaScriptオブジェクトに変換
@@ -129,7 +97,8 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
 
     // pythonからerrorが返ってきた場合
     if(data.p_error){
-      setPopupMessage(data.p_error);
+      // alert(data.p_error);
+      setPopupMessage(data.p_error)
       return;
     }
 
@@ -140,12 +109,6 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
     setFunctions(data.functions);     // 関数定義の行番号などを登録 (一行目実行時のみ)
     setCurrentLine(data.currentLine); // 次の行へ  (python側で決めたcurrentLineをセットする)
     setcallStack(data.callStack);     // 関数の呼び出し情報をセット
-
-    // ブレークポイントで停止したらメッセージ
-    if(data.isbreak){
-      setPopupMessage(`ブレークポイント(${data.currentLine + 1}行目)で停止しました`);
-    }
-    
   };
 
   // エディタのコードは変更せずに実行状態のみリセット   (停止マークボタン)
@@ -160,24 +123,22 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
 
   // すべて初期状態に戻す (初期化ボタン)
   const resetAll = () => {
-    setResult({});                // グローバル変数を空に
-    setglobalState({});           // グローバルスコープのステート
-    setOutput({});                // 出力を空に
-    setFunctions({});             // 関数定義をリセット
-    setText(problemCode);         // エディタのコードを最初に戻す
-    setCurrentLine(0);            // 行番号を0に戻す
-    setcallStack([]);             // 関数呼び出しリセット
+    setResult({});          // グローバル変数を空に
+    setglobalState({});     // グローバルスコープのステート
+    setOutput({});          // 出力を空に
+    setFunctions({});       // 関数定義をリセット
+    setText(problemCode);   // エディタのコードを最初に戻す
+    setCurrentLine(0);      // 行番号を0に戻す
+    setcallStack([]);       // 関数呼び出しリセット
     setinsertChoicedata(null);    // 置き換えデータ
     setinsertChoiceNumber(null)   // 置き換えボタン番号 （置き換えボタンが押された）
-    setBreakPoint(new Set())      // ブレークポイント
   };
 
 
   // BrakePoint切り替え
   const switchingBreakPoint = () => {
-    const editor = editorRef.current?.editor;        // 現在のエディタのリファレンスを取得
     const cursor = editor.getCursorPosition();       // エディタの選択中位置を取得
-    const row = cursor.row;                          // 選択中の行番号を取得
+    const row = cursor.row + 1;                      // 選択中の行番号を取得
     let newBreakPoint = new Set(breakPoint);         // 更新用のSetオブジェクトを作成
 
 
@@ -201,9 +162,9 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
   // 行番号ごとにmarkerを作る
   for (const line of breakPointArray) {
     const marker = {
-      startRow: line,
+      startRow: line - 1,   // Ace内部では0始まり
       startCol: 0,
-      endRow: line,     // 開始行のみ
+      endRow: line - 1,     // 開始行のみ
       endCol: 1,
       className: "breakpoint_line",
       type: "fullLine",
@@ -212,11 +173,20 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
     aceMarkers.push(marker);
   }
 
+  
+
+  // // BreakPoint行の背景色
+  // const breakpoint_line = {
+  //   position: absolute,
+  //   background: rgba(255, 0, 0, 0.14)
+  // };
+
 
   // ボタン用スタイル
   const buttonBarStyle = {
     marginTop: '0.6rem',
     display: 'flex',
+    flex: 1,
     gap: '4rem',
     justifyContent: 'center',     // 横
     alignItems: 'center'          // 縦
@@ -238,68 +208,20 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
 
 
   return (
-    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
-
-      {/* プログラム選択メニュー, ブレークポイント切り替え */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '5.0rem' }}>
-
-        {/* プログラム選択メニュー */}
-        <div style={{ flex: '0 0 auto', marginLeft: '1rem' }}>
-          <SelectProblem
-            selectedProblemIndex={selectedProblemIndex}
-            setSelectedProblemIndex={setSelectedProblemIndex}
-          />
-        </div>
-
-        {/* BreakPoint切り替え */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'0.1rem'}}>
-          <button
-            type="button"
-            onClick={switchingBreakPoint}
-            title="ブレークポイント切替"
-            style={{
-              width: 50,
-              height: 30,
-              borderRadius: 8,
-              border: '1px solid #555',
-              background: '#ffffff',
-              cursor: 'pointer',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: 0,
-            }}
-          >
-            <FlagIcon className="h-6 w-6 text-gray-700" />
-          </button>
-
-          <div style={{ fontSize: '0.75rem', marginTop: '0.1rem' }}>
-            ブレークポイント切替
-          </div>
-        </div>
-      </div>
-
-      {/* AceEditor の伸縮用 (エディタだけ、サイズを固定しない) */}
-      <div style={{ flex: 1, marginTop: '0.2rem' }}>
-        <AceEditor
-          ref={editorRef}
-          markers={aceMarkers}
-          mode="ruby"                 // 一旦、ruby仕様
-          theme="xcode"
-          value={text}
-          onChange={setText}
-          width="100%"
-          height="100%"
-          name="ace-editor"
-          editorProps={{ $blockScrolling: false }}
-          setOptions={{ 
-            tabSize: 2,               // タブキーを押したときのインデント
-            showPrintMargin: false,   // 縦線を消す
-          }}
-          style={{ width: "100%", height: "100%", border: '1px solid #ddd', borderRadius: 8 }}
-        />
-      </div>
+    <div style={{ flex: '1 1 50%', display: 'flex', flexDirection: 'column' }}>
+      <AceEditor
+        ref={editorRef}
+        markers={aceMarkers}
+        mode="ruby"                 // 一旦、ruby仕様
+        theme="xcode"
+        value={text}
+        onChange={setText}
+        width="100%"
+        name="ace-editor"
+        editorProps={{ $blockScrolling: false }}
+        setOptions={{ tabSize: 2}}  // tabSize: 2 タブキーを押したときのインデント
+        style={{ height: '430px', marginTop: '0.5rem', border: '1px solid #ddd', borderRadius: 8 }}
+      />
 
       {/* 実行ボタン */}
       <div style={buttonBarStyle}>
@@ -435,6 +357,8 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
           </div>
         </div>
       )}
+
+
 
     </div>
   );

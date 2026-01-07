@@ -302,7 +302,7 @@ function VariablesPanel({ globalVars, callStack, problemText, answerChoices, cho
         borderRadius: 8,
         padding: '0.6rem 0.8rem 1.4rem 0.8rem', // 下を少し広めに
         background: '#fafafa',
-        height: 380,
+        height: '100%',
         overflow: 'visible',                     // はみ出しOKに
         display: 'flex',
         flexDirection: 'column',

@@ -2,7 +2,7 @@ import sys
 import ply.lex as lex
 import ply.yacc as yacc
 
-# importで使うから、関数にする
+# importで使うから関数にする
 def parse(source):
 
     # エディタの文字列を取得
@@ -21,6 +21,8 @@ def parse(source):
     callStack = source.get("callStack")
     # 最後まで実行ボタンを押したか
     runButton = source.get("runButton")
+    # ブレークポイント設定行
+    breakPoint = source.get("breakPointArray")
 
     # トークンエラーのメッセージを入れる場所(トークンエラーは構文ルール外だからparserに入れられない)
     terror_message = ""
@@ -1362,7 +1364,22 @@ def parse(source):
     # 最後まで実行ならループ
     loopcnt = 0                                             # 無限ループ判定に使用 
 
+    print("currentLine:", currentLine, file=sys.stderr)
+    print("breakPointArray:", breakPoint, file=sys.stderr)
+
+
     while True:
+        # 次がブレークポイントなら抜ける
+        isbreak = False
+        for bp in breakPoint:
+            print("currentLine:", currentLine, file=sys.stderr)
+            print("breakPointArray:", breakPoint, file=sys.stderr)
+            if currentLine == bp:
+                isbreak = True
+        
+        if isbreak == True:
+            break
+                
 
         # 実行
         code = codes[currentLine]                           # 実行する行の取得
@@ -1706,6 +1723,9 @@ def parse(source):
         result["p_error"] = terror_message
     elif oerror_message:                             # その他のエラー（現在は無限ループのみ）
         result["p_error"] = oerror_message           
-
+    
+    # ブレークポイントに到達
+    if isbreak == True:
+        result["isbreak"] = True
 
     return result

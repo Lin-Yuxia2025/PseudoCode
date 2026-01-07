@@ -47,12 +47,26 @@ a {
 }
 
 /* Ace Editor */
+
 .ace_gutter-cell.next-line-marker {
   background: #fff7cc;     /* gutter-cell(行番号部分)の背景色 */
-  font-weight: bold;         /* フォント(太字) */
+  font-weight: bold;
 }
-.ace_gutter-cell.next-line-marker::before {
+.ace_gutter-cell.next-line-marker::after {
   content: '▶';
   position: absolute;   /* セル内で絶対配置 */
-  left: 8px;
+  left: 12px;
+}
+
+/* ブレークポイント B（左端） */
+.ace_gutter-cell.breakpoint-marker::before {
+  content: "B";
+  position: absolute;
+  left: 2px;
+}
+
+/* BreakPoint行の背景色（Ace marker用） */
+.breakpoint_line {
+  position: absolute;
+  background: rgba(255, 0, 0, 0.14);
 }

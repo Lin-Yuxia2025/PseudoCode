@@ -217,6 +217,7 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
   const buttonBarStyle = {
     marginTop: '0.6rem',
     display: 'flex',
+    flex: 1,
     gap: '4rem',
     justifyContent: 'center',     // 横
     alignItems: 'center'          // 縦
@@ -238,7 +239,7 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
 
 
   return (
-    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+    <div style={{ flex: '1 1 50%', display: 'flex', flexDirection: 'column' }}>
 
       {/* プログラム選択メニュー, ブレークポイント切り替え */}
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: '5.0rem' }}>
@@ -280,26 +281,23 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
         </div>
       </div>
 
-      {/* AceEditor の伸縮用 (エディタだけ、サイズを固定しない) */}
-      <div style={{ flex: 1, marginTop: '0.2rem' }}>
-        <AceEditor
-          ref={editorRef}
-          markers={aceMarkers}
-          mode="ruby"                 // 一旦、ruby仕様
-          theme="xcode"
-          value={text}
-          onChange={setText}
-          width="100%"
-          height="100%"
-          name="ace-editor"
-          editorProps={{ $blockScrolling: false }}
-          setOptions={{ 
-            tabSize: 2,               // タブキーを押したときのインデント
-            showPrintMargin: false,   // 縦線を消す
-          }}
-          style={{ width: "100%", height: "100%", border: '1px solid #ddd', borderRadius: 8 }}
-        />
-      </div>
+
+      <AceEditor
+        ref={editorRef}
+        markers={aceMarkers}
+        mode="ruby"                 // 一旦、ruby仕様
+        theme="xcode"
+        value={text}
+        onChange={setText}
+        width="100%"
+        name="ace-editor"
+        editorProps={{ $blockScrolling: false }}
+        setOptions={{ 
+          tabSize: 2,               // タブキーを押したときのインデント
+          showPrintMargin: false,   // 縦線を消す
+        }}
+        style={{ height: '430px', marginTop: '0.2rem', border: '1px solid #ddd', borderRadius: 8 }}
+      />
 
       {/* 実行ボタン */}
       <div style={buttonBarStyle}>
