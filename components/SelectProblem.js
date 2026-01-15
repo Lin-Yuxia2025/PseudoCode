@@ -14,6 +14,7 @@ function SelectProblem({selectedProblemIndex, setSelectedProblemIndex,}) {
     const problemOptions = problems.map((p, idx) => ({
         id: idx,
         // 表示は「プログラム名 - 備考」
+        // p[0]: タイトル     p[1]: 備考 
         name: `${p[0] ?? ''} - ${p[1] ?? ''}`,
     }));
 
@@ -22,7 +23,7 @@ function SelectProblem({selectedProblemIndex, setSelectedProblemIndex,}) {
     const [selectedProgram, setSelectedProgram] = useState(problemOptions[selectedProblemIndex] ?? problemOptions[0]);
     const [programQuery, setProgramQuery] = useState('');       // 検索文字列
 
-    const programInputRef = useRef(null);
+    const programInputRef = useRef(null);          
 
     // 検索機能
     const filteredPrograms =

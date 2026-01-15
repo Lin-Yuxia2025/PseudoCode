@@ -18,7 +18,9 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
   const editorRef = useRef(null);                         // Aceエディタの参照  (次に実行するLineの印用)
   const [popupMessage, setPopupMessage] = useState(null); //
   const [breakPoint, setBreakPoint] = useState(new Set());// BreakPointに設定した行をSetオブジェクトで管理
+  const [fontSize, setFontSize] = useState(16);           // エディタのフォントサイズ
   
+  const fontSizeList = [10, 12, 14, 16, 18, 20, 22];      // フォントサイズ選択用リスト 
 
   // プログラムを選択し直したら、新しいコードをセット
   useEffect(() => {
@@ -141,10 +143,10 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
     setCurrentLine(data.currentLine); // 次の行へ  (python側で決めたcurrentLineをセットする)
     setcallStack(data.callStack);     // 関数の呼び出し情報をセット
 
-    // ブレークポイントで停止したらメッセージ
-    if(data.isbreak){
-      setPopupMessage(`ブレークポイント(${data.currentLine + 1}行目)で停止しました`);
-    }
+    // ブレークポイントで停止したらメッセージ   (一般的な開発環境に近づけるため、不採用)
+    // if(data.isbreak){
+    //   setPopupMessage(`ブレークポイント(${data.currentLine + 1}行目)で停止しました`);
+    // }
     
   };
 
@@ -241,7 +243,7 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
 
       {/* プログラム選択メニュー, ブレークポイント切り替え */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '5.0rem' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '3.0rem' }}>
 
         {/* プログラム選択メニュー */}
         <div style={{ flex: '0 0 auto', marginLeft: '1rem' }}>
@@ -256,7 +258,6 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
           <button
             type="button"
             onClick={switchingBreakPoint}
-            title="ブレークポイント切替"
             style={{
               width: 50,
               height: 30,
@@ -264,7 +265,6 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
               border: '1px solid #555',
               background: '#ffffff',
               cursor: 'pointer',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -274,11 +274,39 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
             <FlagIcon className="h-6 w-6 text-gray-700" />
           </button>
 
-          <div style={{ fontSize: '0.75rem', marginTop: '0.1rem' }}>
+          <div style={{ fontSize: '0.7rem', marginTop: '0.1rem', textAlign: 'center' }}>
             ブレークポイント切替
           </div>
         </div>
+
+        {/* Font Size 切替 */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '0.1rem' }}>
+          <select
+            value={fontSize}
+            onChange={(e) => setFontSize(Number(e.target.value))}
+            style={{
+              height: 30,
+              borderRadius: 8,
+              border: '1px solid #555',
+              background: '#ffffff',
+              color: '#111',
+              cursor: 'pointer',
+              padding: '0 0.5rem',
+            }}
+          >
+            {fontSizeList.map((size) => (
+              <option key={size} value={size}>
+                {size}
+              </option>
+            ))}
+          </select>
+          <div style={{ fontSize: '0.7rem', marginBottom: '0.2rem', textAlign: 'center' }}>フォントサイズ切替</div>
+        </div>
+
+
       </div>
+
+
 
       {/* AceEditor の伸縮用 (エディタだけ、サイズを固定しない) */}
       <div style={{ flex: 1, marginTop: '0.2rem' }}>
@@ -292,6 +320,7 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
           width="100%"
           height="100%"
           name="ace-editor"
+          fontSize={fontSize}         // 選択したフォントサイズを適用
           editorProps={{ $blockScrolling: false }}
           setOptions={{ 
             tabSize: 2,               // タブキーを押したときのインデント

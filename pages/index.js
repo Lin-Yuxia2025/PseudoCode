@@ -23,7 +23,7 @@ export default function Home() {
 
   // const problemTitle = selectedProblem[0];
   // const problemMemo  = selectedProblem[1];
-  const problemCode  = selectedProblem[2];
+  const problemCode  = selectedProblem[2];                // コード
   const problemText = selectedProblem[3];                 // 問題文
   const answerChoices = selectedProblem[4] || [];         // 解答群 (無ければ空配列)
   const choiceitemsRow = selectedProblem[5] || 3;         // 一行に選択肢を何個置くか (なければデフォルト3個

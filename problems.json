@@ -3,7 +3,7 @@
     "サンプル問題1",
     "変数の代入",
     "整数型: x ← 1\n整数型: y ← 2\n整数型: z ← 3\nx ← y\ny ← z\nz ← x\ny を 出力する\nz を 出力する",
-    "このプログラムを実行すると整数値が2回出力される。\n実行した際に出力されるものが、出力される順に並んだものを\n解答群の中から選んでください。",
+    "このプログラムを実行すると整数値が2回出力される。\n実行した際に出力されるものが、出力される順に並んだものを\n解答群の中から選べ。",
     [
       { "id": "ア", "text": "1,2", "answer": "incorrect" },
       { "id": "イ", "text": "1,3", "answer": "incorrect" },
@@ -19,7 +19,7 @@
     "サンプル問題3",
     "配列の加算",
     "整数型の配列: array ← {3, 2, 1, 6, 5, 4}\n整数型の配列: result ← {}  // 要素数0の配列\n\nresult ← makeNewArray(array)\n\n〇整数型の配列: makeNewArray(整数型の配列: in)\n  整数型の配列: out ← {}   // 要素数0の配列\n  整数型: i\n  整数型: tail\n  out の末尾に in[1] の値を追加する\n  for (i を 2 から inの要素数 まで 1 ずつ増やす)\n    tail ← out[outの要素数]\n    outの末尾に(tail + in[i]) の結果を追加する\n  endfor\n  return out\n",
-    "次の記述中の 【空欄】 に入れる正しい答えを、解答群の中から選んでください。また、配列の要素番号は 1 から始まります。\n\n関数 makeNewArrayは、要素数2以上の整数型の配列を引数にとり、整数型の配列を返す関数である。\n関数 makeNewArrayを makeNewArray(array) として呼び出した時、戻り値の配列の要素番号5の値は 【空欄】 となる。\n",
+    "次の記述中の 【空欄】 に入れる正しい答えを、解答群の中から選べ。また、配列の要素番号は 1 から始まる。\n\n関数 makeNewArrayは、要素数2以上の整数型の配列を引数にとり、整数型の配列を返す関数である。\n関数 makeNewArrayを makeNewArray(array) として呼び出した時、戻り値の配列の要素番号5の値は 【空欄】 となる。\n",
     [
       { "id": "ア", "text": "5", "answer": "incorrect" },
       { "id": "イ", "text": "6", "answer": "incorrect" },
@@ -36,7 +36,7 @@
     "サンプル問題4",
     "最大公約数",
     "整数型: result ← gcd(36, 60)\nresultを出力する\n\n〇整数型: gcd(整数型: num1, 整数型: num2)\n  整数型: x ← num1\n  整数型: y ← num2\n  A                                             // 空欄A\n    if ( B )                                    // 空欄B\n      x ← x - y\n    else\n      y ← y - x\n    endif\n  C                                             // 空欄C\n  return x\n",
-    "次のプログラム中のA, B, Cに入れる正しい答えの組み合わせを、解答群の中から選んでください。\n\n関数 gcd は、引数で与えられた二つの正の整数 num1 と num2 の最大公約数を、次の(1)~(3)の性質を利用して求める。\n(1) num1 と num2 が等しい時、num1 と num2 の最大公約数は num1 である。\n(2) num1 が num2 より大きい時、num1 と num2 の最大公約数は、(num1 - num2)と num2 の最大公約数と等しい。\n(3) num2 が num1 より大きい時、num1 と num2 最大公約数は、(num2 - num1) とnum1 の最大公約数と等しい。 \n\n",
+    "次のプログラム中のA, B, Cに入れる正しい答えの組み合わせを、解答群の中から選べ。\n\n関数 gcd は、引数で与えられた二つの正の整数 num1 と num2 の最大公約数を、次の(1)~(3)の性質を利用して求める。\n(1) num1 と num2 が等しい時、num1 と num2 の最大公約数は num1 である。\n(2) num1 が num2 より大きい時、num1 と num2 の最大公約数は、(num1 - num2)と num2 の最大公約数と等しい。\n(3) num2 が num1 より大きい時、num1 と num2 最大公約数は、(num2 - num1) とnum1 の最大公約数と等しい。 \n\n",
     [
       { "id": "ア", "text": "A: \u00A0 if (x ≠ y) \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 x < y \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 C: \u00A0 endif", "answer": "incorrect" },
       { "id": "イ", "text": "A: \u00A0 if (x ≠ y) \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 x > y \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 C: \u00A0 endif", "answer": "incorrect" },
@@ -102,7 +102,7 @@
     "サンプル問題13",
     "配列から探索",
     "整数型の配列: array ← {1,2}\n整数型: result\nresult ← search(array, 2)\n\n〇整数型: search(整数型の配列: data, 整数型: target)\n  整数型: low\n  整数型: high\n  整数型: middle\n\n  low ← 1\n  high ← dataの要素数\n\n  while (low ≦ high)\n    middle ← (low + high) ÷ 2 の商\n    if (data[middle] < target)\n      low ← middle\n    elseif (data[middle] > target)\n      high ← middle\n    else\n      return middle\n    endif\n  endwhile\n\n  return -1\n",
-    "次の記述中の【空欄】に入れる正しい答えを、解答群の中から選んでください。ここで、配列の要素番号は 1 から始まるとします。\n\n関数 search は、引数 data で指定された配列に、引数 target で指定された値が含まれていればその要素番号を返し、\n含まれていなければ -1 を返す。 data は昇順に整列されており、値に重複はない。\n関数 search には不具合がある。例えば、 data の 【空欄】 場合は、無限ループになる。",
+    "次の記述中の【空欄】に入れる正しい答えを、解答群の中から選べ。ここで、配列の要素番号は 1 から始まる。\n\n関数 search は、引数 data で指定された配列に、引数 target で指定された値が含まれていればその要素番号を返し、\n含まれていなければ -1 を返す。 data は昇順に整列されており、値に重複はない。\n関数 search には不具合がある。例えば、 data の 【空欄】 場合は、無限ループになる。",
     [
       { "id": "ア", "text": "要素数が 1 で、target がその要素の値と等しい", "answer": "incorrect" },
       { "id": "イ", "text": "要素数が 2 で、target が data の先頭要素と等しい", "answer": "incorrect" },
