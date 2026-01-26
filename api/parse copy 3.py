@@ -1945,102 +1945,95 @@ def parse(source):
         else:                                                       # 何もなければ次の行へ
             currentLine += 1
 
-        # ここから次の行を参照 -----------------------------
+        # ここから次の行を参照 
 
-        # 呼び出していた関数が終了して元の位置に戻った後に、もう一度次の行を判定させるためにループ
-        while True: 
+        # スキップ処理はループにする必要がある？
+        n = len(codes)
+        while currentLine < n:                  # 全ての行を越えない
+            skipped = False                     # skip判定をリセット
+            code = codes[currentLine].lstrip()  # 次の行の左端から空白を取り除く
+            # 空白スキップ
+            if code == "":
+                skipped = True
 
-            # スキップ処理はループにする
-            n = len(codes)
-            while currentLine < n:                  # 全ての行を越えない
-                skipped = False                     # skip判定をリセット
-                code = codes[currentLine].lstrip()  # 次の行の左端から空白を取り除く
-                # 空白スキップ
-                if code == "":
-                    skipped = True
+            # # 関数定義のスキップは別に考える必要がある(構文解析を使ってスキップしている)
+            # elif code.startswith("〇"):
+            #     skipped = True
 
-                # # 関数定義のスキップは別に考える必要がある(構文解析を使ってスキップしている)
-                # elif code.startswith("〇"):
-                #     skipped = True
+            # コメントアウトスキップ
+            elif code.startswith("//"):
+                skipped = True
 
-                # コメントアウトスキップ
-                elif code.startswith("//"):
-                    skipped = True
-
-                if skipped == False:                # skipしていなかったら抜ける
-                    break
-
-                currentLine += 1
-
-            # ループ処理
-
-            # currentLineがendforならforの行に戻る (endforの行は実行しない)
-            # 参照するend と 戻すfor
-            if callStack:                                    # 関数実行中(ローカル)        
-                if callStack[-1].get("forStack"):                # for文実行中      (無ければ Noneを返すからkeyエラーが起きない)
-                    if currentLine == callStack[-1]["forStack"][-1]["endLine"]:  # 次の行がendfor
-                        currentLine = callStack[-1]["forStack"][-1]["startLine"] # forの行に戻る
-            else:                                            # 関数を実行していない(グローバル)
-                if globalState.get("forStack"):                  # for文実行中
-                    if currentLine == globalState["forStack"][-1]["endLine"]:    # 次の行がendfor
-                        currentLine = globalState["forStack"][-1]["startLine"]   # forの行に戻る
-
-            # currentLineがendwhileならwhileの行に戻る (endwhileの行は実行しないから必ず戻す)
-            # while文に入っている時のみここに来る
-            # 参照するend と 戻すwhile
-            if callStack:                                    # 関数実行中(ローカル)        
-                if callStack[-1].get("whileStack"):                # while文実行中      (無ければ Noneを返すからkeyエラーが起きない)
-                    if currentLine == callStack[-1]["whileStack"][-1]["endLine"]:  # 次の行がendwhile
-                        currentLine = callStack[-1]["whileStack"][-1]["startLine"] # whileの行に戻る
-            else:                                            # 関数を実行していない(グローバル)
-                if globalState.get("whileStack"):                  # while文実行中
-                    if currentLine == globalState["whileStack"][-1]["endLine"]:    # 次の行がendwhile
-                        currentLine = globalState["whileStack"][-1]["startLine"]   # whileの行に戻る
-
-
-
-            # -------------------       呼び出していた関数の終了       ------------------------
-            
-
-            # callStackがある　＆　次の行が呼び出した関数を越えた or returnした
-            if callStack and (currentLine >= callStack[-1]["endLine"] or hasattr(parser, 'ret')):
-                endFunc = callStack.pop()                                   # 終了する関数呼び出しデータをpop　（この時点でStackからは消える)
-
-                funcAction = endFunc.get("funcAction")                      # 終了した関数に返り値を使う処理があるなら取得
-                if funcAction is not None:                                  # ↑があるなら
-                    if funcAction["type"] == "assign":                      # 返り値を代入なら
-                        name = funcAction["name"]                           # 代入先の変数名を取得
-                        value = getattr(parser, "retValue", None)           # 代入する返り値を取得
-                        if funcAction["scope"] == "local":                  # 代入先がlocal
-                            localVar = funcAction["scope_ref"]              # 代入先の入ってるローカル変数の参照を取得
-                            localVar[name]["value"] = value                 # 返り値の代入処理
-                            # ↑だけでは返り値を変数に代入して更新できないことがあったため直接callStackの辞書も更新
-                            callStack[-1]["variables"] = localVar
-                        else:                                               # 代入先がglobal
-                            globalVars[name]["value"] = value               # 返り値の代入処理
-
-                    elif funcAction["type"] == "add_end":                   # 配列の末尾に追加なら
-                        name = funcAction["name"]                           # 追加先の配列名を取得
-                        value = getattr(parser, "retValue", None)           # 追加する返り値を取得
-                        if funcAction["scope"] == "local":                  # 追加先がlocal
-                            localVar = funcAction["scope_ref"]              # 追加先の入ってるローカル変数の参照を取得
-                            localVar[name]["value"].append(value)           # 返り値を末尾に追加処理
-                            # ↑だけでは更新できないことがあったため直接callStackの辞書も更新
-                            callStack[-1]["variables"] = localVar
-                        else:                                               # 代入先がglobal
-                            globalVars[name]["value"].append(value)         # 返り値を末尾に追加処理
-
-
-                currentLine = endFunc["returnLine"]                         # 関数呼び出し位置の次をcurrentLineに
-                # returnしていたなら、parserから消しておく
-                if hasattr(parser, "ret"):
-                    delattr(parser, "ret")
-                if hasattr(parser, "retValue"):
-                    delattr(parser, "retValue")
-
-            # 呼び出していた関数を終了していなければ抜ける
-            else:               
+            if skipped == False:                # skipしていなかったら抜ける
                 break
+
+            currentLine += 1
+
+        # ループ処理
+
+        # currentLineがendforならforの行に戻る (endforの行は実行しない)
+        # 参照するend と 戻すfor
+        if callStack:                                    # 関数実行中(ローカル)        
+            if callStack[-1].get("forStack"):                # for文実行中      (無ければ Noneを返すからkeyエラーが起きない)
+                if currentLine == callStack[-1]["forStack"][-1]["endLine"]:  # 次の行がendfor
+                    currentLine = callStack[-1]["forStack"][-1]["startLine"] # forの行に戻る
+        else:                                            # 関数を実行していない(グローバル)
+            if globalState.get("forStack"):                  # for文実行中
+                if currentLine == globalState["forStack"][-1]["endLine"]:    # 次の行がendfor
+                    currentLine = globalState["forStack"][-1]["startLine"]   # forの行に戻る
+
+        # currentLineがendwhileならwhileの行に戻る (endwhileの行は実行しないから必ず戻す)
+        # while文に入っている時のみここに来る
+        # 参照するend と 戻すwhile
+        if callStack:                                    # 関数実行中(ローカル)        
+            if callStack[-1].get("whileStack"):                # while文実行中      (無ければ Noneを返すからkeyエラーが起きない)
+                if currentLine == callStack[-1]["whileStack"][-1]["endLine"]:  # 次の行がendwhile
+                    currentLine = callStack[-1]["whileStack"][-1]["startLine"] # whileの行に戻る
+        else:                                            # 関数を実行していない(グローバル)
+            if globalState.get("whileStack"):                  # while文実行中
+                if currentLine == globalState["whileStack"][-1]["endLine"]:    # 次の行がendwhile
+                    currentLine = globalState["whileStack"][-1]["startLine"]   # whileの行に戻る
+
+
+
+        # -------------------       呼び出していた関数の終了       ------------------------
+        
+
+        # callStackがある　＆　次の行が呼び出した関数を越えた or returnした
+        if callStack and (currentLine >= callStack[-1]["endLine"] or hasattr(parser, 'ret')):
+            endFunc = callStack.pop()                                   # 終了する関数呼び出しデータをpop　（この時点でStackからは消える)
+
+            funcAction = endFunc.get("funcAction")                      # 終了した関数に返り値を使う処理があるなら取得
+            if funcAction is not None:                                  # ↑があるなら
+                if funcAction["type"] == "assign":                      # 返り値を代入なら
+                    name = funcAction["name"]                           # 代入先の変数名を取得
+                    value = getattr(parser, "retValue", None)           # 代入する返り値を取得
+                    if funcAction["scope"] == "local":                  # 代入先がlocal
+                        localVar = funcAction["scope_ref"]              # 代入先の入ってるローカル変数の参照を取得
+                        localVar[name]["value"] = value                 # 返り値の代入処理
+                        # ↑だけでは返り値を変数に代入して更新できないことがあったため直接callStackの辞書も更新
+                        callStack[-1]["variables"] = localVar
+                    else:                                               # 代入先がglobal
+                        globalVars[name]["value"] = value               # 返り値の代入処理
+
+                elif funcAction["type"] == "add_end":                   # 配列の末尾に追加なら
+                    name = funcAction["name"]                           # 追加先の配列名を取得
+                    value = getattr(parser, "retValue", None)           # 追加する返り値を取得
+                    if funcAction["scope"] == "local":                  # 追加先がlocal
+                        localVar = funcAction["scope_ref"]              # 追加先の入ってるローカル変数の参照を取得
+                        localVar[name]["value"].append(value)           # 返り値を末尾に追加処理
+                        # ↑だけでは更新できないことがあったため直接callStackの辞書も更新
+                        callStack[-1]["variables"] = localVar
+                    else:                                               # 代入先がglobal
+                        globalVars[name]["value"].append(value)         # 返り値を末尾に追加処理
+
+
+            currentLine = endFunc["returnLine"]                         # 関数呼び出し位置の次をcurrentLineに
+            # returnしていたなら、parserから消しておく
+            if hasattr(parser, "ret"):
+                delattr(parser, "ret")
+            if hasattr(parser, "retValue"):
+                delattr(parser, "retValue")
 
         
         # 最後まで実行中なら

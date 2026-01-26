@@ -1,7 +1,6 @@
 import sys
 import ply.lex as lex
 import ply.yacc as yacc
-import math
 
 # importで使うから関数にする
 def parse(source):
@@ -105,16 +104,15 @@ def parse(source):
         'else': 'ELSE',
         'endif': 'ENDIF',
         'for': 'FOR',
-        'endfor': 'ENDFOR',
         'while': 'WHILE',
         'do': 'DO',
         'pow': 'POW'
     }
 
     # トークン（単語の種類）一覧
-    tokens = ('CIRCLE', 'TYPE', 'ARRAY', 'VALUE', 'UNDEF', 'END', 'NAME', 'FLOAT', 'NUMBER', 'STRING', 'COLON', 'EQUAL', 'NOT', 'NOT2', 'LESS', 'GREATER', 'LESS_EQUAL', 'GREATER_EQUAL', 'DIVISIBLE', 'INDIVISIBLE', 'ASSIGN', 'ADD',
-            'PLUS','MINUS', 'MULTI', 'DIVID', 'SHOW', 'OUT', 'INCREASE', 'RESULT', 'RETURN_VAL', 'ARR_LEN', 'DECIMAL_P', 'BELOW', 'ROUNDED_UP', 'KO', 'WO', 'NO', 'NI', 'GA', 'DE', 'TO', 'KARA', 'MADE', 'ZUTSU',  'L_S_BRACKET',
-            'R_S_BRACKET', 'L_C_BRACKET', 'R_C_BRACKET', 'L_PAREN', 'R_PAREN', 'COMMA', 'RETURN', 'IF', 'ELSEIF', 'ELSE','ENDIF', 'FOR', 'ENDFOR', 'WHILE', 'DO', 'POW')
+    tokens = ('CIRCLE', 'TYPE', 'ARRAY', 'VALUE', 'END', 'NAME', 'FLOAT', 'NUMBER', 'STRING', 'COLON', 'EQUAL', 'NOT', 'NOT2', 'LESS', 'GREATER', 'LESS_EQUAL', 'GREATER_EQUAL', 'DIVISIBLE', 'INDIVISIBLE', 'ASSIGN', 'ADD',
+            'PLUS','MINUS', 'MULTI', 'DIVID', 'SHOW', 'OUT', 'INCREASE', 'RESULT', 'ARR_LEN', 'WO', 'NO', 'NI', 'GA', 'DE', 'TO', 'KARA', 'MADE', 'ZUTSU',  'L_S_BRACKET',
+            'R_S_BRACKET', 'L_C_BRACKET', 'R_C_BRACKET', 'L_PAREN', 'R_PAREN', 'COMMA', 'RETURN', 'IF', 'ELSEIF', 'ELSE','ENDIF', 'FOR', 'WHILE', 'DO', 'POW')
 
     # PLY の字句解析ルール
     # (入力文字列からトークンを見つけると、それぞれの関数が呼び出される)
@@ -132,10 +130,6 @@ def parse(source):
 
     def t_VALUE(t):
         r'値'       
-        return t
-
-    def t_UNDEF(t):
-        r'未定義'       
         return t
 
     def t_END(t):
@@ -244,33 +238,12 @@ def parse(source):
     def t_RESULT(t):
         r'結果'
         return t
-    
-    def t_RETURN_VAL(t):
-        r'戻り値'
-        return t
 
-    def t_ARR_LEN(t):                   # 配列の要素数
+    def t_ARR_LEN(t):                   # 要素数
         r'要素数'
         return t
-    
-    def t_DECIMAL_P(t):                 
-        r'小数点'
-        return t
-    
-    def t_BELOW(t):                 
-        r'以下'
-        return t
 
-    
-    def t_ROUNDED_UP(t):                 
-        r'切り上げた'
-        return t
-    
 
-    def t_KO(t):                        # 要素数
-        r'個'
-        return t
-    
     def t_WO(t):                        # 助詞
         r'を'
         return t
@@ -569,32 +542,14 @@ def parse(source):
     def p_init_array_num_multi(p):  # 1, 2, 3 配列に入れる初期値が複数
         #                     　　　　　　　　　　値が3つ以上の時、右に ｝が来るまで ↓ を繰り返す
         #                                          init_array_val  COMMA   NUMBER
-        'init_array_val : init_array_val COMMA value'  # 1,2       ,     3
-        # 配列のリストに加える(数値を配列にしてから)
+        'init_array_val : init_array_val COMMA NUMBER'  # 1,2       ,     3
+        # 配列のリストに加える
         p[0] = p[1] + [p[3]]
 
     def p_init_array_num_single(p): 
-        'init_array_val : value'
+        'init_array_val : NUMBER'
         # 配列のリストに
         p[0] = [p[1]]
-
-
-
-    def p_init_array_undif(p):      # 配列の初期値にn個の未定義の値
-        'init_array : L_C_BRACKET value KO NO UNDEF NO VALUE R_C_BRACKET'
-
-        n = p[2]
-
-        # 値のチェック
-        if isinstance(n, int):
-            # "未定義"をn回、繰り返したリストを作って渡す
-            p[0] = ["未定義"] * n 
-        
-        else:                       # nが整数値でない
-            message = f"エラー\n{currentLine + 1}行目:   参照した値が整数ではありません"
-            print(message, file=sys.stderr)
-            p.parser.error = message
-
 
 
     # 配列の要素番号を指定して代入 (配列に代入)
@@ -633,11 +588,11 @@ def parse(source):
         scope = find_scope(array_name)
 
         # 追加処理
-        if scope == 'local':                # 追加される側が local にある
+        if scope == 'local':                # 代入される側が local にある
             localvars[array_name]["value"].append(value)
-        elif scope == 'global':             # 追加される側が global にある
+        elif scope == 'global':             # 代入される側が global にある
             globalVars[array_name]["value"].append(value)
-        else:                               # None (未定義の変数に追加しようとした場合はエラー)
+        else:                               # None (未定義の変数に代入しようとした場合はエラー)
             message = f"エラー\n{currentLine + 1}行目:   配列 '{array_name}' が未定義です"
             print(message, file=sys.stderr)
             p.parser.error = message    
@@ -889,132 +844,6 @@ def parse(source):
             "scope": scope,              # "local"か"global"
             "scope_ref": scope_ref       # local変数の参照 or "global"
         }   
-
-
-    # 配列の宣言と同時に関数の戻り値を代入  整数型の配列: array ← func()
-    def p_declaration_func_call_array(p):
-        'statement :  TYPE NO ARRAY COLON NAME ASSIGN NAME L_PAREN args R_PAREN'
-
-        name = p[5]                     # 代入先      
-        localvars = latest_local()      # 関数が呼び出されているならlocal変数の参照を取得 
-        f_name = p[7]                   # 関数名 
-        info = functions.get(f_name)    # 関数の情報
-
-        # 宣言
-        # variablesの、キー(変数名)に初期化
-        if localvars is not None:                   # 関数が呼び出されている
-            localvars[name] = {                     # localに宣言
-                "value": "未定義",
-                "kind": "scalar"
-            }
-            scope = "local"
-            scope_ref = localvars
-        else:                                       # 関数が呼び出されてない
-            globalVars[name] = {                    # globalに宣言
-                "value": "未定義",
-                "kind": "scalar"
-            }
-            scope = "global"
-            scope_ref = "global"
-        
-        # 代入先の参照を取得
-
-        if info:                                    # 呼び出した名前の関数が定義されていたら
-            params = info.get('params', [])         # 仮引数を取得
-            args_list = p[9]
-
-        # "仮引数名": { "value": 実引数, "kind": array } の形で新しいlocal変数を用意
-        new_local = {}  # callStackをpushしてから、新しいlocal変数に引数を入れるために、仮の辞書を用意
-        
-        for idx, param in enumerate(params):        # インデックスと仮引数を同時取得してループ
-            pname = param["name"]                   # 仮引数名
-            ptype = param["type"]                   # "整数型", "整数型の配列" など
-
-            value = args_list[idx]
-
-            # ptypeに"配列"が含まれていたら配列として扱う
-            if "配列" in ptype:
-                kind = "array"
-            else:
-                kind = "scalar"
-
-            new_local[pname] = {                    
-                "value": value,
-                "kind": kind
-            }
-
-        p.parser.funcName = f_name
-        p.parser.new_local = new_local
-        p.parser.returnLine = currentLine + 1   # 呼び出した位置の次を保持(処理が終わったら飛ばす)
-        p.parser.endLine = info["end_after"]    # 呼び出した関数の終了位置(終了して次の行)
-        p.parser.jump = info['start_process']   # 
-        p.parser.funcAction = {          # 関数をどう使うかの情報
-            "type": "assign",            # return後に代入を行う
-            "name": name,                # 代入先変数名
-            "scope": scope,              # "local"か"global"
-            "scope_ref": scope_ref       # local変数の参照 or "global"
-        }   
-
-
-    # 関数の戻り値を配列の末尾に追加   array の 末尾に func() の 戻り値を 追加する
-    def p_add_end_of_array_func_call(p):
-        'statement : NAME NO END NI NAME L_PAREN args R_PAREN NO RETURN_VAL WO ADD'
-        
-
-        name = p[1]                     # 末尾に追加する配列    array        
-        f_name = p[5]                   # 関数名    function
-        info = functions.get(f_name)    # 関数の情報
-        scope = find_scope(name)        # 追加先のスコープ("local"か"global")
-        
-        # 代入先の参照を取得
-        scope_ref = {}                  # 追加先の参照
-
-        if scope == 'local':            # 追加される側が local にある
-            scope_ref = latest_local()
-        elif scope == 'global':         # 追加される側が global にある
-            scope_ref = "global"
-        else:                           # None (未定義の配列に追加しようとした場合はエラー)
-            message = f"エラー\n{currentLine + 1}行目:   変数 '{name}' が未定義です"
-            print(message, file=sys.stderr)
-            p.parser.error = message
-
-
-        if info:                                    # 呼び出した名前の関数が定義されていたら
-            params = info.get('params', [])         # 仮引数を取得
-            args_list = p[7]
-
-        # "仮引数名": { "value": 実引数, "kind": array } の形で新しいlocal変数を用意
-        new_local = {}  # callStackをpushしてから、新しいlocal変数に引数を入れるために、仮の辞書を用意
-        
-        for idx, param in enumerate(params):        # インデックスと仮引数を同時取得してループ
-            pname = param["name"]                   # 仮引数名
-            ptype = param["type"]                   # "整数型", "整数型の配列" など
-
-            value = args_list[idx]
-
-            # ptypeに"配列"が含まれていたら配列として扱う
-            if "配列" in ptype:
-                kind = "array"
-            else:
-                kind = "scalar"
-
-            new_local[pname] = {
-                "value": value,
-                "kind": kind
-            }
-
-        p.parser.funcName = f_name
-        p.parser.new_local = new_local
-        p.parser.returnLine = currentLine + 1   # 呼び出した位置の次を保持(処理が終わったら飛ばす)
-        p.parser.endLine = info["end_after"]    # 呼び出した関数の終了位置(終了して次の行)
-        p.parser.jump = info['start_process']   # 
-        p.parser.funcAction = {          # 関数をどう使うかの情報
-            "type": "add_end",            # return後に末尾に追加を行う
-            "name": name,                # 代入先配列名
-            "scope": scope,              # "local"か"global"
-            "scope_ref": scope_ref       # local変数の参照 or "global"
-        }
-
 
 
     # 例外関数
@@ -1323,14 +1152,7 @@ def parse(source):
             p.parser.for_Entered = "loop"                       # # for文に来たことを知らせる(2回目以降)
 
 
-
-    # endforに来てしまったとき用
-    def p_endfor(p): 
-        'statement : ENDFOR' 
-        pass
-
-
-    
+    # endforには来ない想定だがスキップを実装しておく？
 
 
     # while文
@@ -1460,9 +1282,7 @@ def parse(source):
 
 
 
-    #      ---------------------     構文に使う値を全てvalueにまとめる       ----------------------------------------------------------------------------------
-
-
+    #                       構文に使う値を全てvalueにまとめる
     # 整数値
     def p_value_number(p):
         'value : NUMBER'
@@ -1656,35 +1476,6 @@ def parse(source):
     def p_division_tail_empty(p):
         'division_tail :'
         p[0] = None
-
-    # 小数点以下を切り上げた値
-    def p_rounded_up(p):
-        'value : value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE'
-
-        value = p[1]
-
-        # 値が未定義ならreturn (エラーメッセージはvalueに取得したときに作成済み)
-        if value is None:
-            return
-
-        p[0] = math.ceil(value)         # 小数点以下を切り上げて渡す
-
-
-    # 小数点以下を切り上げた値
-    def p_rounded_up_paren(p):
-        'value : L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE'
-
-        value = p[2]
-
-        # 値が未定義ならreturn (エラーメッセージはvalueに取得したときに作成済み)
-        if value is None:
-            return
-
-        p[0] = math.ceil(value)         # 小数点以下を切り上げて渡す
-
-
-
-    #   ----------------------  valueにまとめ　ここまで  --------------------------- 
 
 
     def p_error(p):                                        # エラー時には、p に None が渡されている
@@ -1945,102 +1736,83 @@ def parse(source):
         else:                                                       # 何もなければ次の行へ
             currentLine += 1
 
-        # ここから次の行を参照 -----------------------------
+        # ここから次の行を参照 
 
-        # 呼び出していた関数が終了して元の位置に戻った後に、もう一度次の行を判定させるためにループ
-        while True: 
+        # スキップ処理はループにする必要がある？
+        n = len(codes)
+        while currentLine < n:                  # 全ての行を越えない
+            skipped = False                     # skip判定をリセット
+            code = codes[currentLine].lstrip()  # 次の行の左端から空白を取り除く
+            # 空白スキップ
+            if code == "":
+                skipped = True
 
-            # スキップ処理はループにする
-            n = len(codes)
-            while currentLine < n:                  # 全ての行を越えない
-                skipped = False                     # skip判定をリセット
-                code = codes[currentLine].lstrip()  # 次の行の左端から空白を取り除く
-                # 空白スキップ
-                if code == "":
-                    skipped = True
+            # # 関数定義のスキップは別に考える必要がある(構文解析を使ってスキップしている)
+            # elif code.startswith("〇"):
+            #     skipped = True
 
-                # # 関数定義のスキップは別に考える必要がある(構文解析を使ってスキップしている)
-                # elif code.startswith("〇"):
-                #     skipped = True
+            # コメントアウトスキップ
+            elif code.startswith("//"):
+                skipped = True
 
-                # コメントアウトスキップ
-                elif code.startswith("//"):
-                    skipped = True
-
-                if skipped == False:                # skipしていなかったら抜ける
-                    break
-
-                currentLine += 1
-
-            # ループ処理
-
-            # currentLineがendforならforの行に戻る (endforの行は実行しない)
-            # 参照するend と 戻すfor
-            if callStack:                                    # 関数実行中(ローカル)        
-                if callStack[-1].get("forStack"):                # for文実行中      (無ければ Noneを返すからkeyエラーが起きない)
-                    if currentLine == callStack[-1]["forStack"][-1]["endLine"]:  # 次の行がendfor
-                        currentLine = callStack[-1]["forStack"][-1]["startLine"] # forの行に戻る
-            else:                                            # 関数を実行していない(グローバル)
-                if globalState.get("forStack"):                  # for文実行中
-                    if currentLine == globalState["forStack"][-1]["endLine"]:    # 次の行がendfor
-                        currentLine = globalState["forStack"][-1]["startLine"]   # forの行に戻る
-
-            # currentLineがendwhileならwhileの行に戻る (endwhileの行は実行しないから必ず戻す)
-            # while文に入っている時のみここに来る
-            # 参照するend と 戻すwhile
-            if callStack:                                    # 関数実行中(ローカル)        
-                if callStack[-1].get("whileStack"):                # while文実行中      (無ければ Noneを返すからkeyエラーが起きない)
-                    if currentLine == callStack[-1]["whileStack"][-1]["endLine"]:  # 次の行がendwhile
-                        currentLine = callStack[-1]["whileStack"][-1]["startLine"] # whileの行に戻る
-            else:                                            # 関数を実行していない(グローバル)
-                if globalState.get("whileStack"):                  # while文実行中
-                    if currentLine == globalState["whileStack"][-1]["endLine"]:    # 次の行がendwhile
-                        currentLine = globalState["whileStack"][-1]["startLine"]   # whileの行に戻る
-
-
-
-            # -------------------       呼び出していた関数の終了       ------------------------
-            
-
-            # callStackがある　＆　次の行が呼び出した関数を越えた or returnした
-            if callStack and (currentLine >= callStack[-1]["endLine"] or hasattr(parser, 'ret')):
-                endFunc = callStack.pop()                                   # 終了する関数呼び出しデータをpop　（この時点でStackからは消える)
-
-                funcAction = endFunc.get("funcAction")                      # 終了した関数に返り値を使う処理があるなら取得
-                if funcAction is not None:                                  # ↑があるなら
-                    if funcAction["type"] == "assign":                      # 返り値を代入なら
-                        name = funcAction["name"]                           # 代入先の変数名を取得
-                        value = getattr(parser, "retValue", None)           # 代入する返り値を取得
-                        if funcAction["scope"] == "local":                  # 代入先がlocal
-                            localVar = funcAction["scope_ref"]              # 代入先の入ってるローカル変数の参照を取得
-                            localVar[name]["value"] = value                 # 返り値の代入処理
-                            # ↑だけでは返り値を変数に代入して更新できないことがあったため直接callStackの辞書も更新
-                            callStack[-1]["variables"] = localVar
-                        else:                                               # 代入先がglobal
-                            globalVars[name]["value"] = value               # 返り値の代入処理
-
-                    elif funcAction["type"] == "add_end":                   # 配列の末尾に追加なら
-                        name = funcAction["name"]                           # 追加先の配列名を取得
-                        value = getattr(parser, "retValue", None)           # 追加する返り値を取得
-                        if funcAction["scope"] == "local":                  # 追加先がlocal
-                            localVar = funcAction["scope_ref"]              # 追加先の入ってるローカル変数の参照を取得
-                            localVar[name]["value"].append(value)           # 返り値を末尾に追加処理
-                            # ↑だけでは更新できないことがあったため直接callStackの辞書も更新
-                            callStack[-1]["variables"] = localVar
-                        else:                                               # 代入先がglobal
-                            globalVars[name]["value"].append(value)         # 返り値を末尾に追加処理
-
-
-                currentLine = endFunc["returnLine"]                         # 関数呼び出し位置の次をcurrentLineに
-                # returnしていたなら、parserから消しておく
-                if hasattr(parser, "ret"):
-                    delattr(parser, "ret")
-                if hasattr(parser, "retValue"):
-                    delattr(parser, "retValue")
-
-            # 呼び出していた関数を終了していなければ抜ける
-            else:               
+            if skipped == False:                # skipしていなかったら抜ける
                 break
+
+            currentLine += 1
+
+        # ループ処理
+
+        # currentLineがendforならforの行に戻る (endforの行は実行しない)
+        # 参照するend と 戻すfor
+        if callStack:                                    # 関数実行中(ローカル)        
+            if callStack[-1].get("forStack"):                # for文実行中      (無ければ Noneを返すからkeyエラーが起きない)
+                if currentLine == callStack[-1]["forStack"][-1]["endLine"]:  # 次の行がendfor
+                    currentLine = callStack[-1]["forStack"][-1]["startLine"] # forの行に戻る
+        else:                                            # 関数を実行していない(グローバル)
+            if globalState.get("forStack"):                  # for文実行中
+                if currentLine == globalState["forStack"][-1]["endLine"]:    # 次の行がendfor
+                    currentLine = globalState["forStack"][-1]["startLine"]   # forの行に戻る
+
+        # currentLineがendwhileならwhileの行に戻る (endwhileの行は実行しないから必ず戻す)
+        # while文に入っている時のみここに来る
+        # 参照するend と 戻すwhile
+        if callStack:                                    # 関数実行中(ローカル)        
+            if callStack[-1].get("whileStack"):                # while文実行中      (無ければ Noneを返すからkeyエラーが起きない)
+                if currentLine == callStack[-1]["whileStack"][-1]["endLine"]:  # 次の行がendwhile
+                    currentLine = callStack[-1]["whileStack"][-1]["startLine"] # whileの行に戻る
+        else:                                            # 関数を実行していない(グローバル)
+            if globalState.get("whileStack"):                  # while文実行中
+                if currentLine == globalState["whileStack"][-1]["endLine"]:    # 次の行がendwhile
+                    currentLine = globalState["whileStack"][-1]["startLine"]   # whileの行に戻る
+
+
+        # 呼び出していた関数の終了
+
+        
+
+        # callStackがある　＆　次の行が呼び出した関数を越えた or returnした
+        if callStack and (currentLine >= callStack[-1]["endLine"] or hasattr(parser, 'ret')):
+            endFunc = callStack.pop()                                   # 終了する関数呼び出しデータをpop　（この時点でStackからは消える)
+
+            funcAction = endFunc.get("funcAction")                      # 終了した関数に返り値を使う処理があるなら取得
+            if funcAction is not None:                                  # ↑があるなら
+                if funcAction["type"] == "assign":                      # 返り値を代入なら
+                    name = funcAction["name"]                           # 代入先の変数名を取得
+                    value = getattr(parser, "retValue", None)           # 代入する返り値を取得
+                    if funcAction["scope"] == "local":                  # 代入先がlocal
+                        localVar = funcAction["scope_ref"]              # 代入先の入ってるローカル変数の参照を取得
+                        localVar[name]["value"] = value                 # 返り値の代入処理
+                        # ↑だけでは返り値を変数に代入して更新できないことがあったため直接callStackの辞書も更新
+                        callStack[-1]["variables"] = localVar
+                    else:                                               # 代入先がglobal
+                        globalVars[name]["value"] = value               # 返り値の代入処理
+
+            currentLine = endFunc["returnLine"]                         # 関数呼び出し位置の次をcurrentLineに
+            # returnしていたなら、parserから消しておく
+            if hasattr(parser, "ret"):
+                delattr(parser, "ret")
+            if hasattr(parser, "retValue"):
+                delattr(parser, "retValue")
 
         
         # 最後まで実行中なら

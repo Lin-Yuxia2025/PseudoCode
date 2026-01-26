@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import AceEditor from 'react-ace';
-import 'brace/mode/ruby';
-import 'brace/theme/xcode';
+import "ace-builds/src-noconflict/mode-gobstones";
+import "ace-builds/src-noconflict/theme-chrome";
 import SelectProblem from './SelectProblem';
-
 import { FlagIcon } from '@heroicons/react/20/solid';
 
 
@@ -313,8 +312,8 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
         <AceEditor
           ref={editorRef}
           markers={aceMarkers}
-          mode="ruby"                 // 一旦、ruby仕様
-          theme="xcode"
+          mode="gobstones"
+          theme= "chrome"
           value={text}
           onChange={setText}
           width="100%"
@@ -342,7 +341,7 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
           >
             ↻
           </button>
-          <span style={{ fontSize: '0.75rem', marginTop: '0.8rem' }}>
+          <span style={{ fontSize: '0.75rem', marginTop: '0.7rem' }}>
             コードを初期化する
           </span>
         </div>
@@ -362,7 +361,7 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
               backgroundColor: '#111',
             }}></div>
           </button>
-          <span style={{ fontSize: '0.75rem', marginTop: '0.8rem' }}>
+          <span style={{ fontSize: '0.75rem', marginTop: '0.7rem' }}>
             実行前に戻す
           </span>
         </div>
@@ -377,7 +376,7 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
           >
             ▶
           </button>
-          <span style={{ fontSize: '0.75rem', marginTop: '0.8rem' }}>
+          <span style={{ fontSize: '0.75rem', marginTop: '0.7rem' }}>
             ステップ実行
           </span>
         </div>
@@ -397,7 +396,7 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
           >
             ▶┃
           </button>
-          <span style={{ fontSize: '0.75rem', marginTop: '0.8rem' }}>
+          <span style={{ fontSize: '0.75rem', marginTop: '0.7rem' }}>
             全て実行
           </span>
         </div>

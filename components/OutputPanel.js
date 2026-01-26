@@ -1,14 +1,13 @@
 import React from 'react';
 
-// 親(index)から渡された props 中の output を分割代入 (直接使える)
 function OutputPanel({ output }) {
 
   // 表示する出力の整形
   const formatValue = (value) => {
-    if (Array.isArray(value)) {                // 配列なら
+    if (Array.isArray(value)) {               // 配列なら
       return value.join(',');                 // カンマを要素間に入れる
     }
-    return JSON.stringify(value, null, 2);  // 配列以外なら、改行＆インデント
+    return value;                             // 何もなければそのまま
   };
 
   // output の中身をループ処理できる形に変換
