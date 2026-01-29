@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // indexから渡された globalVars, callStack を分割代入
-function VariablesPanel({ globalVars, callStack, problemText, answerChoices, choiceitemsRow, setinsertChoiceNumber, insertChoiceList }) {
+function VariablesPanel({ globalVars, callStack, problemText, problemImage, answerChoices, choiceitemsRow, setinsertChoiceNumber, insertChoiceList }) {
   // タブの状態（変数 or 問題文）
   const [activeTab, setActiveTab] = useState('problem');    // 'variables' | 'problem'
   const [resultPopup, setResultPopup] = useState(null);     // 解答結果
@@ -344,6 +344,17 @@ function VariablesPanel({ globalVars, callStack, problemText, answerChoices, cho
                 {problemText}
               </div>
             )}
+            {/* 問題に画像があるなら表示 */}
+            {problemImage && (
+              <div>
+                <img
+                  src={problemImage}
+                  alt="問題画像"
+                  style={{ maxWidth: '100%', height: 'auto' }}
+                />
+              </div>
+            )}
+
 
             {/* 解答ボタン */}
             {/* 解答群があるなら表示 */}

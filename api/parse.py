@@ -113,7 +113,7 @@ def parse(source):
 
     # トークン（単語の種類）一覧
     tokens = ('CIRCLE', 'TYPE', 'ARRAY', 'VALUE', 'UNDEF', 'END', 'NAME', 'FLOAT', 'NUMBER', 'STRING', 'COLON', 'EQUAL', 'NOT', 'NOT2', 'LESS', 'GREATER', 'LESS_EQUAL', 'GREATER_EQUAL', 'DIVISIBLE', 'INDIVISIBLE', 'ASSIGN', 'ADD',
-            'PLUS','MINUS', 'MULTI', 'DIVID', 'SHOW', 'OUT', 'INCREASE', 'RESULT', 'RETURN_VAL', 'ARR_LEN', 'DECIMAL_P', 'BELOW', 'ROUNDED_UP', 'KO', 'WO', 'NO', 'NI', 'GA', 'DE', 'TO', 'KARA', 'MADE', 'ZUTSU',  'L_S_BRACKET',
+            'PLUS','MINUS', 'MULTI', 'DIVID', 'SHOW', 'REMAINDER', 'DIVREAL', 'OUT', 'INCREASE', 'DECREASE', 'RESULT', 'RETURN_VAL', 'ARR_LEN', 'DECIMAL_P', 'BELOW', 'ROUNDED_UP', 'KO', 'WO', 'NO', 'NI', 'GA', 'DE', 'TO', 'KARA', 'MADE', 'ZUTSU',  'L_S_BRACKET',
             'R_S_BRACKET', 'L_C_BRACKET', 'R_C_BRACKET', 'L_PAREN', 'R_PAREN', 'COMMA', 'RETURN', 'IF', 'ELSEIF', 'ELSE','ENDIF', 'FOR', 'ENDFOR', 'WHILE', 'DO', 'POW')
 
     # PLY の字句解析ルール
@@ -123,7 +123,7 @@ def parse(source):
         return t
 
     def t_TYPE(t):
-        r'(整数型|文字列型|実数型)'       # ( | ) どれかに一致したら呼び出される
+        r'(整数型|文字型|文字列型|実数型)'       # ( | ) どれかに一致したら呼び出される
         return t
 
     def t_ARRAY(t):
@@ -202,8 +202,7 @@ def parse(source):
     def t_INDIVISIBLE(t):               # 割り切れない
         r'割り切れない'                    
         return t
-
-
+    
     def t_ASSIGN(t):                    # 代入
         r'←'
         return t
@@ -232,6 +231,13 @@ def parse(source):
         r'商'
         return t
 
+    def t_REMAINDER(t):                     
+        r'余り'
+        return t
+    
+    def t_DIVREAL(t):                   # 除算の後ろに付けると、整数同士でも実数を返す
+        r'/\*\s*実数として計算する\s*\*/' # /* 実数として計算する */                  
+        return t                        #  " /**/ " と "実数として計算する" 間のスペース数は自由
 
     def t_OUT(t):                       # 出力
         r'出力する'
@@ -240,6 +246,10 @@ def parse(source):
     def t_INCREASE(t):
         r'増やす'
         return t
+
+    def t_DECREASE(t):
+        r'減らす'
+        return t    
 
     def t_RESULT(t):
         r'結果'
@@ -1230,15 +1240,14 @@ def parse(source):
             p[0] = False
 
 
-
     # for文 
     # 条件を満たさなくなったら、endfor+1に飛ばして、stateをpop
     # 一回目はstateが作られてないから、直接参照する必要がある
     # カウンタ変数はあらかじめ宣言してある想定
 
     def p_for(p):    # for (i を 1 から 5 まで 1 ずつ 増やす)
-        # p[1]FOR, p[2]L_PAREN, p[3]NAME, p[4]WO, p[5]value, p[6]KARA, p[7]value, p[8]MADE, p[9]NUMBER, p[10]ZUTSU, p[11]INCREASE, p[12]R_PAREN
-        'statement : FOR L_PAREN NAME WO value KARA value MADE NUMBER ZUTSU INCREASE R_PAREN'
+        # p[1]FOR, p[2]L_PAREN, p[3]NAME, p[4]WO, p[5]value, p[6]KARA, p[7]value, p[8]MADE, p[9]NUMBER, p[10]ZUTSU, p[11]incdec, p[12]R_PAREN
+        'statement : FOR L_PAREN NAME WO value KARA value MADE NUMBER ZUTSU incdec R_PAREN'
         cntname = p[3]      # カウンタ変数名
         initval = p[5]      # 初期値
         #condition1 = p[6]   # "から" or 
@@ -1323,6 +1332,14 @@ def parse(source):
             p.parser.for_Entered = "loop"                       # # for文に来たことを知らせる(2回目以降)
 
 
+    # 増やす or 減らす
+    def p_increase(p):
+        'incdec : INCREASE'
+        p[0] = p[1]
+
+    def p_decrease(p):
+        'incdec : DECREASE'
+        p[0] = p[1]
 
     # endforに来てしまったとき用
     def p_endfor(p): 
@@ -1642,16 +1659,28 @@ def parse(source):
 
         if tail == 'show':      # 商のみ
             p[0] = valuea // valueb
+        elif tail == 'remaind': # 余り
+            p[0] = valuea % valueb
+        elif tail == 'real':    # /* 実数として計算する */
+            p[0] = valuea / valueb
         else:                   # 指定なし
             if ((isinstance(valuea, float)) or (isinstance(valueb, float)) ):    # 実数を扱うなら、結果も実数に
                 p[0] = valuea / valueb
             else:               # 実数値を扱わない
                 p[0] = valuea // valueb
 
-    # 何もない or "の 商"
+    # 除算の後ろに    何もない or "の 商" or "の余り" or /* 実数として計算する */
     def p_division_tail_show(p):
         'division_tail : NO SHOW'
         p[0] = 'show'
+
+    def p_division_tail_remainder(p):
+        'division_tail : NO REMAINDER'
+        p[0] = 'remaind'
+
+    def p_division_tail_real(p):
+        'division_tail : DIVREAL'
+        p[0] = 'real'
 
     def p_division_tail_empty(p):
         'division_tail :'

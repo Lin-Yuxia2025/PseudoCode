@@ -28,6 +28,8 @@ export default function Home() {
   const answerChoices = selectedProblem[4] || [];         // 解答群 (無ければ空配列)
   const choiceitemsRow = selectedProblem[5] || 3;         // 一行に選択肢を何個置くか (なければデフォルト3個
   const insertChoiceList = selectedProblem[6] || [];      // 選択肢から挿入する内容のリスト [ア, イ, ウ]（無ければ空配列）
+  const problemImage = selectedProblem[7];                // 問題文の画像(無ければnull)
+  
   
 
   // 選択肢から挿入ボタンが押されたら、内容を押された番号の内容を取得して、エディタに渡す
@@ -62,7 +64,7 @@ export default function Home() {
         }}>
         {/* 変数一覧に載せる、globalVars, callStack(local変数が入ってる)を渡す */}
         <div style={{ flex: 1, minHeight: 0}}>
-          <VariablesPanel globalVars={globalVars} callStack={callStack} problemText={problemText}
+          <VariablesPanel globalVars={globalVars} callStack={callStack} problemText={problemText} problemImage = {problemImage}
            answerChoices={answerChoices} choiceitemsRow={choiceitemsRow} setinsertChoiceNumber={setinsertChoiceNumber} insertChoiceList={insertChoiceList}/>
         </div>
         <div style={{height: 140}}>

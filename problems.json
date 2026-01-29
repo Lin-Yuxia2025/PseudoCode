@@ -13,6 +13,7 @@
       { "id": "カ", "text": "3,2", "answer": "correct" }
     ],
     3,
+    null,
     null
   ],
   [
@@ -60,7 +61,8 @@
         { "text": "  elseif (num が 3 と 5 で 割り切れる)", "line": 9 },
         { "text": "    result ← \"3と5で割り切れる\"", "line": 10 }
       ]
-    ]
+    ],
+    null
   ],
   [
     "サンプル問題3",
@@ -76,6 +78,7 @@
       { "id": "カ", "text": "17", "answer": "correct" },
       { "id": "キ", "text": "21", "answer": "incorrect" }
     ],
+    4,
     null,
     null
   ],
@@ -112,7 +115,8 @@
         { "text": "    if ( x > y )", "line": 7 },
         { "text": "  endwhile", "line": 12 }
       ]
-    ]
+    ],
+    null
   ],
   [
     "サンプル問題5",
@@ -139,7 +143,8 @@
       [
         { "text": "  return pow(x, y) ÷ pow(2, 0.5)", "line": 4 }
       ]
-    ]
+    ],
+    null
   ],  
   [
     "サンプル問題7",
@@ -170,7 +175,8 @@
         { "text": "  f ← factorial(n-1)", "line": 9 },
         { "text": "  return n × f", "line": 10 }
       ]
-    ]
+    ],
+    null
   ],
   [
     "サンプル問題11",
@@ -197,7 +203,36 @@
       [
         { "text": "整数型の配列: array ← {5, 3, 4, 3, 2, 6}", "line": 0 }
       ]
-    ]
+    ],
+    null
+  ],
+  [
+    "サンプル問題12",
+    "文字列の類似度",
+    "文字型の配列: array1 ← {\"a\", \"p\", \"p\", \"l\", \"e\"}\n文字型の配列: array2 ← {\"a\", \"p\", \"l\", \"i\", \"l\"}\n実数型: result ← simRatio(array1, array2)\nresult を 出力する\n\n〇実数型: simRatio(文字型の配列: s1, 文字型の配列: s2)\n  整数型: i ← 0\n  整数型: cnt ← 0\n  if (s1の要素数 ≠ s2の要素数)\n    return -1\n  endif\n  for (i を 1 から s1の要素数 まで 1ずつ増やす)\n    if (A)                                        // 空白A\n      cnt ← cnt + 1\n    endif\n  endfor\n  return cnt ÷ s1の要素数         /* 実数として計算する */",
+    "  次のプログラム中の 空白A に入れる正しい答えを、解答群の中から選べ。ここで、配列の要素番号は 1 から始まる。\n\n  関数 simRatioは、引数として与えられた要素数1以上の二つの文字型の配列 s1 と s2 を比較し、要素数が等しい場合は、配列の並びがどの程度似ているかの指標として、(要素番号が同じ要素の文字同士が一致する要素の組みの個数 ÷ s1の要素数)を実数型で返す。例えば、配列の全ての要素が一致する場合の戻り値は1, いずれの要素も一致しない場合の戻り値は0である。なお、二つの配列の要素数が等しくない場合は、 -1を返す。\n  関数simRatioに与える s1, s2 及び戻り値の例を表に示す。プログラムでは、配列の領域外を参照してはならないものとする。",
+    [
+      { "id": "ア", "text": " \u00A0\u00A0\u00A0\u00A0s1[i] ≠ s2[cnt]", "answer": "incorrect" },
+      { "id": "イ", "text": " \u00A0\u00A0\u00A0\u00A0s1[i] ≠ s2[i]", "answer": "incorrect" },
+      { "id": "ウ", "text": " \u00A0\u00A0\u00A0\u00A0s1[i] = s2[cnt]", "answer": "incorrect" },
+      { "id": "エ", "text": " \u00A0\u00A0\u00A0\u00A0s1[i] = s2[i]", "answer": "correct" }
+    ],
+    2,
+    [
+      [
+        { "text": "    if (s1[i] ≠ s2[cnt])", "line": 12 }
+      ],
+      [
+        { "text": "    if (s1[i] ≠ s2[i])", "line": 12 }
+      ],
+      [
+        { "text": "    if (s1[i] = s2[cnt])", "line": 12 }      
+      ],
+      [
+        { "text": "    if (s1[i] = s2[i])", "line": 12 }      
+      ]
+    ],
+    "images/q12.png"
   ],
   [
     "サンプル問題13",
@@ -211,6 +246,7 @@
       { "id": "エ", "text": "要素に -1 が含まれている", "answer": "incorrect" }
     ],
     1,
+    null,
     null
   ],
   [
@@ -227,9 +263,46 @@
       { "id": "カ", "text": " \u00A0\u00A0\u00A0\u00A0{0.1, 0.4, 0.6, 0.8, 1}", "answer": "correct" }
     ],
     2,
+    null,
     null
   ],
-
+  [
+    "サンプル問題16",
+    "文字列処理",
+    "整数型の配列: result ← encode(12354)    // 3042(16) = 12354(10)\nresultを出力する\n\n〇整数型の配列: encode(整数型: codePoint)\n  // utf8Bytesの初期値は、ビットパターンの\"x\"を全て0に置き換え、\n  // 8桁ごとに区切って、それぞれを2進数とみなした時の値\n  整数型の配列: utf8Bytes ← {224, 128, 128}\n  整数型: cp ← codePoint\n  整数型: i\n  for (i をutf8Bytesの要素数 から 1 まで 1ずつ減らす)\n    utf8Bytes[i] ← utf8Bytes[i] + (cp ÷【空欄】の余り)   // 空欄\n    cp ← cp ÷【空欄】の商                                // 空欄\n  endfor\n  return utf8Bytes",
+    "  次のプログラム中の【空欄】に入れる正しい答えを、解答群の中から選べ。二つの【空欄】には、同じ答えが入る。ここで、配列の要素番号は1から始まる。\n\n  Unicodeの符号位置を、UTF-8の符号に変換するプログラムである。本問で数値の後ろに\"(16)\"と記載した場合は、その数値が16進数であることを表す。\n  Unicodeの各文字には、符号位置と呼ばれる整数値が与えられている。UTF-8は、Unicodeの文字を符号化する方式の一つであり、符号位置が800(16)以上FFFF(16)以下の文字は、次のように3バイトの値に符号化する。\n  3バイトの長さのビットパターンを 1110xxxx 10xxxxxx 10xxxxxx とする。ビットパターンの下線の付いた\"x\"の箇所に、符号位置を2進数で表した値を右詰めで格納し、余った\"x\"の箇所に、0を格納する。\nこの3バイトの値がUTF-8の符号である。\n  例えば、ひらがなの\"あ\"の符号位置である 3042(16) を2進数で表すと 11000001000010 である。\nこれを、上に示したビットパターンの\"x\"の箇所に右詰めで格納すると、\n 1110xx11 10000001 10000010 となる。余った二つの\"x\"の箇所に0を格納すると、\"あ\"のUTF-8の符号 11100011 10000001 10000010 が得られる。\n  関数 encode は、引数で渡されたUnicodeの符号位置をUTF-8の符号に変換し、先頭から順に1バイトずつ要素に格納した整数型の配列を返す。encodeには、引数として、800(16)以上FFFF(16)以下の整数値だけが渡されるものとする。",
+    [
+      { "id": "ア", "text": " \u00A0\u00A0\u00A0\u00A02", "answer": "incorrect" },
+      { "id": "イ", "text": " \u00A0\u00A0\u00A0\u00A06", "answer": "incorrect" },
+      { "id": "ウ", "text": " \u00A0\u00A0\u00A0\u00A016", "answer": "incorrect" },
+      { "id": "エ", "text": " \u00A0\u00A0\u00A0\u00A064", "answer": "correct" },
+      { "id": "オ", "text": " \u00A0\u00A0\u00A0\u00A0256", "answer": "incorrect" }  
+    ],
+    3,
+    [
+      [
+        { "text": "    utf8Bytes[i] ← utf8Bytes[i] + (cp ÷ 2 の余り)", "line": 10 },
+        { "text": "    cp ← cp ÷ 2 の商", "line": 11 }
+      ],
+      [
+        { "text": "    utf8Bytes[i] ← utf8Bytes[i] + (cp ÷ 6 の余り)", "line": 10 },
+        { "text": "    cp ← cp ÷ 6 の商", "line": 11 }
+      ],
+      [
+        { "text": "    utf8Bytes[i] ← utf8Bytes[i] + (cp ÷ 16 の余り)", "line": 10 },
+        { "text": "    cp ← cp ÷ 16 の商", "line": 11 }
+      ],
+      [
+        { "text": "    utf8Bytes[i] ← utf8Bytes[i] + (cp ÷ 64 の余り)", "line": 10 },
+        { "text": "    cp ← cp ÷ 64 の商", "line": 11 }
+      ],
+      [
+        { "text": "    utf8Bytes[i] ← utf8Bytes[i] + (cp ÷ 256 の余り)", "line": 10 },
+        { "text": "    cp ← cp ÷ 256 の商", "line": 11 }
+      ]
+    ],
+    null
+  ],
   [
     "基本問題1",
     "while, do while",
@@ -242,113 +315,6 @@
       { "id": "エ", "text": " \u00A0funcWhileの出力：\u00A0 1 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 funcDoWhileの出力：\u00A0 1", "answer": "incorrect" }
     ],
     1,
-      null
-  ],
-  [
-    "テスト",
-    "関数呼び出し",
-    "funcA(100)\n// コメントアウトテスト1\n〇funcA(整数型: paramA)\n  整数型: x ← 1                         // コメントアウトテスト2\n  x ← paramA\n  x を 出力する\n\n  return\n",
-    "",
-    null,
-    null,
-    null
-  ],
-  [
-    "テスト",
-    "配列",
-    "整数型の配列: problemArray ← {3, 2, 1, 6, 5, 4}  // 出題用のグローバル変数\nmakeNewArray(problemArray)\n\n〇makeNewArray(整数型の配列: in)\n  整数型の配列: out ← {}  // 要素数0の配列\n  整数型: i\n  整数型: tail\n  outの末尾にin[1]の値を追加する\n  return",
-    "",
-    null,
-    null,
-    null
-  ],
-  [
-    "スライド用",
-    "",
-    "functionA(4)\n\nfunctionB()\n\n〇functionA(整数型: paramA)\n  整数型: x ← 1\n  整数型: y ← 2\n  整数型: z ← 3\n  x ← y\n  y ← z\n  z ← x\n  x ← paramA\n  x を 出力する\n  y を 出力する\n  z を 出力する\n\n  return\n\n〇functionB()\n  整数型の配列: array ← {1, 2, 3, 4, 5}\n  arrayを出力する\n  \n  return",
-    "",
-    null,
-    null,
-    null
-  ],
-  [
-    "テスト",
-    "関数内で関数呼び出し",
-    "整数型: Z ← 500\nfuncA()\n  \n〇funcA()\n  整数型: A ← 1\n  Aを出力する\n  funcB()\n\n  return\n\n〇funcB()\n  整数型: B ← 2\n  Bを出力する\n  funcC()\n\n  return\n\n〇funcC()\n  整数型: C ← 3\n  Cを出力する\n\n  return",
-    "",
-    null,
-    null,
-    null
-  ],
-  [
-    "テスト",
-    "関数の返り値を代入",
-    "整数型: x\nx ← funcA()\n\n〇funcA()\n  整数型: y ← 1\n  \n  return y",
-    "",
-    null,
-    null,
-    null
-  ],
-  [
-    "テスト",
-    "if文",
-    "整数型: result\nresult ← factorial(5)\n\n〇整数型: factorial(整数型: n)\n  整数型:f\n  if(n = 0)    \n    return 1\n  endif \n  f ← factorial(n-1) \n  return n × f",
-    "",
-    null,
-    null,
-    null
-  ],
-  [
-    "テスト",
-    "for文",
-    "func()\n\n〇func()\n  整数型: i\n  for(i を 1 から 5 まで 1 ずつ増やす)\n    i を 出力する\n  endfor\n",
-    "",
-    null,
-    null,
-    null
-  ],
-  [
-    "テスト",
-    "while文",
-    "整数型:a ← 1\n\nwhile (a < 5)\n  a を出力する\n  a ← a + 1\nendwhile\n",
-    "",
-    null,
-    null,
-    null
-  ],
-  [
-    "テスト",
-    "do while",
-    "整数型: i ← 0\ndo  \n  i ← i + 1\nwhile(i < 3)\n",
-    "",
-    null,
-    null,
-    null
-  ],
-  [
-    "テスト",
-    "while, do_while ネスト",
-    "// ネスト、インデント\n整数型: do1 ← 0\n整数型: do2 ← 0\n整数型: w1 ← 0\n整数型: w2 ← 0\n\ndo                      // 一つ目のdowhile      1\n  while (w1 < 2)        // 一つ目のwhile        2\n    do                  // 二つ目のdowhile      3\n      while(w2 < 2)     // 二つ目のwhile        4\n        w2 ← w2 + 1\n      endwhile          // 二つ目のwhile最後     4\n      do2 ← do2 + 1     \n    while(do2 < 2)      // 二つ目のdowhile最後   3\n    w1 ← w1 + 1         \n  endwhile              // 一つ目のwhile最後     2\n  do1 ← do1 + 1\nwhile(do1 < 2)          // 一つ目のdowhile最後   1\n",
-    "",
-    null,
-    null,
-    null
-  ],
-  [
-    "テスト",
-    "変数,配列表示",
-    "// 変数表示テスト\n整数型: g ← 100\ng を 出力する\n整数型の配列: array1 ← {1}\n整数型の配列: array2 ← {1, 2, 3}\n整数型の配列: array3 ← {1, 2, 3, 4, 5}\n整数型の配列: array4 ← {111, 2, 3, 4, 5}\n整数型の配列: array5 ← {1, 22, 333, 4444, 55555}\n\nfuncA(200)\n\n〇funcA(整数型: paramA)\n  整数型: a ← paramA\n  整数型の配列: array2 ← {1, 2, 3, 4, 5}\n  funcB(300)\n  return\n\n〇funcB(整数型: paramB)\n  整数型: b ← paramB                    \n  整数型の配列: array3 ← {1, 2, 3, 4, 5}    \n  return\n",
-    "",
-    null,
-    null,
-    null
-  ],
-  [
-    "テスト",
-    "宣言と同時に戻り値",
-    "\n整数型: x\nx ← funcA()\n\n整数型: y ← funcB()\n\n〇整数型: funcA()\n  整数型: a ← 100\n  return a\n \n〇funcB()\n  整数型: b ← 200                        \n  return b\n\n",
-    "",
-    null,
     null,
     null
   ]

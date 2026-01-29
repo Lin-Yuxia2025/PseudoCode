@@ -60,91 +60,98 @@ Rule 50    sign -> GREATER EQUAL
 Rule 51    sign -> GREATER_EQUAL
 Rule 52    conditional -> value GA value DE DIVISIBLE
 Rule 53    conditional -> value GA value TO value DE DIVISIBLE
-Rule 54    statement -> FOR L_PAREN NAME WO value KARA value MADE NUMBER ZUTSU INCREASE R_PAREN
-Rule 55    statement -> ENDFOR
-Rule 56    statement -> WHILE L_PAREN conditional R_PAREN
-Rule 57    statement -> DO
-Rule 58    value -> NUMBER
-Rule 59    value -> FLOAT
-Rule 60    value -> NAME
-Rule 61    value -> STRING
-Rule 62    value -> NAME L_S_BRACKET value R_S_BRACKET
-Rule 63    value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-Rule 64    value -> NAME NO ARR_LEN
-Rule 65    value -> L_PAREN value R_PAREN
-Rule 66    value -> L_PAREN value R_PAREN NO RESULT
-Rule 67    value -> value PLUS value
-Rule 68    value -> value MINUS value
-Rule 69    value -> value MULTI value
-Rule 70    value -> value DIVID value division_tail
-Rule 71    division_tail -> NO SHOW
-Rule 72    division_tail -> <empty>
-Rule 73    value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-Rule 74    value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+Rule 54    statement -> FOR L_PAREN NAME WO value KARA value MADE NUMBER ZUTSU incdec R_PAREN
+Rule 55    incdec -> INCREASE
+Rule 56    incdec -> DECREASE
+Rule 57    statement -> ENDFOR
+Rule 58    statement -> WHILE L_PAREN conditional R_PAREN
+Rule 59    statement -> DO
+Rule 60    value -> NUMBER
+Rule 61    value -> FLOAT
+Rule 62    value -> NAME
+Rule 63    value -> STRING
+Rule 64    value -> NAME L_S_BRACKET value R_S_BRACKET
+Rule 65    value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+Rule 66    value -> NAME NO ARR_LEN
+Rule 67    value -> L_PAREN value R_PAREN
+Rule 68    value -> L_PAREN value R_PAREN NO RESULT
+Rule 69    value -> value PLUS value
+Rule 70    value -> value MINUS value
+Rule 71    value -> value MULTI value
+Rule 72    value -> value DIVID value division_tail
+Rule 73    division_tail -> NO SHOW
+Rule 74    division_tail -> NO REMAINDER
+Rule 75    division_tail -> DIVREAL
+Rule 76    division_tail -> <empty>
+Rule 77    value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+Rule 78    value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
 Terminals, with rules where they appear
 
 ADD                  : 15 34
 ARRAY                : 8 19 21 25 33
-ARR_LEN              : 64
+ARR_LEN              : 66
 ASSIGN               : 6 7 8 14 31 32 33
-BELOW                : 73 74
+BELOW                : 77 78
 CIRCLE               : 23 24 25
 COLON                : 2 6 8 18 19 20 21 24 25 32 33
 COMMA                : 4 11 20 21 28
 DE                   : 52 53
-DECIMAL_P            : 73 74
-DIVID                : 70
+DECIMAL_P            : 77 78
+DECREASE             : 56
+DIVID                : 72
 DIVISIBLE            : 52 53
-DO                   : 57
+DIVREAL              : 75
+DO                   : 59
 ELSE                 : 40
 ELSEIF               : 39
 END                  : 15 34
-ENDFOR               : 55
+ENDFOR               : 57
 ENDIF                : 41
 EQUAL                : 43 44 47 50
-FLOAT                : 59
+FLOAT                : 61
 FOR                  : 54
 GA                   : 52 53
 GREATER              : 49 50
 GREATER_EQUAL        : 51
 IF                   : 38
-INCREASE             : 54
+INCREASE             : 55
 INDIVISIBLE          : 
 KARA                 : 54
 KO                   : 13
 LESS                 : 46 47
 LESS_EQUAL           : 48
 L_C_BRACKET          : 9 10 13
-L_PAREN              : 23 24 25 30 31 32 33 34 35 38 39 54 56 65 66 74
-L_S_BRACKET          : 14 62 63
+L_PAREN              : 23 24 25 30 31 32 33 34 35 38 39 54 58 67 68 78
+L_S_BRACKET          : 14 64 65
 MADE                 : 54
-MINUS                : 68
-MULTI                : 69
-NAME                 : 3 4 6 7 8 14 15 18 19 20 21 23 24 25 30 31 31 32 32 33 33 34 34 54 60 62 63 64
+MINUS                : 70
+MULTI                : 71
+NAME                 : 3 4 6 7 8 14 15 18 19 20 21 23 24 25 30 31 31 32 32 33 33 34 34 54 62 64 65 66
 NI                   : 15 34
-NO                   : 8 13 13 15 19 21 25 33 34 34 63 64 66 71 73 74
+NO                   : 8 13 13 15 19 21 25 33 34 34 65 66 68 73 74 77 78
 NOT                  : 44
 NOT2                 : 45
-NUMBER               : 54 58
+NUMBER               : 54 60
 OUT                  : 16
-PLUS                 : 67
+PLUS                 : 69
 POW                  : 35
-RESULT               : 66
+REMAINDER            : 74
+RESULT               : 68
 RETURN               : 36 37
 RETURN_VAL           : 34
-ROUNDED_UP           : 73 74
+ROUNDED_UP           : 77 78
 R_C_BRACKET          : 9 10 13
-R_PAREN              : 23 24 25 30 31 32 33 34 35 38 39 54 56 65 66 74
-R_S_BRACKET          : 14 62 63
-SHOW                 : 71
-STRING               : 61
+R_PAREN              : 23 24 25 30 31 32 33 34 35 38 39 54 58 67 68 78
+R_S_BRACKET          : 14 64 65
+SHOW                 : 73
+STRING               : 63
 TO                   : 53
 TYPE                 : 2 6 8 18 19 20 21 24 25 32 33
 UNDEF                : 13
-VALUE                : 13 63 73 74
-WHILE                : 56
-WO                   : 15 16 34 54 73 74
+VALUE                : 13 65 77 78
+WHILE                : 58
+WO                   : 15 16 34 54 77 78
 ZUTSU                : 54
 error                : 
 
@@ -152,17 +159,18 @@ Nonterminals, with rules where they appear
 
 args                 : 30 31 32 33 34 35
 args_m               : 27 28
-conditional          : 38 39 56
+conditional          : 38 39 58
 decl_names           : 2
 decl_names_m         : 3 4
-division_tail        : 70
+division_tail        : 72
+incdec               : 54
 init_array           : 8
 init_array_val       : 10 11
 params               : 23 24 25
 params_m             : 18 19 20 21
 sign                 : 42
 statement            : 0
-value                : 6 7 11 12 13 14 14 15 16 27 28 37 42 42 52 52 53 53 53 54 54 62 63 65 66 67 67 68 68 69 69 70 70 73 74
+value                : 6 7 11 12 13 14 14 15 16 27 28 37 42 42 52 52 53 53 53 54 54 64 65 67 68 69 69 70 70 71 71 72 72 77 78
 
 Parsing method: LALR
 
@@ -191,26 +199,26 @@ state 0
     (39) statement -> . ELSEIF L_PAREN conditional R_PAREN
     (40) statement -> . ELSE
     (41) statement -> . ENDIF
-    (54) statement -> . FOR L_PAREN NAME WO value KARA value MADE NUMBER ZUTSU INCREASE R_PAREN
-    (55) statement -> . ENDFOR
-    (56) statement -> . WHILE L_PAREN conditional R_PAREN
-    (57) statement -> . DO
+    (54) statement -> . FOR L_PAREN NAME WO value KARA value MADE NUMBER ZUTSU incdec R_PAREN
+    (57) statement -> . ENDFOR
+    (58) statement -> . WHILE L_PAREN conditional R_PAREN
+    (59) statement -> . DO
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     $end            reduce using rule 1 (statement -> .)
     TYPE            shift and go to state 2
@@ -260,33 +268,33 @@ state 3
     (30) statement -> NAME . L_PAREN args R_PAREN
     (31) statement -> NAME . ASSIGN NAME L_PAREN args R_PAREN
     (34) statement -> NAME . NO END NI NAME L_PAREN args R_PAREN NO RETURN_VAL WO ADD
-    (60) value -> NAME .
-    (62) value -> NAME . L_S_BRACKET value R_S_BRACKET
-    (63) value -> NAME . L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> NAME . NO ARR_LEN
+    (62) value -> NAME .
+    (64) value -> NAME . L_S_BRACKET value R_S_BRACKET
+    (65) value -> NAME . L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> NAME . NO ARR_LEN
 
   ! shift/reduce conflict for NO resolved as shift
     ASSIGN          shift and go to state 22
     L_S_BRACKET     shift and go to state 23
     NO              shift and go to state 24
     L_PAREN         shift and go to state 25
-    WO              reduce using rule 60 (value -> NAME .)
-    PLUS            reduce using rule 60 (value -> NAME .)
-    MINUS           reduce using rule 60 (value -> NAME .)
-    MULTI           reduce using rule 60 (value -> NAME .)
-    DIVID           reduce using rule 60 (value -> NAME .)
+    WO              reduce using rule 62 (value -> NAME .)
+    PLUS            reduce using rule 62 (value -> NAME .)
+    MINUS           reduce using rule 62 (value -> NAME .)
+    MULTI           reduce using rule 62 (value -> NAME .)
+    DIVID           reduce using rule 62 (value -> NAME .)
 
-  ! NO              [ reduce using rule 60 (value -> NAME .) ]
+  ! NO              [ reduce using rule 62 (value -> NAME .) ]
 
 
 state 4
 
     (16) statement -> value . WO OUT
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     WO              shift and go to state 26
     PLUS            shift and go to state 27
@@ -308,25 +316,25 @@ state 5
 
 state 6
 
-    (65) value -> L_PAREN . value R_PAREN
-    (66) value -> L_PAREN . value R_PAREN NO RESULT
-    (74) value -> L_PAREN . value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (67) value -> L_PAREN . value R_PAREN
+    (68) value -> L_PAREN . value R_PAREN NO RESULT
+    (78) value -> L_PAREN . value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
@@ -342,21 +350,21 @@ state 7
     (36) statement -> RETURN .
     (37) statement -> RETURN . value
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     $end            reduce using rule 36 (statement -> RETURN .)
     POW             shift and go to state 17
@@ -398,60 +406,61 @@ state 11
 
 state 12
 
-    (54) statement -> FOR . L_PAREN NAME WO value KARA value MADE NUMBER ZUTSU INCREASE R_PAREN
+    (54) statement -> FOR . L_PAREN NAME WO value KARA value MADE NUMBER ZUTSU incdec R_PAREN
 
     L_PAREN         shift and go to state 39
 
 
 state 13
 
-    (58) value -> NUMBER .
+    (60) value -> NUMBER .
 
-    WO              reduce using rule 58 (value -> NUMBER .)
-    PLUS            reduce using rule 58 (value -> NUMBER .)
-    MINUS           reduce using rule 58 (value -> NUMBER .)
-    MULTI           reduce using rule 58 (value -> NUMBER .)
-    DIVID           reduce using rule 58 (value -> NUMBER .)
-    NO              reduce using rule 58 (value -> NUMBER .)
-    R_PAREN         reduce using rule 58 (value -> NUMBER .)
-    $end            reduce using rule 58 (value -> NUMBER .)
-    R_S_BRACKET     reduce using rule 58 (value -> NUMBER .)
-    COMMA           reduce using rule 58 (value -> NUMBER .)
-    GA              reduce using rule 58 (value -> NUMBER .)
-    EQUAL           reduce using rule 58 (value -> NUMBER .)
-    NOT             reduce using rule 58 (value -> NUMBER .)
-    NOT2            reduce using rule 58 (value -> NUMBER .)
-    LESS            reduce using rule 58 (value -> NUMBER .)
-    LESS_EQUAL      reduce using rule 58 (value -> NUMBER .)
-    GREATER         reduce using rule 58 (value -> NUMBER .)
-    GREATER_EQUAL   reduce using rule 58 (value -> NUMBER .)
-    DE              reduce using rule 58 (value -> NUMBER .)
-    TO              reduce using rule 58 (value -> NUMBER .)
-    KARA            reduce using rule 58 (value -> NUMBER .)
-    MADE            reduce using rule 58 (value -> NUMBER .)
-    KO              reduce using rule 58 (value -> NUMBER .)
-    R_C_BRACKET     reduce using rule 58 (value -> NUMBER .)
+    WO              reduce using rule 60 (value -> NUMBER .)
+    PLUS            reduce using rule 60 (value -> NUMBER .)
+    MINUS           reduce using rule 60 (value -> NUMBER .)
+    MULTI           reduce using rule 60 (value -> NUMBER .)
+    DIVID           reduce using rule 60 (value -> NUMBER .)
+    NO              reduce using rule 60 (value -> NUMBER .)
+    R_PAREN         reduce using rule 60 (value -> NUMBER .)
+    $end            reduce using rule 60 (value -> NUMBER .)
+    R_S_BRACKET     reduce using rule 60 (value -> NUMBER .)
+    COMMA           reduce using rule 60 (value -> NUMBER .)
+    DIVREAL         reduce using rule 60 (value -> NUMBER .)
+    GA              reduce using rule 60 (value -> NUMBER .)
+    EQUAL           reduce using rule 60 (value -> NUMBER .)
+    NOT             reduce using rule 60 (value -> NUMBER .)
+    NOT2            reduce using rule 60 (value -> NUMBER .)
+    LESS            reduce using rule 60 (value -> NUMBER .)
+    LESS_EQUAL      reduce using rule 60 (value -> NUMBER .)
+    GREATER         reduce using rule 60 (value -> NUMBER .)
+    GREATER_EQUAL   reduce using rule 60 (value -> NUMBER .)
+    DE              reduce using rule 60 (value -> NUMBER .)
+    TO              reduce using rule 60 (value -> NUMBER .)
+    KARA            reduce using rule 60 (value -> NUMBER .)
+    MADE            reduce using rule 60 (value -> NUMBER .)
+    KO              reduce using rule 60 (value -> NUMBER .)
+    R_C_BRACKET     reduce using rule 60 (value -> NUMBER .)
 
 
 state 14
 
-    (55) statement -> ENDFOR .
+    (57) statement -> ENDFOR .
 
-    $end            reduce using rule 55 (statement -> ENDFOR .)
+    $end            reduce using rule 57 (statement -> ENDFOR .)
 
 
 state 15
 
-    (56) statement -> WHILE . L_PAREN conditional R_PAREN
+    (58) statement -> WHILE . L_PAREN conditional R_PAREN
 
     L_PAREN         shift and go to state 40
 
 
 state 16
 
-    (57) statement -> DO .
+    (59) statement -> DO .
 
-    $end            reduce using rule 57 (statement -> DO .)
+    $end            reduce using rule 59 (statement -> DO .)
 
 
 state 17
@@ -463,62 +472,64 @@ state 17
 
 state 18
 
-    (59) value -> FLOAT .
+    (61) value -> FLOAT .
 
-    WO              reduce using rule 59 (value -> FLOAT .)
-    PLUS            reduce using rule 59 (value -> FLOAT .)
-    MINUS           reduce using rule 59 (value -> FLOAT .)
-    MULTI           reduce using rule 59 (value -> FLOAT .)
-    DIVID           reduce using rule 59 (value -> FLOAT .)
-    NO              reduce using rule 59 (value -> FLOAT .)
-    R_PAREN         reduce using rule 59 (value -> FLOAT .)
-    $end            reduce using rule 59 (value -> FLOAT .)
-    R_S_BRACKET     reduce using rule 59 (value -> FLOAT .)
-    COMMA           reduce using rule 59 (value -> FLOAT .)
-    GA              reduce using rule 59 (value -> FLOAT .)
-    EQUAL           reduce using rule 59 (value -> FLOAT .)
-    NOT             reduce using rule 59 (value -> FLOAT .)
-    NOT2            reduce using rule 59 (value -> FLOAT .)
-    LESS            reduce using rule 59 (value -> FLOAT .)
-    LESS_EQUAL      reduce using rule 59 (value -> FLOAT .)
-    GREATER         reduce using rule 59 (value -> FLOAT .)
-    GREATER_EQUAL   reduce using rule 59 (value -> FLOAT .)
-    DE              reduce using rule 59 (value -> FLOAT .)
-    TO              reduce using rule 59 (value -> FLOAT .)
-    KARA            reduce using rule 59 (value -> FLOAT .)
-    MADE            reduce using rule 59 (value -> FLOAT .)
-    KO              reduce using rule 59 (value -> FLOAT .)
-    R_C_BRACKET     reduce using rule 59 (value -> FLOAT .)
+    WO              reduce using rule 61 (value -> FLOAT .)
+    PLUS            reduce using rule 61 (value -> FLOAT .)
+    MINUS           reduce using rule 61 (value -> FLOAT .)
+    MULTI           reduce using rule 61 (value -> FLOAT .)
+    DIVID           reduce using rule 61 (value -> FLOAT .)
+    NO              reduce using rule 61 (value -> FLOAT .)
+    R_PAREN         reduce using rule 61 (value -> FLOAT .)
+    $end            reduce using rule 61 (value -> FLOAT .)
+    R_S_BRACKET     reduce using rule 61 (value -> FLOAT .)
+    COMMA           reduce using rule 61 (value -> FLOAT .)
+    DIVREAL         reduce using rule 61 (value -> FLOAT .)
+    GA              reduce using rule 61 (value -> FLOAT .)
+    EQUAL           reduce using rule 61 (value -> FLOAT .)
+    NOT             reduce using rule 61 (value -> FLOAT .)
+    NOT2            reduce using rule 61 (value -> FLOAT .)
+    LESS            reduce using rule 61 (value -> FLOAT .)
+    LESS_EQUAL      reduce using rule 61 (value -> FLOAT .)
+    GREATER         reduce using rule 61 (value -> FLOAT .)
+    GREATER_EQUAL   reduce using rule 61 (value -> FLOAT .)
+    DE              reduce using rule 61 (value -> FLOAT .)
+    TO              reduce using rule 61 (value -> FLOAT .)
+    KARA            reduce using rule 61 (value -> FLOAT .)
+    MADE            reduce using rule 61 (value -> FLOAT .)
+    KO              reduce using rule 61 (value -> FLOAT .)
+    R_C_BRACKET     reduce using rule 61 (value -> FLOAT .)
 
 
 state 19
 
-    (61) value -> STRING .
+    (63) value -> STRING .
 
-    WO              reduce using rule 61 (value -> STRING .)
-    PLUS            reduce using rule 61 (value -> STRING .)
-    MINUS           reduce using rule 61 (value -> STRING .)
-    MULTI           reduce using rule 61 (value -> STRING .)
-    DIVID           reduce using rule 61 (value -> STRING .)
-    NO              reduce using rule 61 (value -> STRING .)
-    R_PAREN         reduce using rule 61 (value -> STRING .)
-    $end            reduce using rule 61 (value -> STRING .)
-    R_S_BRACKET     reduce using rule 61 (value -> STRING .)
-    COMMA           reduce using rule 61 (value -> STRING .)
-    GA              reduce using rule 61 (value -> STRING .)
-    EQUAL           reduce using rule 61 (value -> STRING .)
-    NOT             reduce using rule 61 (value -> STRING .)
-    NOT2            reduce using rule 61 (value -> STRING .)
-    LESS            reduce using rule 61 (value -> STRING .)
-    LESS_EQUAL      reduce using rule 61 (value -> STRING .)
-    GREATER         reduce using rule 61 (value -> STRING .)
-    GREATER_EQUAL   reduce using rule 61 (value -> STRING .)
-    DE              reduce using rule 61 (value -> STRING .)
-    TO              reduce using rule 61 (value -> STRING .)
-    KARA            reduce using rule 61 (value -> STRING .)
-    MADE            reduce using rule 61 (value -> STRING .)
-    KO              reduce using rule 61 (value -> STRING .)
-    R_C_BRACKET     reduce using rule 61 (value -> STRING .)
+    WO              reduce using rule 63 (value -> STRING .)
+    PLUS            reduce using rule 63 (value -> STRING .)
+    MINUS           reduce using rule 63 (value -> STRING .)
+    MULTI           reduce using rule 63 (value -> STRING .)
+    DIVID           reduce using rule 63 (value -> STRING .)
+    NO              reduce using rule 63 (value -> STRING .)
+    R_PAREN         reduce using rule 63 (value -> STRING .)
+    $end            reduce using rule 63 (value -> STRING .)
+    R_S_BRACKET     reduce using rule 63 (value -> STRING .)
+    COMMA           reduce using rule 63 (value -> STRING .)
+    DIVREAL         reduce using rule 63 (value -> STRING .)
+    GA              reduce using rule 63 (value -> STRING .)
+    EQUAL           reduce using rule 63 (value -> STRING .)
+    NOT             reduce using rule 63 (value -> STRING .)
+    NOT2            reduce using rule 63 (value -> STRING .)
+    LESS            reduce using rule 63 (value -> STRING .)
+    LESS_EQUAL      reduce using rule 63 (value -> STRING .)
+    GREATER         reduce using rule 63 (value -> STRING .)
+    GREATER_EQUAL   reduce using rule 63 (value -> STRING .)
+    DE              reduce using rule 63 (value -> STRING .)
+    TO              reduce using rule 63 (value -> STRING .)
+    KARA            reduce using rule 63 (value -> STRING .)
+    MADE            reduce using rule 63 (value -> STRING .)
+    KO              reduce using rule 63 (value -> STRING .)
+    R_C_BRACKET     reduce using rule 63 (value -> STRING .)
 
 
 state 20
@@ -545,21 +556,21 @@ state 22
     (7) statement -> NAME ASSIGN . value
     (31) statement -> NAME ASSIGN . NAME L_PAREN args R_PAREN
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     NAME            shift and go to state 45
     POW             shift and go to state 17
@@ -573,24 +584,24 @@ state 22
 state 23
 
     (14) statement -> NAME L_S_BRACKET . value R_S_BRACKET ASSIGN value
-    (62) value -> NAME L_S_BRACKET . value R_S_BRACKET
-    (63) value -> NAME L_S_BRACKET . value R_S_BRACKET NO VALUE
+    (64) value -> NAME L_S_BRACKET . value R_S_BRACKET
+    (65) value -> NAME L_S_BRACKET . value R_S_BRACKET NO VALUE
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
@@ -605,7 +616,7 @@ state 24
 
     (15) statement -> NAME NO . END NI value WO ADD
     (34) statement -> NAME NO . END NI NAME L_PAREN args R_PAREN NO RETURN_VAL WO ADD
-    (64) value -> NAME NO . ARR_LEN
+    (66) value -> NAME NO . ARR_LEN
 
     END             shift and go to state 48
     ARR_LEN         shift and go to state 49
@@ -617,21 +628,21 @@ state 25
     (26) args -> .
     (27) args -> . value args_m
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     R_PAREN         reduce using rule 26 (args -> .)
     POW             shift and go to state 17
@@ -653,23 +664,23 @@ state 26
 
 state 27
 
-    (67) value -> value PLUS . value
+    (69) value -> value PLUS . value
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
@@ -682,23 +693,23 @@ state 27
 
 state 28
 
-    (68) value -> value MINUS . value
+    (70) value -> value MINUS . value
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
@@ -711,23 +722,23 @@ state 28
 
 state 29
 
-    (69) value -> value MULTI . value
+    (71) value -> value MULTI . value
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
@@ -740,23 +751,23 @@ state 29
 
 state 30
 
-    (70) value -> value DIVID . value division_tail
+    (72) value -> value DIVID . value division_tail
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
@@ -769,7 +780,7 @@ state 30
 
 state 31
 
-    (73) value -> value NO . DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (77) value -> value NO . DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     DECIMAL_P       shift and go to state 57
 
@@ -792,14 +803,14 @@ state 33
 
 state 34
 
-    (65) value -> L_PAREN value . R_PAREN
-    (66) value -> L_PAREN value . R_PAREN NO RESULT
-    (74) value -> L_PAREN value . R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (67) value -> L_PAREN value . R_PAREN
+    (68) value -> L_PAREN value . R_PAREN NO RESULT
+    (78) value -> L_PAREN value . R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     R_PAREN         shift and go to state 61
     PLUS            shift and go to state 27
@@ -811,49 +822,50 @@ state 34
 
 state 35
 
-    (60) value -> NAME .
-    (62) value -> NAME . L_S_BRACKET value R_S_BRACKET
-    (63) value -> NAME . L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> NAME . NO ARR_LEN
+    (62) value -> NAME .
+    (64) value -> NAME . L_S_BRACKET value R_S_BRACKET
+    (65) value -> NAME . L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> NAME . NO ARR_LEN
 
   ! shift/reduce conflict for NO resolved as shift
-    R_PAREN         reduce using rule 60 (value -> NAME .)
-    PLUS            reduce using rule 60 (value -> NAME .)
-    MINUS           reduce using rule 60 (value -> NAME .)
-    MULTI           reduce using rule 60 (value -> NAME .)
-    DIVID           reduce using rule 60 (value -> NAME .)
-    $end            reduce using rule 60 (value -> NAME .)
-    R_S_BRACKET     reduce using rule 60 (value -> NAME .)
-    COMMA           reduce using rule 60 (value -> NAME .)
-    WO              reduce using rule 60 (value -> NAME .)
-    GA              reduce using rule 60 (value -> NAME .)
-    EQUAL           reduce using rule 60 (value -> NAME .)
-    NOT             reduce using rule 60 (value -> NAME .)
-    NOT2            reduce using rule 60 (value -> NAME .)
-    LESS            reduce using rule 60 (value -> NAME .)
-    LESS_EQUAL      reduce using rule 60 (value -> NAME .)
-    GREATER         reduce using rule 60 (value -> NAME .)
-    GREATER_EQUAL   reduce using rule 60 (value -> NAME .)
-    DE              reduce using rule 60 (value -> NAME .)
-    TO              reduce using rule 60 (value -> NAME .)
-    KARA            reduce using rule 60 (value -> NAME .)
-    MADE            reduce using rule 60 (value -> NAME .)
-    KO              reduce using rule 60 (value -> NAME .)
-    R_C_BRACKET     reduce using rule 60 (value -> NAME .)
+    R_PAREN         reduce using rule 62 (value -> NAME .)
+    PLUS            reduce using rule 62 (value -> NAME .)
+    MINUS           reduce using rule 62 (value -> NAME .)
+    MULTI           reduce using rule 62 (value -> NAME .)
+    DIVID           reduce using rule 62 (value -> NAME .)
+    $end            reduce using rule 62 (value -> NAME .)
+    R_S_BRACKET     reduce using rule 62 (value -> NAME .)
+    COMMA           reduce using rule 62 (value -> NAME .)
+    WO              reduce using rule 62 (value -> NAME .)
+    DIVREAL         reduce using rule 62 (value -> NAME .)
+    GA              reduce using rule 62 (value -> NAME .)
+    EQUAL           reduce using rule 62 (value -> NAME .)
+    NOT             reduce using rule 62 (value -> NAME .)
+    NOT2            reduce using rule 62 (value -> NAME .)
+    LESS            reduce using rule 62 (value -> NAME .)
+    LESS_EQUAL      reduce using rule 62 (value -> NAME .)
+    GREATER         reduce using rule 62 (value -> NAME .)
+    GREATER_EQUAL   reduce using rule 62 (value -> NAME .)
+    DE              reduce using rule 62 (value -> NAME .)
+    TO              reduce using rule 62 (value -> NAME .)
+    KARA            reduce using rule 62 (value -> NAME .)
+    MADE            reduce using rule 62 (value -> NAME .)
+    KO              reduce using rule 62 (value -> NAME .)
+    R_C_BRACKET     reduce using rule 62 (value -> NAME .)
     L_S_BRACKET     shift and go to state 62
     NO              shift and go to state 63
 
-  ! NO              [ reduce using rule 60 (value -> NAME .) ]
+  ! NO              [ reduce using rule 62 (value -> NAME .) ]
 
 
 state 36
 
     (37) statement -> RETURN value .
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     $end            reduce using rule 37 (statement -> RETURN value .)
     PLUS            shift and go to state 27
@@ -870,21 +882,21 @@ state 37
     (52) conditional -> . value GA value DE DIVISIBLE
     (53) conditional -> . value GA value TO value DE DIVISIBLE
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
@@ -903,21 +915,21 @@ state 38
     (52) conditional -> . value GA value DE DIVISIBLE
     (53) conditional -> . value GA value TO value DE DIVISIBLE
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
@@ -931,33 +943,33 @@ state 38
 
 state 39
 
-    (54) statement -> FOR L_PAREN . NAME WO value KARA value MADE NUMBER ZUTSU INCREASE R_PAREN
+    (54) statement -> FOR L_PAREN . NAME WO value KARA value MADE NUMBER ZUTSU incdec R_PAREN
 
     NAME            shift and go to state 67
 
 
 state 40
 
-    (56) statement -> WHILE L_PAREN . conditional R_PAREN
+    (58) statement -> WHILE L_PAREN . conditional R_PAREN
     (42) conditional -> . value sign value
     (52) conditional -> . value GA value DE DIVISIBLE
     (53) conditional -> . value GA value TO value DE DIVISIBLE
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
@@ -975,21 +987,21 @@ state 41
     (26) args -> .
     (27) args -> . value args_m
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     R_PAREN         reduce using rule 26 (args -> .)
     POW             shift and go to state 17
@@ -1034,32 +1046,32 @@ state 44
 state 45
 
     (31) statement -> NAME ASSIGN NAME . L_PAREN args R_PAREN
-    (60) value -> NAME .
-    (62) value -> NAME . L_S_BRACKET value R_S_BRACKET
-    (63) value -> NAME . L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> NAME . NO ARR_LEN
+    (62) value -> NAME .
+    (64) value -> NAME . L_S_BRACKET value R_S_BRACKET
+    (65) value -> NAME . L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> NAME . NO ARR_LEN
 
   ! shift/reduce conflict for NO resolved as shift
     L_PAREN         shift and go to state 74
-    PLUS            reduce using rule 60 (value -> NAME .)
-    MINUS           reduce using rule 60 (value -> NAME .)
-    MULTI           reduce using rule 60 (value -> NAME .)
-    DIVID           reduce using rule 60 (value -> NAME .)
-    $end            reduce using rule 60 (value -> NAME .)
+    PLUS            reduce using rule 62 (value -> NAME .)
+    MINUS           reduce using rule 62 (value -> NAME .)
+    MULTI           reduce using rule 62 (value -> NAME .)
+    DIVID           reduce using rule 62 (value -> NAME .)
+    $end            reduce using rule 62 (value -> NAME .)
     L_S_BRACKET     shift and go to state 62
     NO              shift and go to state 63
 
-  ! NO              [ reduce using rule 60 (value -> NAME .) ]
+  ! NO              [ reduce using rule 62 (value -> NAME .) ]
 
 
 state 46
 
     (7) statement -> NAME ASSIGN value .
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     $end            reduce using rule 7 (statement -> NAME ASSIGN value .)
     PLUS            shift and go to state 27
@@ -1072,13 +1084,13 @@ state 46
 state 47
 
     (14) statement -> NAME L_S_BRACKET value . R_S_BRACKET ASSIGN value
-    (62) value -> NAME L_S_BRACKET value . R_S_BRACKET
-    (63) value -> NAME L_S_BRACKET value . R_S_BRACKET NO VALUE
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (64) value -> NAME L_S_BRACKET value . R_S_BRACKET
+    (65) value -> NAME L_S_BRACKET value . R_S_BRACKET NO VALUE
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     R_S_BRACKET     shift and go to state 75
     PLUS            shift and go to state 27
@@ -1098,32 +1110,33 @@ state 48
 
 state 49
 
-    (64) value -> NAME NO ARR_LEN .
+    (66) value -> NAME NO ARR_LEN .
 
-    WO              reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    PLUS            reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    MINUS           reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    MULTI           reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    DIVID           reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    NO              reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    R_PAREN         reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    $end            reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    R_S_BRACKET     reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    COMMA           reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    GA              reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    EQUAL           reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    NOT             reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    NOT2            reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    LESS            reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    LESS_EQUAL      reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    GREATER         reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    GREATER_EQUAL   reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    DE              reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    TO              reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    KARA            reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    MADE            reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    KO              reduce using rule 64 (value -> NAME NO ARR_LEN .)
-    R_C_BRACKET     reduce using rule 64 (value -> NAME NO ARR_LEN .)
+    WO              reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    PLUS            reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    MINUS           reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    MULTI           reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    DIVID           reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    NO              reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    R_PAREN         reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    $end            reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    R_S_BRACKET     reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    COMMA           reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    DIVREAL         reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    GA              reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    EQUAL           reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    NOT             reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    NOT2            reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    LESS            reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    LESS_EQUAL      reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    GREATER         reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    GREATER_EQUAL   reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    DE              reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    TO              reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    KARA            reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    MADE            reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    KO              reduce using rule 66 (value -> NAME NO ARR_LEN .)
+    R_C_BRACKET     reduce using rule 66 (value -> NAME NO ARR_LEN .)
 
 
 state 50
@@ -1136,11 +1149,11 @@ state 50
 state 51
 
     (27) args -> value . args_m
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
     (28) args_m -> . COMMA value args_m
     (29) args_m -> .
 
@@ -1163,40 +1176,41 @@ state 52
 
 state 53
 
-    (67) value -> value PLUS value .
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (69) value -> value PLUS value .
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
-    WO              reduce using rule 67 (value -> value PLUS value .)
-    PLUS            reduce using rule 67 (value -> value PLUS value .)
-    MINUS           reduce using rule 67 (value -> value PLUS value .)
-    NO              reduce using rule 67 (value -> value PLUS value .)
-    R_PAREN         reduce using rule 67 (value -> value PLUS value .)
-    $end            reduce using rule 67 (value -> value PLUS value .)
-    R_S_BRACKET     reduce using rule 67 (value -> value PLUS value .)
-    COMMA           reduce using rule 67 (value -> value PLUS value .)
-    GA              reduce using rule 67 (value -> value PLUS value .)
-    EQUAL           reduce using rule 67 (value -> value PLUS value .)
-    NOT             reduce using rule 67 (value -> value PLUS value .)
-    NOT2            reduce using rule 67 (value -> value PLUS value .)
-    LESS            reduce using rule 67 (value -> value PLUS value .)
-    LESS_EQUAL      reduce using rule 67 (value -> value PLUS value .)
-    GREATER         reduce using rule 67 (value -> value PLUS value .)
-    GREATER_EQUAL   reduce using rule 67 (value -> value PLUS value .)
-    DE              reduce using rule 67 (value -> value PLUS value .)
-    TO              reduce using rule 67 (value -> value PLUS value .)
-    KARA            reduce using rule 67 (value -> value PLUS value .)
-    MADE            reduce using rule 67 (value -> value PLUS value .)
-    KO              reduce using rule 67 (value -> value PLUS value .)
-    R_C_BRACKET     reduce using rule 67 (value -> value PLUS value .)
+    WO              reduce using rule 69 (value -> value PLUS value .)
+    PLUS            reduce using rule 69 (value -> value PLUS value .)
+    MINUS           reduce using rule 69 (value -> value PLUS value .)
+    NO              reduce using rule 69 (value -> value PLUS value .)
+    R_PAREN         reduce using rule 69 (value -> value PLUS value .)
+    $end            reduce using rule 69 (value -> value PLUS value .)
+    R_S_BRACKET     reduce using rule 69 (value -> value PLUS value .)
+    COMMA           reduce using rule 69 (value -> value PLUS value .)
+    DIVREAL         reduce using rule 69 (value -> value PLUS value .)
+    GA              reduce using rule 69 (value -> value PLUS value .)
+    EQUAL           reduce using rule 69 (value -> value PLUS value .)
+    NOT             reduce using rule 69 (value -> value PLUS value .)
+    NOT2            reduce using rule 69 (value -> value PLUS value .)
+    LESS            reduce using rule 69 (value -> value PLUS value .)
+    LESS_EQUAL      reduce using rule 69 (value -> value PLUS value .)
+    GREATER         reduce using rule 69 (value -> value PLUS value .)
+    GREATER_EQUAL   reduce using rule 69 (value -> value PLUS value .)
+    DE              reduce using rule 69 (value -> value PLUS value .)
+    TO              reduce using rule 69 (value -> value PLUS value .)
+    KARA            reduce using rule 69 (value -> value PLUS value .)
+    MADE            reduce using rule 69 (value -> value PLUS value .)
+    KO              reduce using rule 69 (value -> value PLUS value .)
+    R_C_BRACKET     reduce using rule 69 (value -> value PLUS value .)
     MULTI           shift and go to state 29
     DIVID           shift and go to state 30
 
-  ! MULTI           [ reduce using rule 67 (value -> value PLUS value .) ]
-  ! DIVID           [ reduce using rule 67 (value -> value PLUS value .) ]
+  ! MULTI           [ reduce using rule 69 (value -> value PLUS value .) ]
+  ! DIVID           [ reduce using rule 69 (value -> value PLUS value .) ]
   ! PLUS            [ shift and go to state 27 ]
   ! MINUS           [ shift and go to state 28 ]
   ! NO              [ shift and go to state 31 ]
@@ -1204,40 +1218,41 @@ state 53
 
 state 54
 
-    (68) value -> value MINUS value .
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (70) value -> value MINUS value .
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
-    WO              reduce using rule 68 (value -> value MINUS value .)
-    PLUS            reduce using rule 68 (value -> value MINUS value .)
-    MINUS           reduce using rule 68 (value -> value MINUS value .)
-    NO              reduce using rule 68 (value -> value MINUS value .)
-    R_PAREN         reduce using rule 68 (value -> value MINUS value .)
-    $end            reduce using rule 68 (value -> value MINUS value .)
-    R_S_BRACKET     reduce using rule 68 (value -> value MINUS value .)
-    COMMA           reduce using rule 68 (value -> value MINUS value .)
-    GA              reduce using rule 68 (value -> value MINUS value .)
-    EQUAL           reduce using rule 68 (value -> value MINUS value .)
-    NOT             reduce using rule 68 (value -> value MINUS value .)
-    NOT2            reduce using rule 68 (value -> value MINUS value .)
-    LESS            reduce using rule 68 (value -> value MINUS value .)
-    LESS_EQUAL      reduce using rule 68 (value -> value MINUS value .)
-    GREATER         reduce using rule 68 (value -> value MINUS value .)
-    GREATER_EQUAL   reduce using rule 68 (value -> value MINUS value .)
-    DE              reduce using rule 68 (value -> value MINUS value .)
-    TO              reduce using rule 68 (value -> value MINUS value .)
-    KARA            reduce using rule 68 (value -> value MINUS value .)
-    MADE            reduce using rule 68 (value -> value MINUS value .)
-    KO              reduce using rule 68 (value -> value MINUS value .)
-    R_C_BRACKET     reduce using rule 68 (value -> value MINUS value .)
+    WO              reduce using rule 70 (value -> value MINUS value .)
+    PLUS            reduce using rule 70 (value -> value MINUS value .)
+    MINUS           reduce using rule 70 (value -> value MINUS value .)
+    NO              reduce using rule 70 (value -> value MINUS value .)
+    R_PAREN         reduce using rule 70 (value -> value MINUS value .)
+    $end            reduce using rule 70 (value -> value MINUS value .)
+    R_S_BRACKET     reduce using rule 70 (value -> value MINUS value .)
+    COMMA           reduce using rule 70 (value -> value MINUS value .)
+    DIVREAL         reduce using rule 70 (value -> value MINUS value .)
+    GA              reduce using rule 70 (value -> value MINUS value .)
+    EQUAL           reduce using rule 70 (value -> value MINUS value .)
+    NOT             reduce using rule 70 (value -> value MINUS value .)
+    NOT2            reduce using rule 70 (value -> value MINUS value .)
+    LESS            reduce using rule 70 (value -> value MINUS value .)
+    LESS_EQUAL      reduce using rule 70 (value -> value MINUS value .)
+    GREATER         reduce using rule 70 (value -> value MINUS value .)
+    GREATER_EQUAL   reduce using rule 70 (value -> value MINUS value .)
+    DE              reduce using rule 70 (value -> value MINUS value .)
+    TO              reduce using rule 70 (value -> value MINUS value .)
+    KARA            reduce using rule 70 (value -> value MINUS value .)
+    MADE            reduce using rule 70 (value -> value MINUS value .)
+    KO              reduce using rule 70 (value -> value MINUS value .)
+    R_C_BRACKET     reduce using rule 70 (value -> value MINUS value .)
     MULTI           shift and go to state 29
     DIVID           shift and go to state 30
 
-  ! MULTI           [ reduce using rule 68 (value -> value MINUS value .) ]
-  ! DIVID           [ reduce using rule 68 (value -> value MINUS value .) ]
+  ! MULTI           [ reduce using rule 70 (value -> value MINUS value .) ]
+  ! DIVID           [ reduce using rule 70 (value -> value MINUS value .) ]
   ! PLUS            [ shift and go to state 27 ]
   ! MINUS           [ shift and go to state 28 ]
   ! NO              [ shift and go to state 31 ]
@@ -1245,37 +1260,38 @@ state 54
 
 state 55
 
-    (69) value -> value MULTI value .
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (71) value -> value MULTI value .
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
-    WO              reduce using rule 69 (value -> value MULTI value .)
-    PLUS            reduce using rule 69 (value -> value MULTI value .)
-    MINUS           reduce using rule 69 (value -> value MULTI value .)
-    MULTI           reduce using rule 69 (value -> value MULTI value .)
-    DIVID           reduce using rule 69 (value -> value MULTI value .)
-    NO              reduce using rule 69 (value -> value MULTI value .)
-    R_PAREN         reduce using rule 69 (value -> value MULTI value .)
-    $end            reduce using rule 69 (value -> value MULTI value .)
-    R_S_BRACKET     reduce using rule 69 (value -> value MULTI value .)
-    COMMA           reduce using rule 69 (value -> value MULTI value .)
-    GA              reduce using rule 69 (value -> value MULTI value .)
-    EQUAL           reduce using rule 69 (value -> value MULTI value .)
-    NOT             reduce using rule 69 (value -> value MULTI value .)
-    NOT2            reduce using rule 69 (value -> value MULTI value .)
-    LESS            reduce using rule 69 (value -> value MULTI value .)
-    LESS_EQUAL      reduce using rule 69 (value -> value MULTI value .)
-    GREATER         reduce using rule 69 (value -> value MULTI value .)
-    GREATER_EQUAL   reduce using rule 69 (value -> value MULTI value .)
-    DE              reduce using rule 69 (value -> value MULTI value .)
-    TO              reduce using rule 69 (value -> value MULTI value .)
-    KARA            reduce using rule 69 (value -> value MULTI value .)
-    MADE            reduce using rule 69 (value -> value MULTI value .)
-    KO              reduce using rule 69 (value -> value MULTI value .)
-    R_C_BRACKET     reduce using rule 69 (value -> value MULTI value .)
+    WO              reduce using rule 71 (value -> value MULTI value .)
+    PLUS            reduce using rule 71 (value -> value MULTI value .)
+    MINUS           reduce using rule 71 (value -> value MULTI value .)
+    MULTI           reduce using rule 71 (value -> value MULTI value .)
+    DIVID           reduce using rule 71 (value -> value MULTI value .)
+    NO              reduce using rule 71 (value -> value MULTI value .)
+    R_PAREN         reduce using rule 71 (value -> value MULTI value .)
+    $end            reduce using rule 71 (value -> value MULTI value .)
+    R_S_BRACKET     reduce using rule 71 (value -> value MULTI value .)
+    COMMA           reduce using rule 71 (value -> value MULTI value .)
+    DIVREAL         reduce using rule 71 (value -> value MULTI value .)
+    GA              reduce using rule 71 (value -> value MULTI value .)
+    EQUAL           reduce using rule 71 (value -> value MULTI value .)
+    NOT             reduce using rule 71 (value -> value MULTI value .)
+    NOT2            reduce using rule 71 (value -> value MULTI value .)
+    LESS            reduce using rule 71 (value -> value MULTI value .)
+    LESS_EQUAL      reduce using rule 71 (value -> value MULTI value .)
+    GREATER         reduce using rule 71 (value -> value MULTI value .)
+    GREATER_EQUAL   reduce using rule 71 (value -> value MULTI value .)
+    DE              reduce using rule 71 (value -> value MULTI value .)
+    TO              reduce using rule 71 (value -> value MULTI value .)
+    KARA            reduce using rule 71 (value -> value MULTI value .)
+    MADE            reduce using rule 71 (value -> value MULTI value .)
+    KO              reduce using rule 71 (value -> value MULTI value .)
+    R_C_BRACKET     reduce using rule 71 (value -> value MULTI value .)
 
   ! PLUS            [ shift and go to state 27 ]
   ! MINUS           [ shift and go to state 28 ]
@@ -1286,58 +1302,63 @@ state 55
 
 state 56
 
-    (70) value -> value DIVID value . division_tail
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (71) division_tail -> . NO SHOW
-    (72) division_tail -> .
+    (72) value -> value DIVID value . division_tail
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (73) division_tail -> . NO SHOW
+    (74) division_tail -> . NO REMAINDER
+    (75) division_tail -> . DIVREAL
+    (76) division_tail -> .
 
   ! shift/reduce conflict for PLUS resolved as shift
   ! shift/reduce conflict for MINUS resolved as shift
   ! shift/reduce conflict for MULTI resolved as shift
   ! shift/reduce conflict for DIVID resolved as shift
   ! shift/reduce conflict for NO resolved as shift
+  ! shift/reduce conflict for DIVREAL resolved as shift
     PLUS            shift and go to state 27
     MINUS           shift and go to state 28
     MULTI           shift and go to state 29
     DIVID           shift and go to state 30
     NO              shift and go to state 81
-    WO              reduce using rule 72 (division_tail -> .)
-    R_PAREN         reduce using rule 72 (division_tail -> .)
-    $end            reduce using rule 72 (division_tail -> .)
-    R_S_BRACKET     reduce using rule 72 (division_tail -> .)
-    COMMA           reduce using rule 72 (division_tail -> .)
-    GA              reduce using rule 72 (division_tail -> .)
-    EQUAL           reduce using rule 72 (division_tail -> .)
-    NOT             reduce using rule 72 (division_tail -> .)
-    NOT2            reduce using rule 72 (division_tail -> .)
-    LESS            reduce using rule 72 (division_tail -> .)
-    LESS_EQUAL      reduce using rule 72 (division_tail -> .)
-    GREATER         reduce using rule 72 (division_tail -> .)
-    GREATER_EQUAL   reduce using rule 72 (division_tail -> .)
-    DE              reduce using rule 72 (division_tail -> .)
-    TO              reduce using rule 72 (division_tail -> .)
-    KARA            reduce using rule 72 (division_tail -> .)
-    MADE            reduce using rule 72 (division_tail -> .)
-    KO              reduce using rule 72 (division_tail -> .)
-    R_C_BRACKET     reduce using rule 72 (division_tail -> .)
+    DIVREAL         shift and go to state 82
+    WO              reduce using rule 76 (division_tail -> .)
+    R_PAREN         reduce using rule 76 (division_tail -> .)
+    $end            reduce using rule 76 (division_tail -> .)
+    R_S_BRACKET     reduce using rule 76 (division_tail -> .)
+    COMMA           reduce using rule 76 (division_tail -> .)
+    GA              reduce using rule 76 (division_tail -> .)
+    EQUAL           reduce using rule 76 (division_tail -> .)
+    NOT             reduce using rule 76 (division_tail -> .)
+    NOT2            reduce using rule 76 (division_tail -> .)
+    LESS            reduce using rule 76 (division_tail -> .)
+    LESS_EQUAL      reduce using rule 76 (division_tail -> .)
+    GREATER         reduce using rule 76 (division_tail -> .)
+    GREATER_EQUAL   reduce using rule 76 (division_tail -> .)
+    DE              reduce using rule 76 (division_tail -> .)
+    TO              reduce using rule 76 (division_tail -> .)
+    KARA            reduce using rule 76 (division_tail -> .)
+    MADE            reduce using rule 76 (division_tail -> .)
+    KO              reduce using rule 76 (division_tail -> .)
+    R_C_BRACKET     reduce using rule 76 (division_tail -> .)
 
-  ! PLUS            [ reduce using rule 72 (division_tail -> .) ]
-  ! MINUS           [ reduce using rule 72 (division_tail -> .) ]
-  ! MULTI           [ reduce using rule 72 (division_tail -> .) ]
-  ! DIVID           [ reduce using rule 72 (division_tail -> .) ]
-  ! NO              [ reduce using rule 72 (division_tail -> .) ]
+  ! PLUS            [ reduce using rule 76 (division_tail -> .) ]
+  ! MINUS           [ reduce using rule 76 (division_tail -> .) ]
+  ! MULTI           [ reduce using rule 76 (division_tail -> .) ]
+  ! DIVID           [ reduce using rule 76 (division_tail -> .) ]
+  ! NO              [ reduce using rule 76 (division_tail -> .) ]
+  ! DIVREAL         [ reduce using rule 76 (division_tail -> .) ]
 
     division_tail                  shift and go to state 80
 
 state 57
 
-    (73) value -> value NO DECIMAL_P . BELOW WO ROUNDED_UP VALUE
+    (77) value -> value NO DECIMAL_P . BELOW WO ROUNDED_UP VALUE
 
-    BELOW           shift and go to state 82
+    BELOW           shift and go to state 83
 
 
 state 58
@@ -1348,79 +1369,80 @@ state 58
     (19) params -> . TYPE NO ARRAY COLON NAME params_m
 
     R_PAREN         reduce using rule 17 (params -> .)
-    TYPE            shift and go to state 84
+    TYPE            shift and go to state 85
 
-    params                         shift and go to state 83
+    params                         shift and go to state 84
 
 state 59
 
     (24) statement -> CIRCLE TYPE COLON . NAME L_PAREN params R_PAREN
 
-    NAME            shift and go to state 85
+    NAME            shift and go to state 86
 
 
 state 60
 
     (25) statement -> CIRCLE TYPE NO . ARRAY COLON NAME L_PAREN params R_PAREN
 
-    ARRAY           shift and go to state 86
+    ARRAY           shift and go to state 87
 
 
 state 61
 
-    (65) value -> L_PAREN value R_PAREN .
-    (66) value -> L_PAREN value R_PAREN . NO RESULT
-    (74) value -> L_PAREN value R_PAREN . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (67) value -> L_PAREN value R_PAREN .
+    (68) value -> L_PAREN value R_PAREN . NO RESULT
+    (78) value -> L_PAREN value R_PAREN . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
   ! shift/reduce conflict for NO resolved as shift
-    WO              reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    PLUS            reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    MINUS           reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    MULTI           reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    DIVID           reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    R_PAREN         reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    $end            reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    R_S_BRACKET     reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    COMMA           reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    GA              reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    EQUAL           reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    NOT             reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    NOT2            reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    LESS            reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    LESS_EQUAL      reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    GREATER         reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    GREATER_EQUAL   reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    DE              reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    TO              reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    KARA            reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    MADE            reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    KO              reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    R_C_BRACKET     reduce using rule 65 (value -> L_PAREN value R_PAREN .)
-    NO              shift and go to state 87
+    WO              reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    PLUS            reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    MINUS           reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    MULTI           reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    DIVID           reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    R_PAREN         reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    $end            reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    R_S_BRACKET     reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    COMMA           reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    DIVREAL         reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    GA              reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    EQUAL           reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    NOT             reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    NOT2            reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    LESS            reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    LESS_EQUAL      reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    GREATER         reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    GREATER_EQUAL   reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    DE              reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    TO              reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    KARA            reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    MADE            reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    KO              reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    R_C_BRACKET     reduce using rule 67 (value -> L_PAREN value R_PAREN .)
+    NO              shift and go to state 88
 
-  ! NO              [ reduce using rule 65 (value -> L_PAREN value R_PAREN .) ]
+  ! NO              [ reduce using rule 67 (value -> L_PAREN value R_PAREN .) ]
 
 
 state 62
 
-    (62) value -> NAME L_S_BRACKET . value R_S_BRACKET
-    (63) value -> NAME L_S_BRACKET . value R_S_BRACKET NO VALUE
+    (64) value -> NAME L_S_BRACKET . value R_S_BRACKET
+    (65) value -> NAME L_S_BRACKET . value R_S_BRACKET NO VALUE
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
@@ -1429,11 +1451,11 @@ state 62
     STRING          shift and go to state 19
     L_PAREN         shift and go to state 6
 
-    value                          shift and go to state 88
+    value                          shift and go to state 89
 
 state 63
 
-    (64) value -> NAME NO . ARR_LEN
+    (66) value -> NAME NO . ARR_LEN
 
     ARR_LEN         shift and go to state 49
 
@@ -1442,7 +1464,7 @@ state 64
 
     (38) statement -> IF L_PAREN conditional . R_PAREN
 
-    R_PAREN         shift and go to state 89
+    R_PAREN         shift and go to state 90
 
 
 state 65
@@ -1450,11 +1472,11 @@ state 65
     (42) conditional -> value . sign value
     (52) conditional -> value . GA value DE DIVISIBLE
     (53) conditional -> value . GA value TO value DE DIVISIBLE
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
     (43) sign -> . EQUAL
     (44) sign -> . NOT EQUAL
     (45) sign -> . NOT2
@@ -1465,48 +1487,48 @@ state 65
     (50) sign -> . GREATER EQUAL
     (51) sign -> . GREATER_EQUAL
 
-    GA              shift and go to state 91
+    GA              shift and go to state 92
     PLUS            shift and go to state 27
     MINUS           shift and go to state 28
     MULTI           shift and go to state 29
     DIVID           shift and go to state 30
     NO              shift and go to state 31
-    EQUAL           shift and go to state 92
-    NOT             shift and go to state 93
-    NOT2            shift and go to state 94
-    LESS            shift and go to state 95
-    LESS_EQUAL      shift and go to state 96
-    GREATER         shift and go to state 97
-    GREATER_EQUAL   shift and go to state 98
+    EQUAL           shift and go to state 93
+    NOT             shift and go to state 94
+    NOT2            shift and go to state 95
+    LESS            shift and go to state 96
+    LESS_EQUAL      shift and go to state 97
+    GREATER         shift and go to state 98
+    GREATER_EQUAL   shift and go to state 99
 
-    sign                           shift and go to state 90
+    sign                           shift and go to state 91
 
 state 66
 
     (39) statement -> ELSEIF L_PAREN conditional . R_PAREN
 
-    R_PAREN         shift and go to state 99
+    R_PAREN         shift and go to state 100
 
 
 state 67
 
-    (54) statement -> FOR L_PAREN NAME . WO value KARA value MADE NUMBER ZUTSU INCREASE R_PAREN
+    (54) statement -> FOR L_PAREN NAME . WO value KARA value MADE NUMBER ZUTSU incdec R_PAREN
 
-    WO              shift and go to state 100
+    WO              shift and go to state 101
 
 
 state 68
 
-    (56) statement -> WHILE L_PAREN conditional . R_PAREN
+    (58) statement -> WHILE L_PAREN conditional . R_PAREN
 
-    R_PAREN         shift and go to state 101
+    R_PAREN         shift and go to state 102
 
 
 state 69
 
     (35) value -> POW L_PAREN args . R_PAREN
 
-    R_PAREN         shift and go to state 102
+    R_PAREN         shift and go to state 103
 
 
 state 70
@@ -1514,30 +1536,30 @@ state 70
     (6) statement -> TYPE COLON NAME ASSIGN . value
     (32) statement -> TYPE COLON NAME ASSIGN . NAME L_PAREN args R_PAREN
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
-    NAME            shift and go to state 103
+    NAME            shift and go to state 104
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
     FLOAT           shift and go to state 18
     STRING          shift and go to state 19
     L_PAREN         shift and go to state 6
 
-    value                          shift and go to state 104
+    value                          shift and go to state 105
 
 state 71
 
@@ -1550,7 +1572,7 @@ state 72
 
     (4) decl_names_m -> COMMA . NAME decl_names_m
 
-    NAME            shift and go to state 105
+    NAME            shift and go to state 106
 
 
 state 73
@@ -1558,7 +1580,7 @@ state 73
     (8) statement -> TYPE NO ARRAY COLON . NAME ASSIGN init_array
     (33) statement -> TYPE NO ARRAY COLON . NAME ASSIGN NAME L_PAREN args R_PAREN
 
-    NAME            shift and go to state 106
+    NAME            shift and go to state 107
 
 
 state 74
@@ -1567,21 +1589,21 @@ state 74
     (26) args -> .
     (27) args -> . value args_m
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     R_PAREN         reduce using rule 26 (args -> .)
     POW             shift and go to state 17
@@ -1591,25 +1613,25 @@ state 74
     STRING          shift and go to state 19
     L_PAREN         shift and go to state 6
 
-    args                           shift and go to state 107
+    args                           shift and go to state 108
     value                          shift and go to state 51
 
 state 75
 
     (14) statement -> NAME L_S_BRACKET value R_S_BRACKET . ASSIGN value
-    (62) value -> NAME L_S_BRACKET value R_S_BRACKET .
-    (63) value -> NAME L_S_BRACKET value R_S_BRACKET . NO VALUE
+    (64) value -> NAME L_S_BRACKET value R_S_BRACKET .
+    (65) value -> NAME L_S_BRACKET value R_S_BRACKET . NO VALUE
 
   ! shift/reduce conflict for NO resolved as shift
-    ASSIGN          shift and go to state 108
-    WO              reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    PLUS            reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    MINUS           reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    MULTI           reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    DIVID           reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    NO              shift and go to state 109
+    ASSIGN          shift and go to state 109
+    WO              reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    PLUS            reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    MINUS           reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    MULTI           reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    DIVID           reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    NO              shift and go to state 110
 
-  ! NO              [ reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .) ]
+  ! NO              [ reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .) ]
 
 
 state 76
@@ -1617,30 +1639,30 @@ state 76
     (15) statement -> NAME NO END NI . value WO ADD
     (34) statement -> NAME NO END NI . NAME L_PAREN args R_PAREN NO RETURN_VAL WO ADD
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
-    NAME            shift and go to state 110
+    NAME            shift and go to state 111
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
     FLOAT           shift and go to state 18
     STRING          shift and go to state 19
     L_PAREN         shift and go to state 6
 
-    value                          shift and go to state 111
+    value                          shift and go to state 112
 
 state 77
 
@@ -1660,21 +1682,21 @@ state 79
 
     (28) args_m -> COMMA . value args_m
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
@@ -1683,104 +1705,138 @@ state 79
     STRING          shift and go to state 19
     L_PAREN         shift and go to state 6
 
-    value                          shift and go to state 112
+    value                          shift and go to state 113
 
 state 80
 
-    (70) value -> value DIVID value division_tail .
+    (72) value -> value DIVID value division_tail .
 
-    WO              reduce using rule 70 (value -> value DIVID value division_tail .)
-    PLUS            reduce using rule 70 (value -> value DIVID value division_tail .)
-    MINUS           reduce using rule 70 (value -> value DIVID value division_tail .)
-    MULTI           reduce using rule 70 (value -> value DIVID value division_tail .)
-    DIVID           reduce using rule 70 (value -> value DIVID value division_tail .)
-    NO              reduce using rule 70 (value -> value DIVID value division_tail .)
-    R_PAREN         reduce using rule 70 (value -> value DIVID value division_tail .)
-    $end            reduce using rule 70 (value -> value DIVID value division_tail .)
-    R_S_BRACKET     reduce using rule 70 (value -> value DIVID value division_tail .)
-    COMMA           reduce using rule 70 (value -> value DIVID value division_tail .)
-    GA              reduce using rule 70 (value -> value DIVID value division_tail .)
-    EQUAL           reduce using rule 70 (value -> value DIVID value division_tail .)
-    NOT             reduce using rule 70 (value -> value DIVID value division_tail .)
-    NOT2            reduce using rule 70 (value -> value DIVID value division_tail .)
-    LESS            reduce using rule 70 (value -> value DIVID value division_tail .)
-    LESS_EQUAL      reduce using rule 70 (value -> value DIVID value division_tail .)
-    GREATER         reduce using rule 70 (value -> value DIVID value division_tail .)
-    GREATER_EQUAL   reduce using rule 70 (value -> value DIVID value division_tail .)
-    DE              reduce using rule 70 (value -> value DIVID value division_tail .)
-    TO              reduce using rule 70 (value -> value DIVID value division_tail .)
-    KARA            reduce using rule 70 (value -> value DIVID value division_tail .)
-    MADE            reduce using rule 70 (value -> value DIVID value division_tail .)
-    KO              reduce using rule 70 (value -> value DIVID value division_tail .)
-    R_C_BRACKET     reduce using rule 70 (value -> value DIVID value division_tail .)
+    WO              reduce using rule 72 (value -> value DIVID value division_tail .)
+    PLUS            reduce using rule 72 (value -> value DIVID value division_tail .)
+    MINUS           reduce using rule 72 (value -> value DIVID value division_tail .)
+    MULTI           reduce using rule 72 (value -> value DIVID value division_tail .)
+    DIVID           reduce using rule 72 (value -> value DIVID value division_tail .)
+    NO              reduce using rule 72 (value -> value DIVID value division_tail .)
+    R_PAREN         reduce using rule 72 (value -> value DIVID value division_tail .)
+    $end            reduce using rule 72 (value -> value DIVID value division_tail .)
+    R_S_BRACKET     reduce using rule 72 (value -> value DIVID value division_tail .)
+    COMMA           reduce using rule 72 (value -> value DIVID value division_tail .)
+    DIVREAL         reduce using rule 72 (value -> value DIVID value division_tail .)
+    GA              reduce using rule 72 (value -> value DIVID value division_tail .)
+    EQUAL           reduce using rule 72 (value -> value DIVID value division_tail .)
+    NOT             reduce using rule 72 (value -> value DIVID value division_tail .)
+    NOT2            reduce using rule 72 (value -> value DIVID value division_tail .)
+    LESS            reduce using rule 72 (value -> value DIVID value division_tail .)
+    LESS_EQUAL      reduce using rule 72 (value -> value DIVID value division_tail .)
+    GREATER         reduce using rule 72 (value -> value DIVID value division_tail .)
+    GREATER_EQUAL   reduce using rule 72 (value -> value DIVID value division_tail .)
+    DE              reduce using rule 72 (value -> value DIVID value division_tail .)
+    TO              reduce using rule 72 (value -> value DIVID value division_tail .)
+    KARA            reduce using rule 72 (value -> value DIVID value division_tail .)
+    MADE            reduce using rule 72 (value -> value DIVID value division_tail .)
+    KO              reduce using rule 72 (value -> value DIVID value division_tail .)
+    R_C_BRACKET     reduce using rule 72 (value -> value DIVID value division_tail .)
 
 
 state 81
 
-    (73) value -> value NO . DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (71) division_tail -> NO . SHOW
+    (77) value -> value NO . DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (73) division_tail -> NO . SHOW
+    (74) division_tail -> NO . REMAINDER
 
     DECIMAL_P       shift and go to state 57
-    SHOW            shift and go to state 113
+    SHOW            shift and go to state 114
+    REMAINDER       shift and go to state 115
 
 
 state 82
 
-    (73) value -> value NO DECIMAL_P BELOW . WO ROUNDED_UP VALUE
+    (75) division_tail -> DIVREAL .
 
-    WO              shift and go to state 114
+    WO              reduce using rule 75 (division_tail -> DIVREAL .)
+    PLUS            reduce using rule 75 (division_tail -> DIVREAL .)
+    MINUS           reduce using rule 75 (division_tail -> DIVREAL .)
+    MULTI           reduce using rule 75 (division_tail -> DIVREAL .)
+    DIVID           reduce using rule 75 (division_tail -> DIVREAL .)
+    NO              reduce using rule 75 (division_tail -> DIVREAL .)
+    R_PAREN         reduce using rule 75 (division_tail -> DIVREAL .)
+    $end            reduce using rule 75 (division_tail -> DIVREAL .)
+    R_S_BRACKET     reduce using rule 75 (division_tail -> DIVREAL .)
+    COMMA           reduce using rule 75 (division_tail -> DIVREAL .)
+    DIVREAL         reduce using rule 75 (division_tail -> DIVREAL .)
+    GA              reduce using rule 75 (division_tail -> DIVREAL .)
+    EQUAL           reduce using rule 75 (division_tail -> DIVREAL .)
+    NOT             reduce using rule 75 (division_tail -> DIVREAL .)
+    NOT2            reduce using rule 75 (division_tail -> DIVREAL .)
+    LESS            reduce using rule 75 (division_tail -> DIVREAL .)
+    LESS_EQUAL      reduce using rule 75 (division_tail -> DIVREAL .)
+    GREATER         reduce using rule 75 (division_tail -> DIVREAL .)
+    GREATER_EQUAL   reduce using rule 75 (division_tail -> DIVREAL .)
+    DE              reduce using rule 75 (division_tail -> DIVREAL .)
+    TO              reduce using rule 75 (division_tail -> DIVREAL .)
+    KARA            reduce using rule 75 (division_tail -> DIVREAL .)
+    MADE            reduce using rule 75 (division_tail -> DIVREAL .)
+    KO              reduce using rule 75 (division_tail -> DIVREAL .)
+    R_C_BRACKET     reduce using rule 75 (division_tail -> DIVREAL .)
 
 
 state 83
 
-    (23) statement -> CIRCLE NAME L_PAREN params . R_PAREN
+    (77) value -> value NO DECIMAL_P BELOW . WO ROUNDED_UP VALUE
 
-    R_PAREN         shift and go to state 115
+    WO              shift and go to state 116
 
 
 state 84
 
-    (18) params -> TYPE . COLON NAME params_m
-    (19) params -> TYPE . NO ARRAY COLON NAME params_m
+    (23) statement -> CIRCLE NAME L_PAREN params . R_PAREN
 
-    COLON           shift and go to state 116
-    NO              shift and go to state 117
+    R_PAREN         shift and go to state 117
 
 
 state 85
 
-    (24) statement -> CIRCLE TYPE COLON NAME . L_PAREN params R_PAREN
+    (18) params -> TYPE . COLON NAME params_m
+    (19) params -> TYPE . NO ARRAY COLON NAME params_m
 
-    L_PAREN         shift and go to state 118
+    COLON           shift and go to state 118
+    NO              shift and go to state 119
 
 
 state 86
 
-    (25) statement -> CIRCLE TYPE NO ARRAY . COLON NAME L_PAREN params R_PAREN
+    (24) statement -> CIRCLE TYPE COLON NAME . L_PAREN params R_PAREN
 
-    COLON           shift and go to state 119
+    L_PAREN         shift and go to state 120
 
 
 state 87
 
-    (66) value -> L_PAREN value R_PAREN NO . RESULT
-    (74) value -> L_PAREN value R_PAREN NO . DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (25) statement -> CIRCLE TYPE NO ARRAY . COLON NAME L_PAREN params R_PAREN
 
-    RESULT          shift and go to state 120
-    DECIMAL_P       shift and go to state 121
+    COLON           shift and go to state 121
 
 
 state 88
 
-    (62) value -> NAME L_S_BRACKET value . R_S_BRACKET
-    (63) value -> NAME L_S_BRACKET value . R_S_BRACKET NO VALUE
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (68) value -> L_PAREN value R_PAREN NO . RESULT
+    (78) value -> L_PAREN value R_PAREN NO . DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
-    R_S_BRACKET     shift and go to state 122
+    RESULT          shift and go to state 122
+    DECIMAL_P       shift and go to state 123
+
+
+state 89
+
+    (64) value -> NAME L_S_BRACKET value . R_S_BRACKET
+    (65) value -> NAME L_S_BRACKET value . R_S_BRACKET NO VALUE
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+
+    R_S_BRACKET     shift and go to state 124
     PLUS            shift and go to state 27
     MINUS           shift and go to state 28
     MULTI           shift and go to state 29
@@ -1788,32 +1844,32 @@ state 88
     NO              shift and go to state 31
 
 
-state 89
+state 90
 
     (38) statement -> IF L_PAREN conditional R_PAREN .
 
     $end            reduce using rule 38 (statement -> IF L_PAREN conditional R_PAREN .)
 
 
-state 90
+state 91
 
     (42) conditional -> value sign . value
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
@@ -1822,28 +1878,28 @@ state 90
     STRING          shift and go to state 19
     L_PAREN         shift and go to state 6
 
-    value                          shift and go to state 123
+    value                          shift and go to state 125
 
-state 91
+state 92
 
     (52) conditional -> value GA . value DE DIVISIBLE
     (53) conditional -> value GA . value TO value DE DIVISIBLE
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
@@ -1852,9 +1908,9 @@ state 91
     STRING          shift and go to state 19
     L_PAREN         shift and go to state 6
 
-    value                          shift and go to state 124
+    value                          shift and go to state 126
 
-state 92
+state 93
 
     (43) sign -> EQUAL .
 
@@ -1866,14 +1922,14 @@ state 92
     L_PAREN         reduce using rule 43 (sign -> EQUAL .)
 
 
-state 93
+state 94
 
     (44) sign -> NOT . EQUAL
 
-    EQUAL           shift and go to state 125
+    EQUAL           shift and go to state 127
 
 
-state 94
+state 95
 
     (45) sign -> NOT2 .
 
@@ -1885,7 +1941,7 @@ state 94
     L_PAREN         reduce using rule 45 (sign -> NOT2 .)
 
 
-state 95
+state 96
 
     (46) sign -> LESS .
     (47) sign -> LESS . EQUAL
@@ -1896,10 +1952,10 @@ state 95
     NAME            reduce using rule 46 (sign -> LESS .)
     STRING          reduce using rule 46 (sign -> LESS .)
     L_PAREN         reduce using rule 46 (sign -> LESS .)
-    EQUAL           shift and go to state 126
+    EQUAL           shift and go to state 128
 
 
-state 96
+state 97
 
     (48) sign -> LESS_EQUAL .
 
@@ -1911,7 +1967,7 @@ state 96
     L_PAREN         reduce using rule 48 (sign -> LESS_EQUAL .)
 
 
-state 97
+state 98
 
     (49) sign -> GREATER .
     (50) sign -> GREATER . EQUAL
@@ -1922,10 +1978,10 @@ state 97
     NAME            reduce using rule 49 (sign -> GREATER .)
     STRING          reduce using rule 49 (sign -> GREATER .)
     L_PAREN         reduce using rule 49 (sign -> GREATER .)
-    EQUAL           shift and go to state 127
+    EQUAL           shift and go to state 129
 
 
-state 98
+state 99
 
     (51) sign -> GREATER_EQUAL .
 
@@ -1937,32 +1993,32 @@ state 98
     L_PAREN         reduce using rule 51 (sign -> GREATER_EQUAL .)
 
 
-state 99
+state 100
 
     (39) statement -> ELSEIF L_PAREN conditional R_PAREN .
 
     $end            reduce using rule 39 (statement -> ELSEIF L_PAREN conditional R_PAREN .)
 
 
-state 100
+state 101
 
-    (54) statement -> FOR L_PAREN NAME WO . value KARA value MADE NUMBER ZUTSU INCREASE R_PAREN
+    (54) statement -> FOR L_PAREN NAME WO . value KARA value MADE NUMBER ZUTSU incdec R_PAREN
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
@@ -1971,16 +2027,16 @@ state 100
     STRING          shift and go to state 19
     L_PAREN         shift and go to state 6
 
-    value                          shift and go to state 128
-
-state 101
-
-    (56) statement -> WHILE L_PAREN conditional R_PAREN .
-
-    $end            reduce using rule 56 (statement -> WHILE L_PAREN conditional R_PAREN .)
-
+    value                          shift and go to state 130
 
 state 102
+
+    (58) statement -> WHILE L_PAREN conditional R_PAREN .
+
+    $end            reduce using rule 58 (statement -> WHILE L_PAREN conditional R_PAREN .)
+
+
+state 103
 
     (35) value -> POW L_PAREN args R_PAREN .
 
@@ -1994,6 +2050,7 @@ state 102
     $end            reduce using rule 35 (value -> POW L_PAREN args R_PAREN .)
     R_S_BRACKET     reduce using rule 35 (value -> POW L_PAREN args R_PAREN .)
     COMMA           reduce using rule 35 (value -> POW L_PAREN args R_PAREN .)
+    DIVREAL         reduce using rule 35 (value -> POW L_PAREN args R_PAREN .)
     GA              reduce using rule 35 (value -> POW L_PAREN args R_PAREN .)
     EQUAL           reduce using rule 35 (value -> POW L_PAREN args R_PAREN .)
     NOT             reduce using rule 35 (value -> POW L_PAREN args R_PAREN .)
@@ -2010,35 +2067,35 @@ state 102
     R_C_BRACKET     reduce using rule 35 (value -> POW L_PAREN args R_PAREN .)
 
 
-state 103
+state 104
 
     (32) statement -> TYPE COLON NAME ASSIGN NAME . L_PAREN args R_PAREN
-    (60) value -> NAME .
-    (62) value -> NAME . L_S_BRACKET value R_S_BRACKET
-    (63) value -> NAME . L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> NAME . NO ARR_LEN
+    (62) value -> NAME .
+    (64) value -> NAME . L_S_BRACKET value R_S_BRACKET
+    (65) value -> NAME . L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> NAME . NO ARR_LEN
 
   ! shift/reduce conflict for NO resolved as shift
-    L_PAREN         shift and go to state 129
-    PLUS            reduce using rule 60 (value -> NAME .)
-    MINUS           reduce using rule 60 (value -> NAME .)
-    MULTI           reduce using rule 60 (value -> NAME .)
-    DIVID           reduce using rule 60 (value -> NAME .)
-    $end            reduce using rule 60 (value -> NAME .)
+    L_PAREN         shift and go to state 131
+    PLUS            reduce using rule 62 (value -> NAME .)
+    MINUS           reduce using rule 62 (value -> NAME .)
+    MULTI           reduce using rule 62 (value -> NAME .)
+    DIVID           reduce using rule 62 (value -> NAME .)
+    $end            reduce using rule 62 (value -> NAME .)
     L_S_BRACKET     shift and go to state 62
     NO              shift and go to state 63
 
-  ! NO              [ reduce using rule 60 (value -> NAME .) ]
+  ! NO              [ reduce using rule 62 (value -> NAME .) ]
 
 
-state 104
+state 105
 
     (6) statement -> TYPE COLON NAME ASSIGN value .
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     $end            reduce using rule 6 (statement -> TYPE COLON NAME ASSIGN value .)
     PLUS            shift and go to state 27
@@ -2048,7 +2105,7 @@ state 104
     NO              shift and go to state 31
 
 
-state 105
+state 106
 
     (4) decl_names_m -> COMMA NAME . decl_names_m
     (4) decl_names_m -> . COMMA NAME decl_names_m
@@ -2057,42 +2114,42 @@ state 105
     COMMA           shift and go to state 72
     $end            reduce using rule 5 (decl_names_m -> .)
 
-    decl_names_m                   shift and go to state 130
+    decl_names_m                   shift and go to state 132
 
-state 106
+state 107
 
     (8) statement -> TYPE NO ARRAY COLON NAME . ASSIGN init_array
     (33) statement -> TYPE NO ARRAY COLON NAME . ASSIGN NAME L_PAREN args R_PAREN
 
-    ASSIGN          shift and go to state 131
-
-
-state 107
-
-    (31) statement -> NAME ASSIGN NAME L_PAREN args . R_PAREN
-
-    R_PAREN         shift and go to state 132
+    ASSIGN          shift and go to state 133
 
 
 state 108
 
+    (31) statement -> NAME ASSIGN NAME L_PAREN args . R_PAREN
+
+    R_PAREN         shift and go to state 134
+
+
+state 109
+
     (14) statement -> NAME L_S_BRACKET value R_S_BRACKET ASSIGN . value
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
@@ -2101,46 +2158,46 @@ state 108
     STRING          shift and go to state 19
     L_PAREN         shift and go to state 6
 
-    value                          shift and go to state 133
-
-state 109
-
-    (63) value -> NAME L_S_BRACKET value R_S_BRACKET NO . VALUE
-
-    VALUE           shift and go to state 134
-
+    value                          shift and go to state 135
 
 state 110
 
-    (34) statement -> NAME NO END NI NAME . L_PAREN args R_PAREN NO RETURN_VAL WO ADD
-    (60) value -> NAME .
-    (62) value -> NAME . L_S_BRACKET value R_S_BRACKET
-    (63) value -> NAME . L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> NAME . NO ARR_LEN
+    (65) value -> NAME L_S_BRACKET value R_S_BRACKET NO . VALUE
 
-  ! shift/reduce conflict for NO resolved as shift
-    L_PAREN         shift and go to state 135
-    WO              reduce using rule 60 (value -> NAME .)
-    PLUS            reduce using rule 60 (value -> NAME .)
-    MINUS           reduce using rule 60 (value -> NAME .)
-    MULTI           reduce using rule 60 (value -> NAME .)
-    DIVID           reduce using rule 60 (value -> NAME .)
-    L_S_BRACKET     shift and go to state 62
-    NO              shift and go to state 63
-
-  ! NO              [ reduce using rule 60 (value -> NAME .) ]
+    VALUE           shift and go to state 136
 
 
 state 111
 
-    (15) statement -> NAME NO END NI value . WO ADD
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (34) statement -> NAME NO END NI NAME . L_PAREN args R_PAREN NO RETURN_VAL WO ADD
+    (62) value -> NAME .
+    (64) value -> NAME . L_S_BRACKET value R_S_BRACKET
+    (65) value -> NAME . L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> NAME . NO ARR_LEN
 
-    WO              shift and go to state 136
+  ! shift/reduce conflict for NO resolved as shift
+    L_PAREN         shift and go to state 137
+    WO              reduce using rule 62 (value -> NAME .)
+    PLUS            reduce using rule 62 (value -> NAME .)
+    MINUS           reduce using rule 62 (value -> NAME .)
+    MULTI           reduce using rule 62 (value -> NAME .)
+    DIVID           reduce using rule 62 (value -> NAME .)
+    L_S_BRACKET     shift and go to state 62
+    NO              shift and go to state 63
+
+  ! NO              [ reduce using rule 62 (value -> NAME .) ]
+
+
+state 112
+
+    (15) statement -> NAME NO END NI value . WO ADD
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+
+    WO              shift and go to state 138
     PLUS            shift and go to state 27
     MINUS           shift and go to state 28
     MULTI           shift and go to state 29
@@ -2148,14 +2205,14 @@ state 111
     NO              shift and go to state 31
 
 
-state 112
+state 113
 
     (28) args_m -> COMMA value . args_m
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
     (28) args_m -> . COMMA value args_m
     (29) args_m -> .
 
@@ -2167,67 +2224,99 @@ state 112
     COMMA           shift and go to state 79
     R_PAREN         reduce using rule 29 (args_m -> .)
 
-    args_m                         shift and go to state 137
-
-state 113
-
-    (71) division_tail -> NO SHOW .
-
-    WO              reduce using rule 71 (division_tail -> NO SHOW .)
-    PLUS            reduce using rule 71 (division_tail -> NO SHOW .)
-    MINUS           reduce using rule 71 (division_tail -> NO SHOW .)
-    MULTI           reduce using rule 71 (division_tail -> NO SHOW .)
-    DIVID           reduce using rule 71 (division_tail -> NO SHOW .)
-    NO              reduce using rule 71 (division_tail -> NO SHOW .)
-    R_PAREN         reduce using rule 71 (division_tail -> NO SHOW .)
-    $end            reduce using rule 71 (division_tail -> NO SHOW .)
-    R_S_BRACKET     reduce using rule 71 (division_tail -> NO SHOW .)
-    COMMA           reduce using rule 71 (division_tail -> NO SHOW .)
-    GA              reduce using rule 71 (division_tail -> NO SHOW .)
-    EQUAL           reduce using rule 71 (division_tail -> NO SHOW .)
-    NOT             reduce using rule 71 (division_tail -> NO SHOW .)
-    NOT2            reduce using rule 71 (division_tail -> NO SHOW .)
-    LESS            reduce using rule 71 (division_tail -> NO SHOW .)
-    LESS_EQUAL      reduce using rule 71 (division_tail -> NO SHOW .)
-    GREATER         reduce using rule 71 (division_tail -> NO SHOW .)
-    GREATER_EQUAL   reduce using rule 71 (division_tail -> NO SHOW .)
-    DE              reduce using rule 71 (division_tail -> NO SHOW .)
-    TO              reduce using rule 71 (division_tail -> NO SHOW .)
-    KARA            reduce using rule 71 (division_tail -> NO SHOW .)
-    MADE            reduce using rule 71 (division_tail -> NO SHOW .)
-    KO              reduce using rule 71 (division_tail -> NO SHOW .)
-    R_C_BRACKET     reduce using rule 71 (division_tail -> NO SHOW .)
-
+    args_m                         shift and go to state 139
 
 state 114
 
-    (73) value -> value NO DECIMAL_P BELOW WO . ROUNDED_UP VALUE
+    (73) division_tail -> NO SHOW .
 
-    ROUNDED_UP      shift and go to state 138
+    WO              reduce using rule 73 (division_tail -> NO SHOW .)
+    PLUS            reduce using rule 73 (division_tail -> NO SHOW .)
+    MINUS           reduce using rule 73 (division_tail -> NO SHOW .)
+    MULTI           reduce using rule 73 (division_tail -> NO SHOW .)
+    DIVID           reduce using rule 73 (division_tail -> NO SHOW .)
+    NO              reduce using rule 73 (division_tail -> NO SHOW .)
+    R_PAREN         reduce using rule 73 (division_tail -> NO SHOW .)
+    $end            reduce using rule 73 (division_tail -> NO SHOW .)
+    R_S_BRACKET     reduce using rule 73 (division_tail -> NO SHOW .)
+    COMMA           reduce using rule 73 (division_tail -> NO SHOW .)
+    DIVREAL         reduce using rule 73 (division_tail -> NO SHOW .)
+    GA              reduce using rule 73 (division_tail -> NO SHOW .)
+    EQUAL           reduce using rule 73 (division_tail -> NO SHOW .)
+    NOT             reduce using rule 73 (division_tail -> NO SHOW .)
+    NOT2            reduce using rule 73 (division_tail -> NO SHOW .)
+    LESS            reduce using rule 73 (division_tail -> NO SHOW .)
+    LESS_EQUAL      reduce using rule 73 (division_tail -> NO SHOW .)
+    GREATER         reduce using rule 73 (division_tail -> NO SHOW .)
+    GREATER_EQUAL   reduce using rule 73 (division_tail -> NO SHOW .)
+    DE              reduce using rule 73 (division_tail -> NO SHOW .)
+    TO              reduce using rule 73 (division_tail -> NO SHOW .)
+    KARA            reduce using rule 73 (division_tail -> NO SHOW .)
+    MADE            reduce using rule 73 (division_tail -> NO SHOW .)
+    KO              reduce using rule 73 (division_tail -> NO SHOW .)
+    R_C_BRACKET     reduce using rule 73 (division_tail -> NO SHOW .)
 
 
 state 115
+
+    (74) division_tail -> NO REMAINDER .
+
+    WO              reduce using rule 74 (division_tail -> NO REMAINDER .)
+    PLUS            reduce using rule 74 (division_tail -> NO REMAINDER .)
+    MINUS           reduce using rule 74 (division_tail -> NO REMAINDER .)
+    MULTI           reduce using rule 74 (division_tail -> NO REMAINDER .)
+    DIVID           reduce using rule 74 (division_tail -> NO REMAINDER .)
+    NO              reduce using rule 74 (division_tail -> NO REMAINDER .)
+    R_PAREN         reduce using rule 74 (division_tail -> NO REMAINDER .)
+    $end            reduce using rule 74 (division_tail -> NO REMAINDER .)
+    R_S_BRACKET     reduce using rule 74 (division_tail -> NO REMAINDER .)
+    COMMA           reduce using rule 74 (division_tail -> NO REMAINDER .)
+    DIVREAL         reduce using rule 74 (division_tail -> NO REMAINDER .)
+    GA              reduce using rule 74 (division_tail -> NO REMAINDER .)
+    EQUAL           reduce using rule 74 (division_tail -> NO REMAINDER .)
+    NOT             reduce using rule 74 (division_tail -> NO REMAINDER .)
+    NOT2            reduce using rule 74 (division_tail -> NO REMAINDER .)
+    LESS            reduce using rule 74 (division_tail -> NO REMAINDER .)
+    LESS_EQUAL      reduce using rule 74 (division_tail -> NO REMAINDER .)
+    GREATER         reduce using rule 74 (division_tail -> NO REMAINDER .)
+    GREATER_EQUAL   reduce using rule 74 (division_tail -> NO REMAINDER .)
+    DE              reduce using rule 74 (division_tail -> NO REMAINDER .)
+    TO              reduce using rule 74 (division_tail -> NO REMAINDER .)
+    KARA            reduce using rule 74 (division_tail -> NO REMAINDER .)
+    MADE            reduce using rule 74 (division_tail -> NO REMAINDER .)
+    KO              reduce using rule 74 (division_tail -> NO REMAINDER .)
+    R_C_BRACKET     reduce using rule 74 (division_tail -> NO REMAINDER .)
+
+
+state 116
+
+    (77) value -> value NO DECIMAL_P BELOW WO . ROUNDED_UP VALUE
+
+    ROUNDED_UP      shift and go to state 140
+
+
+state 117
 
     (23) statement -> CIRCLE NAME L_PAREN params R_PAREN .
 
     $end            reduce using rule 23 (statement -> CIRCLE NAME L_PAREN params R_PAREN .)
 
 
-state 116
+state 118
 
     (18) params -> TYPE COLON . NAME params_m
 
-    NAME            shift and go to state 139
+    NAME            shift and go to state 141
 
 
-state 117
+state 119
 
     (19) params -> TYPE NO . ARRAY COLON NAME params_m
 
-    ARRAY           shift and go to state 140
+    ARRAY           shift and go to state 142
 
 
-state 118
+state 120
 
     (24) statement -> CIRCLE TYPE COLON NAME L_PAREN . params R_PAREN
     (17) params -> .
@@ -2235,96 +2324,98 @@ state 118
     (19) params -> . TYPE NO ARRAY COLON NAME params_m
 
     R_PAREN         reduce using rule 17 (params -> .)
-    TYPE            shift and go to state 84
+    TYPE            shift and go to state 85
 
-    params                         shift and go to state 141
-
-state 119
-
-    (25) statement -> CIRCLE TYPE NO ARRAY COLON . NAME L_PAREN params R_PAREN
-
-    NAME            shift and go to state 142
-
-
-state 120
-
-    (66) value -> L_PAREN value R_PAREN NO RESULT .
-
-    WO              reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    PLUS            reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    MINUS           reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    MULTI           reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    DIVID           reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    NO              reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    R_PAREN         reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    $end            reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    R_S_BRACKET     reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    COMMA           reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    GA              reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    EQUAL           reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    NOT             reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    NOT2            reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    LESS            reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    LESS_EQUAL      reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    GREATER         reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    GREATER_EQUAL   reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    DE              reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    TO              reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    KARA            reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    MADE            reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    KO              reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-    R_C_BRACKET     reduce using rule 66 (value -> L_PAREN value R_PAREN NO RESULT .)
-
+    params                         shift and go to state 143
 
 state 121
 
-    (74) value -> L_PAREN value R_PAREN NO DECIMAL_P . BELOW WO ROUNDED_UP VALUE
+    (25) statement -> CIRCLE TYPE NO ARRAY COLON . NAME L_PAREN params R_PAREN
 
-    BELOW           shift and go to state 143
+    NAME            shift and go to state 144
 
 
 state 122
 
-    (62) value -> NAME L_S_BRACKET value R_S_BRACKET .
-    (63) value -> NAME L_S_BRACKET value R_S_BRACKET . NO VALUE
+    (68) value -> L_PAREN value R_PAREN NO RESULT .
 
-  ! shift/reduce conflict for NO resolved as shift
-    R_PAREN         reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    PLUS            reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    MINUS           reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    MULTI           reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    DIVID           reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    $end            reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    R_S_BRACKET     reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    COMMA           reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    WO              reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    GA              reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    EQUAL           reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    NOT             reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    NOT2            reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    LESS            reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    LESS_EQUAL      reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    GREATER         reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    GREATER_EQUAL   reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    DE              reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    TO              reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    KARA            reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    MADE            reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    KO              reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    R_C_BRACKET     reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
-    NO              shift and go to state 109
-
-  ! NO              [ reduce using rule 62 (value -> NAME L_S_BRACKET value R_S_BRACKET .) ]
+    WO              reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    PLUS            reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    MINUS           reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    MULTI           reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    DIVID           reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    NO              reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    R_PAREN         reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    $end            reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    R_S_BRACKET     reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    COMMA           reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    DIVREAL         reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    GA              reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    EQUAL           reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    NOT             reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    NOT2            reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    LESS            reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    LESS_EQUAL      reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    GREATER         reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    GREATER_EQUAL   reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    DE              reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    TO              reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    KARA            reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    MADE            reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    KO              reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
+    R_C_BRACKET     reduce using rule 68 (value -> L_PAREN value R_PAREN NO RESULT .)
 
 
 state 123
 
+    (78) value -> L_PAREN value R_PAREN NO DECIMAL_P . BELOW WO ROUNDED_UP VALUE
+
+    BELOW           shift and go to state 145
+
+
+state 124
+
+    (64) value -> NAME L_S_BRACKET value R_S_BRACKET .
+    (65) value -> NAME L_S_BRACKET value R_S_BRACKET . NO VALUE
+
+  ! shift/reduce conflict for NO resolved as shift
+    R_PAREN         reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    PLUS            reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    MINUS           reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    MULTI           reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    DIVID           reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    $end            reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    R_S_BRACKET     reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    COMMA           reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    WO              reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    DIVREAL         reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    GA              reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    EQUAL           reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    NOT             reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    NOT2            reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    LESS            reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    LESS_EQUAL      reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    GREATER         reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    GREATER_EQUAL   reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    DE              reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    TO              reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    KARA            reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    MADE            reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    KO              reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    R_C_BRACKET     reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .)
+    NO              shift and go to state 110
+
+  ! NO              [ reduce using rule 64 (value -> NAME L_S_BRACKET value R_S_BRACKET .) ]
+
+
+state 125
+
     (42) conditional -> value sign value .
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     R_PAREN         reduce using rule 42 (conditional -> value sign value .)
     PLUS            shift and go to state 27
@@ -2334,18 +2425,18 @@ state 123
     NO              shift and go to state 31
 
 
-state 124
+state 126
 
     (52) conditional -> value GA value . DE DIVISIBLE
     (53) conditional -> value GA value . TO value DE DIVISIBLE
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
-    DE              shift and go to state 144
-    TO              shift and go to state 145
+    DE              shift and go to state 146
+    TO              shift and go to state 147
     PLUS            shift and go to state 27
     MINUS           shift and go to state 28
     MULTI           shift and go to state 29
@@ -2353,7 +2444,7 @@ state 124
     NO              shift and go to state 31
 
 
-state 125
+state 127
 
     (44) sign -> NOT EQUAL .
 
@@ -2365,7 +2456,7 @@ state 125
     L_PAREN         reduce using rule 44 (sign -> NOT EQUAL .)
 
 
-state 126
+state 128
 
     (47) sign -> LESS EQUAL .
 
@@ -2377,7 +2468,7 @@ state 126
     L_PAREN         reduce using rule 47 (sign -> LESS EQUAL .)
 
 
-state 127
+state 129
 
     (50) sign -> GREATER EQUAL .
 
@@ -2389,16 +2480,16 @@ state 127
     L_PAREN         reduce using rule 50 (sign -> GREATER EQUAL .)
 
 
-state 128
+state 130
 
-    (54) statement -> FOR L_PAREN NAME WO value . KARA value MADE NUMBER ZUTSU INCREASE R_PAREN
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (54) statement -> FOR L_PAREN NAME WO value . KARA value MADE NUMBER ZUTSU incdec R_PAREN
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
-    KARA            shift and go to state 146
+    KARA            shift and go to state 148
     PLUS            shift and go to state 27
     MINUS           shift and go to state 28
     MULTI           shift and go to state 29
@@ -2406,27 +2497,27 @@ state 128
     NO              shift and go to state 31
 
 
-state 129
+state 131
 
     (32) statement -> TYPE COLON NAME ASSIGN NAME L_PAREN . args R_PAREN
     (26) args -> .
     (27) args -> . value args_m
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     R_PAREN         reduce using rule 26 (args -> .)
     POW             shift and go to state 17
@@ -2436,17 +2527,17 @@ state 129
     STRING          shift and go to state 19
     L_PAREN         shift and go to state 6
 
-    args                           shift and go to state 147
+    args                           shift and go to state 149
     value                          shift and go to state 51
 
-state 130
+state 132
 
     (4) decl_names_m -> COMMA NAME decl_names_m .
 
     $end            reduce using rule 4 (decl_names_m -> COMMA NAME decl_names_m .)
 
 
-state 131
+state 133
 
     (8) statement -> TYPE NO ARRAY COLON NAME ASSIGN . init_array
     (33) statement -> TYPE NO ARRAY COLON NAME ASSIGN . NAME L_PAREN args R_PAREN
@@ -2454,26 +2545,26 @@ state 131
     (10) init_array -> . L_C_BRACKET init_array_val R_C_BRACKET
     (13) init_array -> . L_C_BRACKET value KO NO UNDEF NO VALUE R_C_BRACKET
 
-    NAME            shift and go to state 148
-    L_C_BRACKET     shift and go to state 150
+    NAME            shift and go to state 150
+    L_C_BRACKET     shift and go to state 152
 
-    init_array                     shift and go to state 149
+    init_array                     shift and go to state 151
 
-state 132
+state 134
 
     (31) statement -> NAME ASSIGN NAME L_PAREN args R_PAREN .
 
     $end            reduce using rule 31 (statement -> NAME ASSIGN NAME L_PAREN args R_PAREN .)
 
 
-state 133
+state 135
 
     (14) statement -> NAME L_S_BRACKET value R_S_BRACKET ASSIGN value .
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     $end            reduce using rule 14 (statement -> NAME L_S_BRACKET value R_S_BRACKET ASSIGN value .)
     PLUS            shift and go to state 27
@@ -2483,57 +2574,58 @@ state 133
     NO              shift and go to state 31
 
 
-state 134
+state 136
 
-    (63) value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .
+    (65) value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .
 
-    WO              reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    PLUS            reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    MINUS           reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    MULTI           reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    DIVID           reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    NO              reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    R_PAREN         reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    $end            reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    R_S_BRACKET     reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    COMMA           reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    GA              reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    EQUAL           reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    NOT             reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    NOT2            reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    LESS            reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    LESS_EQUAL      reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    GREATER         reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    GREATER_EQUAL   reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    DE              reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    TO              reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    KARA            reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    MADE            reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    KO              reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
-    R_C_BRACKET     reduce using rule 63 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    WO              reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    PLUS            reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    MINUS           reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    MULTI           reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    DIVID           reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    NO              reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    R_PAREN         reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    $end            reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    R_S_BRACKET     reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    COMMA           reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    DIVREAL         reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    GA              reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    EQUAL           reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    NOT             reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    NOT2            reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    LESS            reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    LESS_EQUAL      reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    GREATER         reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    GREATER_EQUAL   reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    DE              reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    TO              reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    KARA            reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    MADE            reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    KO              reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
+    R_C_BRACKET     reduce using rule 65 (value -> NAME L_S_BRACKET value R_S_BRACKET NO VALUE .)
 
 
-state 135
+state 137
 
     (34) statement -> NAME NO END NI NAME L_PAREN . args R_PAREN NO RETURN_VAL WO ADD
     (26) args -> .
     (27) args -> . value args_m
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     R_PAREN         reduce using rule 26 (args -> .)
     POW             shift and go to state 17
@@ -2543,125 +2635,96 @@ state 135
     STRING          shift and go to state 19
     L_PAREN         shift and go to state 6
 
-    args                           shift and go to state 151
+    args                           shift and go to state 153
     value                          shift and go to state 51
 
-state 136
+state 138
 
     (15) statement -> NAME NO END NI value WO . ADD
 
-    ADD             shift and go to state 152
+    ADD             shift and go to state 154
 
 
-state 137
+state 139
 
     (28) args_m -> COMMA value args_m .
 
     R_PAREN         reduce using rule 28 (args_m -> COMMA value args_m .)
 
 
-state 138
+state 140
 
-    (73) value -> value NO DECIMAL_P BELOW WO ROUNDED_UP . VALUE
+    (77) value -> value NO DECIMAL_P BELOW WO ROUNDED_UP . VALUE
 
-    VALUE           shift and go to state 153
+    VALUE           shift and go to state 155
 
 
-state 139
+state 141
 
     (18) params -> TYPE COLON NAME . params_m
     (20) params_m -> . COMMA TYPE COLON NAME params_m
     (21) params_m -> . COMMA TYPE NO ARRAY COLON NAME params_m
     (22) params_m -> .
 
-    COMMA           shift and go to state 155
+    COMMA           shift and go to state 157
     R_PAREN         reduce using rule 22 (params_m -> .)
 
-    params_m                       shift and go to state 154
-
-state 140
-
-    (19) params -> TYPE NO ARRAY . COLON NAME params_m
-
-    COLON           shift and go to state 156
-
-
-state 141
-
-    (24) statement -> CIRCLE TYPE COLON NAME L_PAREN params . R_PAREN
-
-    R_PAREN         shift and go to state 157
-
+    params_m                       shift and go to state 156
 
 state 142
 
-    (25) statement -> CIRCLE TYPE NO ARRAY COLON NAME . L_PAREN params R_PAREN
+    (19) params -> TYPE NO ARRAY . COLON NAME params_m
 
-    L_PAREN         shift and go to state 158
+    COLON           shift and go to state 158
 
 
 state 143
 
-    (74) value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW . WO ROUNDED_UP VALUE
+    (24) statement -> CIRCLE TYPE COLON NAME L_PAREN params . R_PAREN
 
-    WO              shift and go to state 159
+    R_PAREN         shift and go to state 159
 
 
 state 144
 
-    (52) conditional -> value GA value DE . DIVISIBLE
+    (25) statement -> CIRCLE TYPE NO ARRAY COLON NAME . L_PAREN params R_PAREN
 
-    DIVISIBLE       shift and go to state 160
+    L_PAREN         shift and go to state 160
 
 
 state 145
 
-    (53) conditional -> value GA value TO . value DE DIVISIBLE
-    (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW . WO ROUNDED_UP VALUE
 
-    POW             shift and go to state 17
-    NUMBER          shift and go to state 13
-    FLOAT           shift and go to state 18
-    NAME            shift and go to state 35
-    STRING          shift and go to state 19
-    L_PAREN         shift and go to state 6
+    WO              shift and go to state 161
 
-    value                          shift and go to state 161
 
 state 146
 
-    (54) statement -> FOR L_PAREN NAME WO value KARA . value MADE NUMBER ZUTSU INCREASE R_PAREN
+    (52) conditional -> value GA value DE . DIVISIBLE
+
+    DIVISIBLE       shift and go to state 162
+
+
+state 147
+
+    (53) conditional -> value GA value TO . value DE DIVISIBLE
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
@@ -2670,30 +2733,59 @@ state 146
     STRING          shift and go to state 19
     L_PAREN         shift and go to state 6
 
-    value                          shift and go to state 162
-
-state 147
-
-    (32) statement -> TYPE COLON NAME ASSIGN NAME L_PAREN args . R_PAREN
-
-    R_PAREN         shift and go to state 163
-
+    value                          shift and go to state 163
 
 state 148
 
-    (33) statement -> TYPE NO ARRAY COLON NAME ASSIGN NAME . L_PAREN args R_PAREN
+    (54) statement -> FOR L_PAREN NAME WO value KARA . value MADE NUMBER ZUTSU incdec R_PAREN
+    (35) value -> . POW L_PAREN args R_PAREN
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
-    L_PAREN         shift and go to state 164
+    POW             shift and go to state 17
+    NUMBER          shift and go to state 13
+    FLOAT           shift and go to state 18
+    NAME            shift and go to state 35
+    STRING          shift and go to state 19
+    L_PAREN         shift and go to state 6
 
+    value                          shift and go to state 164
 
 state 149
+
+    (32) statement -> TYPE COLON NAME ASSIGN NAME L_PAREN args . R_PAREN
+
+    R_PAREN         shift and go to state 165
+
+
+state 150
+
+    (33) statement -> TYPE NO ARRAY COLON NAME ASSIGN NAME . L_PAREN args R_PAREN
+
+    L_PAREN         shift and go to state 166
+
+
+state 151
 
     (8) statement -> TYPE NO ARRAY COLON NAME ASSIGN init_array .
 
     $end            reduce using rule 8 (statement -> TYPE NO ARRAY COLON NAME ASSIGN init_array .)
 
 
-state 150
+state 152
 
     (9) init_array -> L_C_BRACKET . R_C_BRACKET
     (10) init_array -> L_C_BRACKET . init_array_val R_C_BRACKET
@@ -2701,23 +2793,23 @@ state 150
     (11) init_array_val -> . init_array_val COMMA value
     (12) init_array_val -> . value
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
-    R_C_BRACKET     shift and go to state 165
+    R_C_BRACKET     shift and go to state 167
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
     FLOAT           shift and go to state 18
@@ -2725,83 +2817,84 @@ state 150
     STRING          shift and go to state 19
     L_PAREN         shift and go to state 6
 
-    init_array_val                 shift and go to state 166
-    value                          shift and go to state 167
+    init_array_val                 shift and go to state 168
+    value                          shift and go to state 169
 
-state 151
+state 153
 
     (34) statement -> NAME NO END NI NAME L_PAREN args . R_PAREN NO RETURN_VAL WO ADD
 
-    R_PAREN         shift and go to state 168
+    R_PAREN         shift and go to state 170
 
 
-state 152
+state 154
 
     (15) statement -> NAME NO END NI value WO ADD .
 
     $end            reduce using rule 15 (statement -> NAME NO END NI value WO ADD .)
 
 
-state 153
+state 155
 
-    (73) value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .
+    (77) value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .
 
-    WO              reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    PLUS            reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    MINUS           reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    MULTI           reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    DIVID           reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    NO              reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    R_PAREN         reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    $end            reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    R_S_BRACKET     reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    COMMA           reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    GA              reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    EQUAL           reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    NOT             reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    NOT2            reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    LESS            reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    LESS_EQUAL      reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    GREATER         reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    GREATER_EQUAL   reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    DE              reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    TO              reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    KARA            reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    MADE            reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    KO              reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    R_C_BRACKET     reduce using rule 73 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    WO              reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    PLUS            reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    MINUS           reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    MULTI           reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    DIVID           reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    NO              reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    R_PAREN         reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    $end            reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    R_S_BRACKET     reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    COMMA           reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    DIVREAL         reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    GA              reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    EQUAL           reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    NOT             reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    NOT2            reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    LESS            reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    LESS_EQUAL      reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    GREATER         reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    GREATER_EQUAL   reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    DE              reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    TO              reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    KARA            reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    MADE            reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    KO              reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    R_C_BRACKET     reduce using rule 77 (value -> value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
 
 
-state 154
+state 156
 
     (18) params -> TYPE COLON NAME params_m .
 
     R_PAREN         reduce using rule 18 (params -> TYPE COLON NAME params_m .)
 
 
-state 155
+state 157
 
     (20) params_m -> COMMA . TYPE COLON NAME params_m
     (21) params_m -> COMMA . TYPE NO ARRAY COLON NAME params_m
 
-    TYPE            shift and go to state 169
+    TYPE            shift and go to state 171
 
 
-state 156
+state 158
 
     (19) params -> TYPE NO ARRAY COLON . NAME params_m
 
-    NAME            shift and go to state 170
+    NAME            shift and go to state 172
 
 
-state 157
+state 159
 
     (24) statement -> CIRCLE TYPE COLON NAME L_PAREN params R_PAREN .
 
     $end            reduce using rule 24 (statement -> CIRCLE TYPE COLON NAME L_PAREN params R_PAREN .)
 
 
-state 158
+state 160
 
     (25) statement -> CIRCLE TYPE NO ARRAY COLON NAME L_PAREN . params R_PAREN
     (17) params -> .
@@ -2809,34 +2902,34 @@ state 158
     (19) params -> . TYPE NO ARRAY COLON NAME params_m
 
     R_PAREN         reduce using rule 17 (params -> .)
-    TYPE            shift and go to state 84
+    TYPE            shift and go to state 85
 
-    params                         shift and go to state 171
+    params                         shift and go to state 173
 
-state 159
+state 161
 
-    (74) value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO . ROUNDED_UP VALUE
+    (78) value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO . ROUNDED_UP VALUE
 
-    ROUNDED_UP      shift and go to state 172
+    ROUNDED_UP      shift and go to state 174
 
 
-state 160
+state 162
 
     (52) conditional -> value GA value DE DIVISIBLE .
 
     R_PAREN         reduce using rule 52 (conditional -> value GA value DE DIVISIBLE .)
 
 
-state 161
+state 163
 
     (53) conditional -> value GA value TO value . DE DIVISIBLE
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
-    DE              shift and go to state 173
+    DE              shift and go to state 175
     PLUS            shift and go to state 27
     MINUS           shift and go to state 28
     MULTI           shift and go to state 29
@@ -2844,16 +2937,16 @@ state 161
     NO              shift and go to state 31
 
 
-state 162
+state 164
 
-    (54) statement -> FOR L_PAREN NAME WO value KARA value . MADE NUMBER ZUTSU INCREASE R_PAREN
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (54) statement -> FOR L_PAREN NAME WO value KARA value . MADE NUMBER ZUTSU incdec R_PAREN
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
-    MADE            shift and go to state 174
+    MADE            shift and go to state 176
     PLUS            shift and go to state 27
     MINUS           shift and go to state 28
     MULTI           shift and go to state 29
@@ -2861,34 +2954,34 @@ state 162
     NO              shift and go to state 31
 
 
-state 163
+state 165
 
     (32) statement -> TYPE COLON NAME ASSIGN NAME L_PAREN args R_PAREN .
 
     $end            reduce using rule 32 (statement -> TYPE COLON NAME ASSIGN NAME L_PAREN args R_PAREN .)
 
 
-state 164
+state 166
 
     (33) statement -> TYPE NO ARRAY COLON NAME ASSIGN NAME L_PAREN . args R_PAREN
     (26) args -> .
     (27) args -> . value args_m
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     R_PAREN         reduce using rule 26 (args -> .)
     POW             shift and go to state 17
@@ -2898,36 +2991,36 @@ state 164
     STRING          shift and go to state 19
     L_PAREN         shift and go to state 6
 
-    args                           shift and go to state 175
+    args                           shift and go to state 177
     value                          shift and go to state 51
 
-state 165
+state 167
 
     (9) init_array -> L_C_BRACKET R_C_BRACKET .
 
     $end            reduce using rule 9 (init_array -> L_C_BRACKET R_C_BRACKET .)
 
 
-state 166
+state 168
 
     (10) init_array -> L_C_BRACKET init_array_val . R_C_BRACKET
     (11) init_array_val -> init_array_val . COMMA value
 
-    R_C_BRACKET     shift and go to state 176
-    COMMA           shift and go to state 177
+    R_C_BRACKET     shift and go to state 178
+    COMMA           shift and go to state 179
 
 
-state 167
+state 169
 
     (13) init_array -> L_C_BRACKET value . KO NO UNDEF NO VALUE R_C_BRACKET
     (12) init_array_val -> value .
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
-    KO              shift and go to state 178
+    KO              shift and go to state 180
     R_C_BRACKET     reduce using rule 12 (init_array_val -> value .)
     COMMA           reduce using rule 12 (init_array_val -> value .)
     PLUS            shift and go to state 27
@@ -2937,95 +3030,95 @@ state 167
     NO              shift and go to state 31
 
 
-state 168
+state 170
 
     (34) statement -> NAME NO END NI NAME L_PAREN args R_PAREN . NO RETURN_VAL WO ADD
 
-    NO              shift and go to state 179
+    NO              shift and go to state 181
 
 
-state 169
+state 171
 
     (20) params_m -> COMMA TYPE . COLON NAME params_m
     (21) params_m -> COMMA TYPE . NO ARRAY COLON NAME params_m
 
-    COLON           shift and go to state 180
-    NO              shift and go to state 181
+    COLON           shift and go to state 182
+    NO              shift and go to state 183
 
 
-state 170
+state 172
 
     (19) params -> TYPE NO ARRAY COLON NAME . params_m
     (20) params_m -> . COMMA TYPE COLON NAME params_m
     (21) params_m -> . COMMA TYPE NO ARRAY COLON NAME params_m
     (22) params_m -> .
 
-    COMMA           shift and go to state 155
+    COMMA           shift and go to state 157
     R_PAREN         reduce using rule 22 (params_m -> .)
 
-    params_m                       shift and go to state 182
-
-state 171
-
-    (25) statement -> CIRCLE TYPE NO ARRAY COLON NAME L_PAREN params . R_PAREN
-
-    R_PAREN         shift and go to state 183
-
-
-state 172
-
-    (74) value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP . VALUE
-
-    VALUE           shift and go to state 184
-
+    params_m                       shift and go to state 184
 
 state 173
 
-    (53) conditional -> value GA value TO value DE . DIVISIBLE
+    (25) statement -> CIRCLE TYPE NO ARRAY COLON NAME L_PAREN params . R_PAREN
 
-    DIVISIBLE       shift and go to state 185
+    R_PAREN         shift and go to state 185
 
 
 state 174
 
-    (54) statement -> FOR L_PAREN NAME WO value KARA value MADE . NUMBER ZUTSU INCREASE R_PAREN
+    (78) value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP . VALUE
 
-    NUMBER          shift and go to state 186
+    VALUE           shift and go to state 186
 
 
 state 175
 
-    (33) statement -> TYPE NO ARRAY COLON NAME ASSIGN NAME L_PAREN args . R_PAREN
+    (53) conditional -> value GA value TO value DE . DIVISIBLE
 
-    R_PAREN         shift and go to state 187
+    DIVISIBLE       shift and go to state 187
 
 
 state 176
+
+    (54) statement -> FOR L_PAREN NAME WO value KARA value MADE . NUMBER ZUTSU incdec R_PAREN
+
+    NUMBER          shift and go to state 188
+
+
+state 177
+
+    (33) statement -> TYPE NO ARRAY COLON NAME ASSIGN NAME L_PAREN args . R_PAREN
+
+    R_PAREN         shift and go to state 189
+
+
+state 178
 
     (10) init_array -> L_C_BRACKET init_array_val R_C_BRACKET .
 
     $end            reduce using rule 10 (init_array -> L_C_BRACKET init_array_val R_C_BRACKET .)
 
 
-state 177
+state 179
 
     (11) init_array_val -> init_array_val COMMA . value
     (35) value -> . POW L_PAREN args R_PAREN
-    (58) value -> . NUMBER
-    (59) value -> . FLOAT
-    (60) value -> . NAME
-    (61) value -> . STRING
-    (62) value -> . NAME L_S_BRACKET value R_S_BRACKET
-    (63) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
-    (64) value -> . NAME NO ARR_LEN
-    (65) value -> . L_PAREN value R_PAREN
-    (66) value -> . L_PAREN value R_PAREN NO RESULT
-    (67) value -> . value PLUS value
-    (68) value -> . value MINUS value
-    (69) value -> . value MULTI value
-    (70) value -> . value DIVID value division_tail
-    (73) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
-    (74) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (60) value -> . NUMBER
+    (61) value -> . FLOAT
+    (62) value -> . NAME
+    (63) value -> . STRING
+    (64) value -> . NAME L_S_BRACKET value R_S_BRACKET
+    (65) value -> . NAME L_S_BRACKET value R_S_BRACKET NO VALUE
+    (66) value -> . NAME NO ARR_LEN
+    (67) value -> . L_PAREN value R_PAREN
+    (68) value -> . L_PAREN value R_PAREN NO RESULT
+    (69) value -> . value PLUS value
+    (70) value -> . value MINUS value
+    (71) value -> . value MULTI value
+    (72) value -> . value DIVID value division_tail
+    (77) value -> . value NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (78) value -> . L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     POW             shift and go to state 17
     NUMBER          shift and go to state 13
@@ -3034,109 +3127,110 @@ state 177
     STRING          shift and go to state 19
     L_PAREN         shift and go to state 6
 
-    value                          shift and go to state 188
-
-state 178
-
-    (13) init_array -> L_C_BRACKET value KO . NO UNDEF NO VALUE R_C_BRACKET
-
-    NO              shift and go to state 189
-
-
-state 179
-
-    (34) statement -> NAME NO END NI NAME L_PAREN args R_PAREN NO . RETURN_VAL WO ADD
-
-    RETURN_VAL      shift and go to state 190
-
+    value                          shift and go to state 190
 
 state 180
 
-    (20) params_m -> COMMA TYPE COLON . NAME params_m
+    (13) init_array -> L_C_BRACKET value KO . NO UNDEF NO VALUE R_C_BRACKET
 
-    NAME            shift and go to state 191
+    NO              shift and go to state 191
 
 
 state 181
 
-    (21) params_m -> COMMA TYPE NO . ARRAY COLON NAME params_m
+    (34) statement -> NAME NO END NI NAME L_PAREN args R_PAREN NO . RETURN_VAL WO ADD
 
-    ARRAY           shift and go to state 192
+    RETURN_VAL      shift and go to state 192
 
 
 state 182
+
+    (20) params_m -> COMMA TYPE COLON . NAME params_m
+
+    NAME            shift and go to state 193
+
+
+state 183
+
+    (21) params_m -> COMMA TYPE NO . ARRAY COLON NAME params_m
+
+    ARRAY           shift and go to state 194
+
+
+state 184
 
     (19) params -> TYPE NO ARRAY COLON NAME params_m .
 
     R_PAREN         reduce using rule 19 (params -> TYPE NO ARRAY COLON NAME params_m .)
 
 
-state 183
+state 185
 
     (25) statement -> CIRCLE TYPE NO ARRAY COLON NAME L_PAREN params R_PAREN .
 
     $end            reduce using rule 25 (statement -> CIRCLE TYPE NO ARRAY COLON NAME L_PAREN params R_PAREN .)
 
 
-state 184
+state 186
 
-    (74) value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .
+    (78) value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .
 
-    WO              reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    PLUS            reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    MINUS           reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    MULTI           reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    DIVID           reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    NO              reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    R_PAREN         reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    $end            reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    R_S_BRACKET     reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    COMMA           reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    GA              reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    EQUAL           reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    NOT             reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    NOT2            reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    LESS            reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    LESS_EQUAL      reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    GREATER         reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    GREATER_EQUAL   reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    DE              reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    TO              reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    KARA            reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    MADE            reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    KO              reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
-    R_C_BRACKET     reduce using rule 74 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    WO              reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    PLUS            reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    MINUS           reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    MULTI           reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    DIVID           reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    NO              reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    R_PAREN         reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    $end            reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    R_S_BRACKET     reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    COMMA           reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    DIVREAL         reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    GA              reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    EQUAL           reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    NOT             reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    NOT2            reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    LESS            reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    LESS_EQUAL      reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    GREATER         reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    GREATER_EQUAL   reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    DE              reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    TO              reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    KARA            reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    MADE            reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    KO              reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
+    R_C_BRACKET     reduce using rule 78 (value -> L_PAREN value R_PAREN NO DECIMAL_P BELOW WO ROUNDED_UP VALUE .)
 
 
-state 185
+state 187
 
     (53) conditional -> value GA value TO value DE DIVISIBLE .
 
     R_PAREN         reduce using rule 53 (conditional -> value GA value TO value DE DIVISIBLE .)
 
 
-state 186
+state 188
 
-    (54) statement -> FOR L_PAREN NAME WO value KARA value MADE NUMBER . ZUTSU INCREASE R_PAREN
+    (54) statement -> FOR L_PAREN NAME WO value KARA value MADE NUMBER . ZUTSU incdec R_PAREN
 
-    ZUTSU           shift and go to state 193
+    ZUTSU           shift and go to state 195
 
 
-state 187
+state 189
 
     (33) statement -> TYPE NO ARRAY COLON NAME ASSIGN NAME L_PAREN args R_PAREN .
 
     $end            reduce using rule 33 (statement -> TYPE NO ARRAY COLON NAME ASSIGN NAME L_PAREN args R_PAREN .)
 
 
-state 188
+state 190
 
     (11) init_array_val -> init_array_val COMMA value .
-    (67) value -> value . PLUS value
-    (68) value -> value . MINUS value
-    (69) value -> value . MULTI value
-    (70) value -> value . DIVID value division_tail
-    (73) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
+    (69) value -> value . PLUS value
+    (70) value -> value . MINUS value
+    (71) value -> value . MULTI value
+    (72) value -> value . DIVID value division_tail
+    (77) value -> value . NO DECIMAL_P BELOW WO ROUNDED_UP VALUE
 
     R_C_BRACKET     reduce using rule 11 (init_array_val -> init_array_val COMMA value .)
     COMMA           reduce using rule 11 (init_array_val -> init_array_val COMMA value .)
@@ -3147,129 +3241,147 @@ state 188
     NO              shift and go to state 31
 
 
-state 189
+state 191
 
     (13) init_array -> L_C_BRACKET value KO NO . UNDEF NO VALUE R_C_BRACKET
 
-    UNDEF           shift and go to state 194
+    UNDEF           shift and go to state 196
 
 
-state 190
+state 192
 
     (34) statement -> NAME NO END NI NAME L_PAREN args R_PAREN NO RETURN_VAL . WO ADD
 
-    WO              shift and go to state 195
+    WO              shift and go to state 197
 
 
-state 191
+state 193
 
     (20) params_m -> COMMA TYPE COLON NAME . params_m
     (20) params_m -> . COMMA TYPE COLON NAME params_m
     (21) params_m -> . COMMA TYPE NO ARRAY COLON NAME params_m
     (22) params_m -> .
 
-    COMMA           shift and go to state 155
+    COMMA           shift and go to state 157
     R_PAREN         reduce using rule 22 (params_m -> .)
 
-    params_m                       shift and go to state 196
-
-state 192
-
-    (21) params_m -> COMMA TYPE NO ARRAY . COLON NAME params_m
-
-    COLON           shift and go to state 197
-
-
-state 193
-
-    (54) statement -> FOR L_PAREN NAME WO value KARA value MADE NUMBER ZUTSU . INCREASE R_PAREN
-
-    INCREASE        shift and go to state 198
-
+    params_m                       shift and go to state 198
 
 state 194
 
-    (13) init_array -> L_C_BRACKET value KO NO UNDEF . NO VALUE R_C_BRACKET
+    (21) params_m -> COMMA TYPE NO ARRAY . COLON NAME params_m
 
-    NO              shift and go to state 199
+    COLON           shift and go to state 199
 
 
 state 195
 
-    (34) statement -> NAME NO END NI NAME L_PAREN args R_PAREN NO RETURN_VAL WO . ADD
+    (54) statement -> FOR L_PAREN NAME WO value KARA value MADE NUMBER ZUTSU . incdec R_PAREN
+    (55) incdec -> . INCREASE
+    (56) incdec -> . DECREASE
 
-    ADD             shift and go to state 200
+    INCREASE        shift and go to state 201
+    DECREASE        shift and go to state 202
 
+    incdec                         shift and go to state 200
 
 state 196
+
+    (13) init_array -> L_C_BRACKET value KO NO UNDEF . NO VALUE R_C_BRACKET
+
+    NO              shift and go to state 203
+
+
+state 197
+
+    (34) statement -> NAME NO END NI NAME L_PAREN args R_PAREN NO RETURN_VAL WO . ADD
+
+    ADD             shift and go to state 204
+
+
+state 198
 
     (20) params_m -> COMMA TYPE COLON NAME params_m .
 
     R_PAREN         reduce using rule 20 (params_m -> COMMA TYPE COLON NAME params_m .)
 
 
-state 197
+state 199
 
     (21) params_m -> COMMA TYPE NO ARRAY COLON . NAME params_m
 
-    NAME            shift and go to state 201
-
-
-state 198
-
-    (54) statement -> FOR L_PAREN NAME WO value KARA value MADE NUMBER ZUTSU INCREASE . R_PAREN
-
-    R_PAREN         shift and go to state 202
-
-
-state 199
-
-    (13) init_array -> L_C_BRACKET value KO NO UNDEF NO . VALUE R_C_BRACKET
-
-    VALUE           shift and go to state 203
+    NAME            shift and go to state 205
 
 
 state 200
+
+    (54) statement -> FOR L_PAREN NAME WO value KARA value MADE NUMBER ZUTSU incdec . R_PAREN
+
+    R_PAREN         shift and go to state 206
+
+
+state 201
+
+    (55) incdec -> INCREASE .
+
+    R_PAREN         reduce using rule 55 (incdec -> INCREASE .)
+
+
+state 202
+
+    (56) incdec -> DECREASE .
+
+    R_PAREN         reduce using rule 56 (incdec -> DECREASE .)
+
+
+state 203
+
+    (13) init_array -> L_C_BRACKET value KO NO UNDEF NO . VALUE R_C_BRACKET
+
+    VALUE           shift and go to state 207
+
+
+state 204
 
     (34) statement -> NAME NO END NI NAME L_PAREN args R_PAREN NO RETURN_VAL WO ADD .
 
     $end            reduce using rule 34 (statement -> NAME NO END NI NAME L_PAREN args R_PAREN NO RETURN_VAL WO ADD .)
 
 
-state 201
+state 205
 
     (21) params_m -> COMMA TYPE NO ARRAY COLON NAME . params_m
     (20) params_m -> . COMMA TYPE COLON NAME params_m
     (21) params_m -> . COMMA TYPE NO ARRAY COLON NAME params_m
     (22) params_m -> .
 
-    COMMA           shift and go to state 155
+    COMMA           shift and go to state 157
     R_PAREN         reduce using rule 22 (params_m -> .)
 
-    params_m                       shift and go to state 204
+    params_m                       shift and go to state 208
 
-state 202
+state 206
 
-    (54) statement -> FOR L_PAREN NAME WO value KARA value MADE NUMBER ZUTSU INCREASE R_PAREN .
+    (54) statement -> FOR L_PAREN NAME WO value KARA value MADE NUMBER ZUTSU incdec R_PAREN .
 
-    $end            reduce using rule 54 (statement -> FOR L_PAREN NAME WO value KARA value MADE NUMBER ZUTSU INCREASE R_PAREN .)
+    $end            reduce using rule 54 (statement -> FOR L_PAREN NAME WO value KARA value MADE NUMBER ZUTSU incdec R_PAREN .)
 
 
-state 203
+state 207
 
     (13) init_array -> L_C_BRACKET value KO NO UNDEF NO VALUE . R_C_BRACKET
 
-    R_C_BRACKET     shift and go to state 205
+    R_C_BRACKET     shift and go to state 209
 
 
-state 204
+state 208
 
     (21) params_m -> COMMA TYPE NO ARRAY COLON NAME params_m .
 
     R_PAREN         reduce using rule 21 (params_m -> COMMA TYPE NO ARRAY COLON NAME params_m .)
 
 
-state 205
+state 209
 
     (13) init_array -> L_C_BRACKET value KO NO UNDEF NO VALUE R_C_BRACKET .
 
@@ -3286,8 +3398,9 @@ WARNING: shift/reduce conflict for MINUS in state 56 resolved as shift
 WARNING: shift/reduce conflict for MULTI in state 56 resolved as shift
 WARNING: shift/reduce conflict for DIVID in state 56 resolved as shift
 WARNING: shift/reduce conflict for NO in state 56 resolved as shift
+WARNING: shift/reduce conflict for DIVREAL in state 56 resolved as shift
 WARNING: shift/reduce conflict for NO in state 61 resolved as shift
 WARNING: shift/reduce conflict for NO in state 75 resolved as shift
-WARNING: shift/reduce conflict for NO in state 103 resolved as shift
-WARNING: shift/reduce conflict for NO in state 110 resolved as shift
-WARNING: shift/reduce conflict for NO in state 122 resolved as shift
+WARNING: shift/reduce conflict for NO in state 104 resolved as shift
+WARNING: shift/reduce conflict for NO in state 111 resolved as shift
+WARNING: shift/reduce conflict for NO in state 124 resolved as shift
