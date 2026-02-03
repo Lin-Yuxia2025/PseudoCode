@@ -11,7 +11,7 @@ import problems from "../problems.json";                                  // プ
 
 export default function Home() {
   const [globalVars, setglobalVars] = useState({});
-  const [output, setOutput] = useState({});
+  const [output, setOutput] = useState([]);
   const [callStack, setcallStack] = useState([]);                         // 関数が呼び出されるたびにステートを重ねる
   const [selectedProblemIndex, setSelectedProblemIndex] = useState(0);    // プログラム選択
   const [insertChoiceNumber, setinsertChoiceNumber] = useState(null);     // 選択肢から挿入する際の選択番号

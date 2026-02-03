@@ -90,16 +90,19 @@ def parse(source):
 
     # Lexer (字句解析)
 
-    # 記述ルール
+    # 記述ルール    (下に書いたものほど、優先される)
     # 左結合、乗除算優先
     precedence = (
+        ('left', 'LSHIFT', 'RSHIFT'),       # >> 比較よりシフトを優先
+        ('nonassoc', 'LESS', 'GREATER'),    # >, < は連続で使わせない 
         ('left', 'PLUS', 'MINUS'),
-        ('left', 'MULTI', 'DIVID'),
+        ('left', 'MULTI', 'DIVID'),         # 加減より乗除を優先
+        ('right', 'N_VALUE')                # 負数は右結合してから使う
     )
 
     # 例外字句をまとめておく
     reserved = {
-        'return': 'RETURN',   # return は RETURN トークンにする
+        'return': 'RETURN',             # return は RETURN トークンにする
         'if': 'IF',
         'elseif': 'ELSEIF',
         'else': 'ELSE',
@@ -112,18 +115,24 @@ def parse(source):
     }
 
     # トークン（単語の種類）一覧
-    tokens = ('CIRCLE', 'TYPE', 'ARRAY', 'VALUE', 'UNDEF', 'END', 'NAME', 'FLOAT', 'NUMBER', 'STRING', 'COLON', 'EQUAL', 'NOT', 'NOT2', 'LESS', 'GREATER', 'LESS_EQUAL', 'GREATER_EQUAL', 'DIVISIBLE', 'INDIVISIBLE', 'ASSIGN', 'ADD',
-            'PLUS','MINUS', 'MULTI', 'DIVID', 'SHOW', 'REMAINDER', 'DIVREAL', 'OUT', 'INCREASE', 'DECREASE', 'RESULT', 'RETURN_VAL', 'ARR_LEN', 'DECIMAL_P', 'BELOW', 'ROUNDED_UP', 'KO', 'WO', 'NO', 'NI', 'GA', 'DE', 'TO', 'KARA', 'MADE', 'ZUTSU',  'L_S_BRACKET',
+    tokens = ('GLOBAL', 'CIRCLE', 'TYPE', 'ARRAY', 'VALUE', 'UNDEF', 'END', 'NAME', 'FLOAT', 'NUMBER', 'STRING', 'COLON', 'RSHIFT', 'LSHIFT', 'CONJUNCT', 'LOGICSUM', 'EQUAL', 'NOT', 'NOT2', 'LESS', 'GREATER', 'LESS_EQUAL', 'GREATER_EQUAL', 'HITOSHII', 'NOTHITOSHII', 'DIVISIBLE', 'INDIVISIBLE', 'ASSIGN', 'ADD',
+            'PLUS','MINUS', 'MULTI', 'ASTERISK', 'DIVID', 'SLASH', 'SHOW', 'REMAINDER', 'DIVREAL', 'OUT', 'INCREASE', 'DECREASE', 'RESULT', 'RETURN_VAL', 'ARR_LEN', 'DECIMAL_P', 'BELOW', 'ROUNDED_UP', 'KO', 'WO', 'NO', 'NI', 'GA', 'DE', 'TO', 'KARA', 'MADE', 'ZUTSU',  'L_S_BRACKET',
             'R_S_BRACKET', 'L_C_BRACKET', 'R_C_BRACKET', 'L_PAREN', 'R_PAREN', 'COMMA', 'RETURN', 'IF', 'ELSEIF', 'ELSE','ENDIF', 'FOR', 'ENDFOR', 'WHILE', 'DO', 'POW')
 
     # PLY の字句解析ルール
     # (入力文字列からトークンを見つけると、それぞれの関数が呼び出される)
+
+
+    def t_GLOBAL(t):
+        r'大域'       
+        return t
+
     def t_CIRCLE(t): # 関数定義
         r'〇'       
         return t
 
     def t_TYPE(t):
-        r'(整数型|文字型|文字列型|実数型)'       # ( | ) どれかに一致したら呼び出される
+        r'(整数型|文字型|文字列型|実数型|8ビット型)'       # ( | ) どれかに一致したら呼び出される
         return t
 
     def t_ARRAY(t):
@@ -166,6 +175,22 @@ def parse(source):
     def t_COLON(t):
         r'(:|：)'           
         return t                        # t トークンオブジェクト t.value に見つけた文字列
+    
+    def t_RSHIFT(t):                    # 右シフト(ビット演算)
+        r'>>'
+        return t
+
+    def t_LSHIFT(t):                    # 左シフト(ビット演算)
+        r'<<'
+        return t
+
+    def t_CONJUNCT(t):                  # 論理積
+        r'∧'                           # 全角記号なのでエディタが崩れる
+        return t
+
+    def t_LOGICSUM(t):                  # 論理和
+        r'∨'                           # 全角記号なのでエディタが崩れる
+        return t
 
     def t_EQUAL(t):                     # 一致
         r'='
@@ -195,6 +220,14 @@ def parse(source):
         r'≧'                           # 全角記号を使うと、エディタの動作が不安定になるため非推奨
         return t
 
+    def t_HITOSHII(t):                  
+        r'等しい'
+        return t
+    
+    def t_NOTHITOSHII(t):               
+        r'等しくない'                   
+        return t
+
     def t_DIVISIBLE(t):                 # 割り切れる
         r'割り切れる'                    
         return t
@@ -222,10 +255,19 @@ def parse(source):
     def t_MULTI(t):                     # 乗算
         r'\×'
         return t
+    
+    def t_ASTERISK(t):                  # 乗算
+        r'\*'
+        return t
 
     def t_DIVID(t):                     # 除算
         r'÷'
         return t
+
+    # def t_SLASH(t):                     # 除算
+    #     r'/'                            # コメントアウトとぶつかる為、一旦アウト 
+    #     return t
+
 
     def t_SHOW(t):                     
         r'商'
@@ -347,10 +389,11 @@ def parse(source):
         r','
         return t
 
-
+    
     t_ignore = ' 　\t\n\r'      # 無視する文字 半角・全角スペース, タブ, 改行, キャリッジリターン
+    t_ignore_COMMENT = r'//.*'  # "//"以降の文字を無視して、コメントアウト
 
-    t_ignore_COMMENT = r'//.*'  # "//"以降の文字を無視して、コメントアウト  
+  
 
     # どのトークンルールにもマッチしなかった場合に呼び出される
     # t にはエラーが起きた時の、現在の位置情報や、文字情報を持つオブジェクトが入る
@@ -445,7 +488,7 @@ def parse(source):
 
         stripped = line.lstrip()                # インデントを除く
         len_line = len(line)                    # インデント + 元の文
-        len_stripped = len(stripped)               # インデントを除いたもの
+        len_stripped = len(stripped)            # インデントを除いたもの
         indent = len_line - len_stripped        # (元 - インデントを除いたもの) = インデント数
 
         return indent
@@ -501,6 +544,13 @@ def parse(source):
 
         name = p[3]
         value = p[5]
+
+        # 8ビット型なら整数値から8桁の文字列に
+        if p[1] == "8ビット型":
+            value = str(value)
+            while len(value) < 8:
+                value = "0" + value
+
 
         localvars = latest_local()   # 関数が呼び出されているならlocal変数の参照を取得
 
@@ -653,17 +703,90 @@ def parse(source):
             p.parser.error = message    
 
 
+    # 2次元配列
+
+    # 2次元配列を宣言して代入
+    # 整数型配列の配列: tree ← {{2, 3}, {4, 5}, {6, 7}}
+    def p_declaration_assign_array_2d(p):
+        # 整数型配列の配列: name ← {{2, 3}, {4, 5}, {6, 7}}
+        # p[1]TYPE, p[2]ARRAY, p[3]NO p[4]ARRAY, p[5]COLON, p[6]NAME, p[7]ASSIGN, p[8]init_array2d
+        'statement : TYPE ARRAY NO ARRAY COLON NAME ASSIGN init_array2d'
+
+        name = p[6]
+        value = p[8]                   # 代入するPythonのリスト
+        localvars = latest_local()
+
+        # variablesの、キー(変数名)に、初期値(init_array)を入れる
+        if localvars is not None:        # 関数が呼び出されている
+            localvars[name] = {         # localに宣言
+                "value": value,
+                "kind": "array"
+            }
+        else:                            # 関数が呼び出されてない
+            globalVars[name] = {         # globalに宣言
+                "value": value,
+                "kind": "array"
+            }
+
+    # 2次元配列を宣言して代入　(問題用に、ここのみ大域:に対応)
+    # 大域: 整数型配列の配列: tree ← {{2, 3}, {4, 5}, {6, 7}}
+    def p_declaration_assign_array_2d_global(p):
+        # 整数型配列の配列: name ← {{2, 3}, {4, 5}, {6, 7}}
+        # p[1]TYPE, p[2]ARRAY, p[3]NO p[4]ARRAY, p[5]COLON, p[6]NAME, p[7]ASSIGN, p[8]init_array2d
+        'statement : GLOBAL COLON TYPE ARRAY NO ARRAY COLON NAME ASSIGN init_array2d'
+
+        name = p[8]
+        value = p[10]                   # 代入するPythonのリスト
+        localvars = latest_local()
+
+        # variablesの、キー(変数名)に、初期値(init_array)を入れる
+        if localvars is not None:        # 関数が呼び出されている
+            localvars[name] = {         # localに宣言
+                "value": value,
+                "kind": "array"
+            }
+        else:                            # 関数が呼び出されてない
+            globalVars[name] = {         # globalに宣言
+                "value": value,
+                "kind": "array"
+            }
+
+
+    # 2次元配列に入れる初期値 init_array2d
+        
+    def p_init_array2d(p):    # 　　{{2, 3}, {4, 5}, {6, 7}}　宣言した配列に入れる初期値
+        'init_array2d : L_C_BRACKET init_array2d_val R_C_BRACKET'
+        p[0] = p[2]  # 中のリストを返す
+
+
+    # 配列に入れる初期値の要素　init_array_val
+
+    def p_init_array2d_multi(p):  # 配列に入れる初期値が複数
+        #                     　　　　　　　　　　値が3つ以上の時、右に ｝が来るまで ↓ を繰り返す
+        #                                          init_array2d_val  COMMA   init_array
+        'init_array2d_val : init_array2d_val COMMA init_array'
+        # 配列のリストに加える(数値を配列にしてから)
+        p[0] = p[1] + [p[3]]
+
+    def p_init_array2d_num_single(p): 
+        'init_array2d_val : init_array'
+        # 配列のリストに
+        p[0] = [p[1]]
+
+
+
+
+
+
+
+
     # 出力  'valueを出力する'
     def p_out(p):
         'statement : value WO OUT'
         
         value = p[1]
-        outc = 1
 
-        while f'出力{outc}' in output :  # outputに既に 出力1,2...が存在していたら見つからなくなるまで、outcを増やす
-            outc += 1
-
-        output[f'出力{outc}' ] = value   # 出力に値を入れる
+        output.append(value)   # 出力リストに追加
 
 
     # 関数定義    〇function(整数型: a, 整数型: b)
@@ -765,6 +888,13 @@ def parse(source):
             else:
                 kind = "scalar"
 
+            # 8bit型かつ整数値なら8桁の文字列に
+            if ("8ビット型" in ptype) and isinstance(value, int):
+                value = str(value)
+                while len(value) < 8:
+                    value = "0" + value
+
+            # 仮の辞書に実引数を入れる
             new_local[pname] = {
                 "value": value,
                 "kind": kind
@@ -817,6 +947,12 @@ def parse(source):
                 kind = "array"
             else:
                 kind = "scalar"
+
+            # 8bit型かつ整数値なら8桁の文字列に
+            if ("8ビット型" in ptype) and isinstance(value, int):
+                value = str(value)
+                while len(value) < 8:
+                    value = "0" + value
 
             new_local[pname] = {
                 "value": value,
@@ -882,6 +1018,12 @@ def parse(source):
                 kind = "array"
             else:
                 kind = "scalar"
+
+            # 8bit型かつ整数値なら8桁の文字列に
+            if ("8ビット型" in ptype) and isinstance(value, int):
+                value = str(value)
+                while len(value) < 8:
+                    value = "0" + value
 
             new_local[pname] = {                    
                 "value": value,
@@ -1189,7 +1331,43 @@ def parse(source):
 
     
     # 特殊な条件式 (結果も入れて渡す True or False)
-     
+
+    def p_conditional_hitoshii(p):   # value が value と 等しい
+        'conditional : value GA value TO HITOSHII'
+
+        valuea = p[1]
+        valueb = p[3]
+
+        # 値が未定義ならreturn (エラーメッセージはvalueに取得したときに作成済み)
+        if (valuea is None) or (valueb is None):
+            return
+
+
+        # 判定して結果を入れる
+        if valuea == valueb:
+            p[0] = True
+        else:
+            p[0] = False
+
+
+    def p_conditional_not_hitoshii(p):   # value が value と 等しくない
+        'conditional : value GA value TO NOTHITOSHII'
+
+        valuea = p[1]
+        valueb = p[3]
+
+        # 値が未定義ならreturn (エラーメッセージはvalueに取得したときに作成済み)
+        if (valuea is None) or (valueb is None):
+            return
+
+
+        # 判定して結果を入れる
+        if valuea != valueb:
+            p[0] = True
+        else:
+            p[0] = False
+
+
     def p_conditional_divisible(p):   # x が y で割り切れる
         'conditional : value GA value DE DIVISIBLE'
 
@@ -1485,6 +1663,12 @@ def parse(source):
         'value : NUMBER'
         p[0] = p[1]
 
+    # 整数値 (負数)  -1
+    def p_value_n_number(p):
+        'value : MINUS value %prec N_VALUE'      # N_VALUE扱いにして右結合を優先→単項に
+        p[0] = -p[2]                             # valueを負数にして渡す
+        
+
     # 実数値
     def p_value_float(p):
         'value : FLOAT'
@@ -1537,6 +1721,14 @@ def parse(source):
             p.parser.error = message
 
         # 配列から指定した要素番号の値を取得
+        # 参照する要素が有るかチェック
+        if number >= len(array):
+            message = f"エラー\n{currentLine + 1}行目:   指定した要素番号 '[{p[3]}]' は存在しません"
+            print(message, file=sys.stderr)
+            p.parser.error = message
+            return
+
+
         p[0] = array[number] # valueに値を入れて渡す
 
     # array[i] の値          ←の形にも対応
@@ -1562,6 +1754,47 @@ def parse(source):
         p[0] = array[number] # valueに値を入れて渡す
 
 
+    # "2次元配列"の要素番号で指定した要素一つ
+    # array[i][j]
+    def p_value_array2d_val(p):
+        'value : NAME L_S_BRACKET value R_S_BRACKET L_S_BRACKET value R_S_BRACKET'
+    
+        name = p[1]
+        number1 = p[3] - 1                 # 値の要素番号 (配列の要素番号は1から始まるがpythonでは -1)
+        number2 = p[6] - 1
+        localvars = latest_local()
+        scope = find_scope(name)          # 配列がlocal, globalどちらか
+
+        # 配列を取得
+        if scope == 'local':            # localに有る
+            array = localvars[name]["value"]
+        elif scope == 'global':         # globalに有る
+            array = globalVars[name]["value"]
+        else:                               # None (未定義の配列を代入しようとした場合はエラー)
+            message = f"エラー\n{currentLine + 1}行目:   変数 '{name}' が未定義です"
+            print(message, file=sys.stderr)
+            p.parser.error = message
+
+
+        # 配列から指定した要素番号の値を取得
+        # 一次元目の要素が有るかチェック
+        if number1 >= len(array):
+            message = f"エラー\n{currentLine + 1}行目:   指定した要素番号 '[{p[3]}]' は存在しません"
+            print(message, file=sys.stderr)
+            p.parser.error = message
+            return
+        
+
+        # 二次元目の要素があるかチェック
+        if number2 >= len(array[number1]):
+            message = f"エラー\n{currentLine + 1}行目:   指定した要素番号 '[{p[3]}][{p[6]}]' は存在しません"
+            print(message, file=sys.stderr)
+            p.parser.error = message
+            return
+
+        p[0] = array[number1][number2] # valueに値を入れて渡す
+
+
     # 配列の要素数
     def p_value_array_length(p):
         'value : NAME NO ARR_LEN'
@@ -1570,7 +1803,7 @@ def parse(source):
         localvars = latest_local()
         scope = find_scope(name)          # 返り値がlocal, globalどちらか(globalの値を返すこともありえる？)
 
-        # 返り値を取得
+        # 要素数を取得
         if scope == 'local':            # localに有る
             length = len(localvars[name]["value"])
         elif scope == 'global':         # globalに有る
@@ -1581,6 +1814,38 @@ def parse(source):
             p.parser.error = message
 
         p[0] = length    # valueに値を入れて渡す
+
+    # 2次元配列の要素数
+    def p_value_array2d_length(p):
+        'value : NAME L_S_BRACKET value R_S_BRACKET NO ARR_LEN'
+    
+        name = p[1]
+        number = p[3] - 1                 # # 値の要素番号 (配列の要素番号は1から始まるがpythonでは -1)
+
+        localvars = latest_local()
+        scope = find_scope(name)          # 返り値がlocal, globalどちらか
+
+        # 配列を取得
+        if scope == 'local':              # localに有る
+            array = localvars[name]["value"]
+        elif scope == 'global':           # globalに有る
+            array = globalVars[name]["value"]
+        else:                             # None (未定義の配列を代入しようとした場合はエラー)
+            message = f"エラー\n{currentLine + 1}行目:   変数 '{name}' が未定義です"
+            print(message, file=sys.stderr)
+            p.parser.error = message
+     
+        # 配列から指定した要素番号の値を取得
+        # 一次元目の要素が有るかチェック
+        if number >= len(array):
+            message = f"エラー\n{currentLine + 1}行目:   指定した要素番号 '[{p[3]}]' は存在しません"
+            print(message, file=sys.stderr)
+            p.parser.error = message
+            return
+        
+        # 要素数を取得して渡す
+        p[0] = len(array[number])
+
 
     # ()内の式を値として使う　　　" ( 式 ) "
     def p_value_expression(p):
@@ -1623,7 +1888,7 @@ def parse(source):
 
         p[0] = valuea - valueb
 
-    # 乗算
+    # 乗算 ×
     def p_multi(p):
         'value : value MULTI value'
 
@@ -1635,6 +1900,20 @@ def parse(source):
             return
 
         p[0] = valuea * valueb
+
+    # 乗算　*
+    def p_multi2(p):
+        'value : value ASTERISK value'
+
+        valuea = p[1]
+        valueb = p[3]
+
+        # 値が未定義ならreturn (エラーメッセージはvalueに取得したときに作成済み)
+        if (valuea is None) or (valueb is None):
+            return
+
+        p[0] = valuea * valueb
+
 
     # 除算 (値に実数が含まれている時のみ、結果も実数を返すように変更)
     # 結果に少数がなくとも、実数にする必要がある
@@ -1668,6 +1947,41 @@ def parse(source):
                 p[0] = valuea / valueb
             else:               # 実数値を扱わない
                 p[0] = valuea // valueb
+
+
+    # 除算 ( / ) コメントアウトの // とぶつかる為一旦アウト
+    
+    # def p_division2(p):
+    #     'value : value SLASH value division_tail'
+    #     valuea = p[1]
+    #     valueb = p[3]
+    #     tail = p[4]
+
+    #     # 値が未定義ならreturn (エラーメッセージはvalueに取得したときに作成済み)
+    #     if (valuea is None) or (valueb is None):
+    #         return
+        
+    #     # 0 で割ろうとしたらエラー
+    #     if valueb == 0:
+    #         message = f"エラー\n{currentLine + 1}行目:   0 で除算することはできません"
+    #         print(message, file=sys.stderr)
+    #         p.parser.error = message
+    #         return
+
+
+    #     if tail == 'show':      # 商のみ
+    #         p[0] = valuea // valueb
+    #     elif tail == 'remaind': # 余り
+    #         p[0] = valuea % valueb
+    #     elif tail == 'real':    # /* 実数として計算する */
+    #         p[0] = valuea / valueb
+    #     else:                   # 指定なし
+    #         if ((isinstance(valuea, float)) or (isinstance(valueb, float)) ):    # 実数を扱うなら、結果も実数に
+    #             p[0] = valuea / valueb
+    #         else:               # 実数値を扱わない
+    #             p[0] = valuea // valueb
+
+
 
     # 除算の後ろに    何もない or "の 商" or "の余り" or /* 実数として計算する */
     def p_division_tail_show(p):
@@ -1712,19 +2026,118 @@ def parse(source):
         p[0] = math.ceil(value)         # 小数点以下を切り上げて渡す
 
 
+    # ビット演算
+    # 右シフト  r >> 1
+    def p_rshift(p):
+        'value : value RSHIFT value'
+        
+        valuea = p[1]
+        valueb = p[3]
+
+        # 値が整数値(直接値を記述した場合)なら8桁の文字列に
+        if isinstance(valuea, int):
+            valuea = str(valuea)
+            while len(valuea) < 8:
+                valuea = "0" + valuea
+
+        # シフト処理
+        valuea = int(valuea, 2)      # 文字列から2進数として取得して整数値に
+        shift = valuea >> valueb
+        shift = format(shift, '08b') # シフト後の整数値を0埋め8桁2進数で文字列に
+
+        p[0] = shift
+
+
+    # 左シフト  r << 1
+    def p_lshift(p):
+        'value : value LSHIFT value'
+        
+        valuea = p[1]
+        valueb = p[3]
+
+        # 値が整数値(直接値を記述した場合)なら8桁の文字列に
+        if isinstance(valuea, int):
+            valuea = str(valuea)
+            while len(valuea) < 8:
+                valuea = "0" + valuea
+
+        # シフト処理
+        valuea = int(valuea, 2)      # 文字列から2進数として取得して整数値に
+        shift = valuea << valueb     # シフト
+        shift = format(shift, '08b') # シフト後の整数値を0埋め8桁2進数で文字列に
+        
+        p[0] = shift[-8:]            # 末尾8文字のみを渡す
+
+
+    # 論理積
+    def p_conjunct(p):
+        'value : value CONJUNCT value'
+        
+        valuea = p[1]
+        valueb = p[3]
+
+        # 値が整数値(直接値を記述した場合)なら8桁の文字列に
+        if isinstance(valuea, int):
+            valuea = str(valuea)
+            while len(valuea) < 8:
+                valuea = "0" + valuea
+        if isinstance(valueb, int):
+            valueb = str(valueb)
+            while len(valueb) < 8:
+                valueb = "0" + valueb
+
+
+        # 処理
+        valuea = int(valuea, 2)         # 文字列から2進数として取得して整数値に
+        valueb = int(valueb, 2)         # 文字列から2進数として取得して整数値に
+
+        result = valuea & valueb        # 論理積
+        result = format(result, '08b')  # 論理積後の整数値を0埋め8桁2進数で文字列に
+        
+        p[0] = result
+
+    
+    # 論理和
+    def p_logicsum(p):
+        'value : value LOGICSUM value'
+        
+        valuea = p[1]
+        valueb = p[3]
+
+        # 値が整数値(直接値を記述した場合)なら8桁の文字列に
+        if isinstance(valuea, int):
+            valuea = str(valuea)
+            while len(valuea) < 8:
+                valuea = "0" + valuea
+        if isinstance(valueb, int):
+            valueb = str(valueb)
+            while len(valueb) < 8:
+                valueb = "0" + valueb
+
+        # 処理
+        valuea = int(valuea, 2)          # 文字列から2進数として取得して整数値に
+        valueb = int(valueb, 2)          # 文字列から2進数として取得して整数値に
+
+        result = valuea | valueb         # 論理積
+        result = format(result, '08b')   # 論理積後の整数値を0埋め8桁2進数で文字列に
+        
+        p[0] = result
+                
+
+
 
     #   ----------------------  valueにまとめ　ここまで  --------------------------- 
 
 
-    def p_error(p):                                        # エラー時には、p に None が渡されている
-        # エラーを起こしたトークンと値を報告
+    def p_error(p):   
+        # エラーを起こしたトークンと値を報告 
         nonlocal oerror_message                              # parserが使えないから、globalの oerror に入れる
-        if p:
+        if p:                                                # エラーを起こしたトークンが入る
             message = f"構文エラー\n{currentLine + 1}行目:   ' {p.value} '"
             print(message, file=sys.stderr)
             oerror_message = message
-        # 構文が完成しないまま終了
-        else:
+        # 構文が完成しないまま終了  (pにはNONEが入る)
+        else:                                                
             message = f"構文エラー\n{currentLine + 1}行目:   構文が未完成"
             print(message, file=sys.stderr)
             oerror_message = message

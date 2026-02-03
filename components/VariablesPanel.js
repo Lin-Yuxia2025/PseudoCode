@@ -224,7 +224,8 @@ function VariablesPanel({ globalVars, callStack, problemText, problemImage, answ
                 <tr>
                   {arr_val.map((val, idx) => (
                     <td key={idx} style={valueCellStyle}>
-                      {String(val)}
+                      {/* 二次元配列(値がさらに配列)なら{}を付けて表示 */}
+                      {Array.isArray(val) ? `{${String(val)}}` : String(val)}
                     </td>
                   ))}
                 </tr>
@@ -346,7 +347,10 @@ function VariablesPanel({ globalVars, callStack, problemText, problemImage, answ
             )}
             {/* 問題に画像があるなら表示 */}
             {problemImage && (
-              <div>
+              <div style={{
+                display: 'flex',
+                justifyContent: 'center', // 水平中央
+              }}>
                 <img
                   src={problemImage}
                   alt="問題画像"
@@ -396,7 +400,7 @@ function VariablesPanel({ globalVars, callStack, problemText, problemImage, answ
                         {choice.id}
                       </button>
                       {/* ボタンの右に内容 */}
-                      <span style={{ fontSize: "0.9rem" }}>{choice.text}</span>
+                      <span style={{ fontSize: "0.9rem", whiteSpace: "pre-wrap"}}>{choice.text}</span>
                       {/* 内容の右に置き換えボタン(あるなら) */}
                       {insertChoiceList.length > 0 && (
                         <button

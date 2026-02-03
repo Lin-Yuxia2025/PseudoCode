@@ -10,9 +10,6 @@ function OutputPanel({ output }) {
     return value;                             // 何もなければそのまま
   };
 
-  // output の中身をループ処理できる形に変換
-  // Object.entries()  key-valueペアを[key, value]形式の配列に変換し、それらを含む配列を返す
-  const outentries = Object.entries(output);
 
   return (
     <div style={{ border: '1px solid #ddd', borderRadius: 8, padding: '1rem', background: '#fafafa', color: '#111',   
@@ -23,9 +20,8 @@ function OutputPanel({ output }) {
         overflow: 'auto' }}>  {/* 内容がコンテナからはみ出たら、スクロールできるように */}
         <h3>出力</h3>
         {/* mapメソッドで囲んで、配列の要素ごとにループ処理して埋め込み */}
-        {/* varentries の [キー, 値] を分割代入して、key と value に代入 */}
-        {outentries.map(([key, value]) => (
-          <div key={value} style={{ marginLeft: '2rem', marginBottom: '0.2rem', fontWeight: 'bold'}}>
+        {output.map((value, index) => (
+          <div key={index} style={{ marginLeft: '2rem', marginBottom: '0.2rem', fontWeight: 'bold'}}>
                 {formatValue(value)}  {/* formatValueを呼んで、整形してから値を埋め込み */}
           </div>
         ))}

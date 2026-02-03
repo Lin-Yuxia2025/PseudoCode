@@ -22,10 +22,10 @@
     "文字列型: result ← fizzBuzz(15)\nresultを出力する\n\n〇文字列型: fizzBuzz(整数型: num)\n  文字列型: result\n  if (num が A で 割り切れる)               // 空欄A\n    result ← \"Aで割り切れる\"                // 空欄A\n  elseif (num が B で 割り切れる)           // 空欄B\n    result ← \"Bで割り切れる\"                // 空欄B\n  elseif (num が C で 割り切れる)           // 空欄C\n    result ← \"Cで割り切れる\"                // 空欄C\n  else\n    result ← \"3でも5でも割り切れない\"\n  endif\n  return result\n",
     "プログラム中の 空欄 A ～ C に入れる正しい答えの組み合わせを、解答群の中から選べ。\n\n関数 fizzBuzzは、引数で与えられた値が、3で割り切れて5で割り切れない場合は\"3で割り切れる\"を、5で割り切れて3で割り切れない場合は\"5で割り切れる\"を、3と5で割り切れる場合は\"3と5で割り切れる\"を返す。それ以外の場合は\"3でも5でも割り切れない\"を返す。",
     [
-      { "id": "ア", "text": "A: \u00A0 3 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 3 と 5 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 C: \u00A0 5\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0", "answer": "incorrect" },
-      { "id": "イ", "text": "A: \u00A0 3 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 5 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 C: \u00A0 3 と 5", "answer": "incorrect" },
-      { "id": "ウ", "text": "A: \u00A0 3 と 5 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 3 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 C: \u00A0 5\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0", "answer": "correct" },
-      { "id": "エ", "text": "A: \u00A0 5 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 3 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 C: \u00A0 3 と 5", "answer": "incorrect" }
+      { "id": "ア", "text": "A:   3                B:   3 と 5          C:   5       ", "answer": "incorrect" },
+      { "id": "イ", "text": "A:   3                B:   5                 C:   3 と 5", "answer": "incorrect" },
+      { "id": "ウ", "text": "A:   3 と 5        B:   3                C:   5        ", "answer": "correct" },
+      { "id": "エ", "text": "A:   5                B:   3                 C:   3 と 5", "answer": "incorrect" }
     ],
     1,
     [
@@ -88,10 +88,10 @@
     "整数型: result ← gcd(36, 60)\nresultを出力する\n\n〇整数型: gcd(整数型: num1, 整数型: num2)\n  整数型: x ← num1\n  整数型: y ← num2\n  A                                             // 空欄A\n    if ( B )                                    // 空欄B\n      x ← x - y\n    else\n      y ← y - x\n    endif\n  C                                             // 空欄C\n  return x\n",
     "次のプログラム中のA, B, Cに入れる正しい答えの組み合わせを、解答群の中から選べ。\n\n関数 gcd は、引数で与えられた二つの正の整数 num1 と num2 の最大公約数を、次の(1)~(3)の性質を利用して求める。\n(1) num1 と num2 が等しい時、num1 と num2 の最大公約数は num1 である。\n(2) num1 が num2 より大きい時、num1 と num2 の最大公約数は、(num1 - num2)と num2 の最大公約数と等しい。\n(3) num2 が num1 より大きい時、num1 と num2 最大公約数は、(num2 - num1) とnum1 の最大公約数と等しい。 \n\n",
     [
-      { "id": "ア", "text": "A: \u00A0 if (x ≠ y) \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 x < y \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 C: \u00A0 endif", "answer": "incorrect" },
-      { "id": "イ", "text": "A: \u00A0 if (x ≠ y) \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 x > y \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 C: \u00A0 endif", "answer": "incorrect" },
-      { "id": "ウ", "text": "A: \u00A0 while (x ≠ y) \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 x < y \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 C: \u00A0 endwhile", "answer": "incorrect" },
-      { "id": "エ", "text": "A: \u00A0 while (x ≠ y) \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 x > y \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 C: \u00A0 endwhile", "answer": "correct" }
+      { "id": "ア", "text": "A:   if (x ≠ y)                 B:   x < y           C:   endif", "answer": "incorrect" },
+      { "id": "イ", "text": "A:   if (x ≠ y)                 B:   x > y           C:   endif", "answer": "incorrect" },
+      { "id": "ウ", "text": "A:   while (x ≠ y)           B:   x < y           C:   endwhile", "answer": "incorrect" },
+      { "id": "エ", "text": "A:   while (x ≠ y)           B:   x > y           C:   endwhile", "answer": "correct" }
     ],
     1,
     [
@@ -145,6 +145,38 @@
       ]
     ],
     null
+  ],
+[
+    "サンプル問題6",
+    "論理演算",
+    "8ビット型: result ← rev(01001011)\nresult を 出力する\n\n〇8ビット型: rev(8ビット型: byte)\n  8ビット型: rbyte ← byte\n  8ビット型: r ← 00000000\n  整数型: i\n  for (i を 1 から 8 まで 1 ずつ増やす)\n                                            // 空欄\n                                            // 空欄\n  endfor\n  return r\n\n// 論理演算は正の8ビットの値にのみ対応しています。",
+    "  次のプログラム中の空欄に入れる正しい答えを、解答群の中から選べ。\n\n  関数 rev は8ビット型の引数 byte を受け取り、ビットの並びを逆にした値を返す。例えば、関数 rev を rev(01001011)として呼び出すと、戻り値は11010010となる。\n  なお演算子∧はビット単位の論理積、演算子∨はビット単位の論理和、演算子>>は論理右シフト、演算子<<は論理左シフトを表す。例えば、value >> n は value の値を n ビットだけ右に論理シフトし、 value << n はvalue の値を n ビットだけ左に論理シフトする。",
+    [
+      { "id": "ア", "text": "    r  ←  (r  <<  1)  ∨  (rbyte  ∧  00000001)  \n    rbyte  ←  rbyte  >>  1", "answer": "correct" },
+      { "id": "イ", "text": "    r  ←  (r  <<  7)  ∨  (rbyte  ∧  00000001)  \n    rbyte  ←  rbyte  >>  7", "answer": "incorrect" },
+      { "id": "ウ", "text": "    r  ←  (rbyte  <<  1)  ∨  (rbyte  >>  7)\n    rbyte  ←  r", "answer": "incorrect" },
+      { "id": "エ", "text": "    r  ←  (rbyte  >>  1)  ∨  (rbyte  <<  7)\n    rbyte  ←  r", "answer": "incorrect" }
+    ],
+    1,
+    [
+      [
+        { "text": "    r ← (r << 1) ∨ (rbyte ∧ 00000001)", "line": 8 },
+        { "text": "    rbyte ← rbyte >> 1", "line": 9 }
+      ],
+      [
+        { "text": "    r ← (r << 7) ∨ (rbyte ∧ 00000001)", "line": 8 },
+        { "text": "    rbyte ← rbyte >> 7", "line": 9 }
+      ],
+      [
+        { "text": "    r ← (rbyte << 1) ∨ (rbyte >> 7)", "line": 8 },
+        { "text": "    rbyte ← r", "line": 9 }
+      ],
+      [
+        { "text": "    r ← (rbyte >> 1) ∨ (rbyte << 7)", "line": 8 },
+        { "text": "    rbyte ← r", "line": 9 }
+      ]
+    ],
+    null
   ],  
   [
     "サンプル問題7",
@@ -152,10 +184,10 @@
     "整数型: result\nresult ← factorial(5)\nresultを出力する\n\n〇整数型: factorial(整数型: n)\n  整数型:f\n  if(n = 0)    \n    return 1\n  endif \n  f ← factorial(A)                  // 空欄A\n  return B                          // 空欄B\n",
     "次のプログラム中の空欄A, Bに入れる正しい答えを、解答群の中から選べ。\n\n関数 factorial は非負の整数 n を引数にとり、その階乗を返す関数である。\n非負の整数 n の階乗は n が0のときに1になり、\nそれ以外の場合は1から n までの整数を全て掛け合わせた数となる。",
     [
-      { "id": "ア", "text": "A: \u00A0 n \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 f \u00A0\u00A0\u00A0\u00A0\u00A0", "answer": "incorrect" },
-      { "id": "イ", "text": "A: \u00A0 n \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 n × f", "answer": "incorrect" },
-      { "id": "ウ", "text": "A: \u00A0 n - 1 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 f \u00A0\u00A0\u00A0\u00A0\u00A0", "answer": "incorrect" },
-      { "id": "エ", "text": "A: \u00A0 n - 1 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 B: \u00A0 n × f", "answer": "correct" }
+      { "id": "ア", "text": "A:   n                      B:   f      ", "answer": "incorrect" },
+      { "id": "イ", "text": "A:   n                      B:   n × f", "answer": "incorrect" },
+      { "id": "ウ", "text": "A:   n - 1                 B:   f      ", "answer": "incorrect" },
+      { "id": "エ", "text": "A:   n - 1                 B:   n × f", "answer": "correct" }
     ],
     1,
     [
@@ -179,15 +211,31 @@
     null
   ],
   [
+    "サンプル問題9",
+    "木構造",
+    "大域:整数型配列の配列: tree ← {{2,3},{4,5},{6,7},{8},{},{},{},{}}\n\norder(1)\n\n〇order(整数型: n)\n  if (tree[n]の要素数 が 2 と等しい)\n    order(tree[n][1])\n    nを出力する\n    order(tree[n][2])\n  elseif (tree[n]の要素数 が 1 と等しい)\n    order(tree[n][1])\n    nを出力する\n  else\n    nを出力する\n  endif",
+    "  次の記述中の【空欄】に入れる正しい答えを、解答群の中から選べ。ここで、配列の要素番号は1から始まる。\n\n  手続き order は、図の二分木の、引数で指定した節を根とする部分木をたどりながら、全ての節番号を出力する。大域の配列 tree が図の2分木を表している。配列 tree の要素は、対応する節の子の節番号を、左の子、右の子の順に格納した配列である。例えば、配列 tree の要素番号1の要素は、節番号1の子の節番号から成る配列であり、左の子の節番号2、右の子の節番号3を配列 {2, 3} として格納する。手続き order を order(1) として呼び出すと、【空欄】の順に出力される。",
+    [
+      { "id": "ア", "text": "     1, 2, 3, 4, 5, 6, 7, 8", "answer": "incorrect" },
+      { "id": "イ", "text": "     1, 2, 4, 8, 5, 3, 6, 7", "answer": "incorrect" },
+      { "id": "ウ", "text": "     8, 4, 2, 5, 1, 6, 3, 7", "answer": "correct" },
+      { "id": "エ", "text": "     8, 4, 5, 2, 6, 7, 3, 1", "answer": "incorrect" }
+    ],
+    2,
+    null,
+    "images/q9.png"
+  ],
+
+  [
     "サンプル問題11",
     "整列",
     "整数型の配列: array ← A                        // 空欄A\n整数型の配列: result ← binSort(array)\nresult を 出力する\n\n〇整数型の配列: binSort(整数型の配列: data)\n  整数型: n ← dataの要素数\n  整数型の配列: bins ← {n個の未定義の値}\n  整数型: i\n\n  for (i を 1 から n まで 1 ずつ増やす)\n    bins[data[i]] ← data[i]\n  endfor\n\n  return bins",
     "  次の記述が正しくなるよう、プログラム中の空欄Aに入れる値を解答群の中から選べ。ここで、配列の要素番号は 1 から始まる。\n\n  関数 binSort を binSort(array)として呼び出すと、戻り値の配列には未定義の要素は含まれておらず、値は昇順に並んでいる。",
     [
-      { "id": "ア", "text": " \u00A0\u00A0\u00A0\u00A0{2, 6, 3, 1, 4, 5}", "answer": "correct" },
-      { "id": "イ", "text": " \u00A0\u00A0\u00A0\u00A0{3, 1, 4, 4, 5, 2}", "answer": "incorrect" },
-      { "id": "ウ", "text": " \u00A0\u00A0\u00A0\u00A0{4, 2, 1, 5, 6, 2}", "answer": "incorrect" },
-      { "id": "エ", "text": " \u00A0\u00A0\u00A0\u00A0{5, 3, 4, 3, 2, 6}", "answer": "incorrect" }
+      { "id": "ア", "text": "     {2, 6, 3, 1, 4, 5}", "answer": "correct" },
+      { "id": "イ", "text": "     {3, 1, 4, 4, 5, 2}", "answer": "incorrect" },
+      { "id": "ウ", "text": "     {4, 2, 1, 5, 6, 2}", "answer": "incorrect" },
+      { "id": "エ", "text": "     {5, 3, 4, 3, 2, 6}", "answer": "incorrect" }
     ],
     2,
     [
@@ -209,13 +257,13 @@
   [
     "サンプル問題12",
     "文字列の類似度",
-    "文字型の配列: array1 ← {\"a\", \"p\", \"p\", \"l\", \"e\"}\n文字型の配列: array2 ← {\"a\", \"p\", \"l\", \"i\", \"l\"}\n実数型: result ← simRatio(array1, array2)\nresult を 出力する\n\n〇実数型: simRatio(文字型の配列: s1, 文字型の配列: s2)\n  整数型: i ← 0\n  整数型: cnt ← 0\n  if (s1の要素数 ≠ s2の要素数)\n    return -1\n  endif\n  for (i を 1 から s1の要素数 まで 1ずつ増やす)\n    if (A)                                        // 空白A\n      cnt ← cnt + 1\n    endif\n  endfor\n  return cnt ÷ s1の要素数         /* 実数として計算する */",
+    "文字型の配列: array1 ← {\"a\", \"p\", \"p\", \"l\", \"e\"}\n文字型の配列: array2 ← {\"a\", \"p\", \"l\", \"i\", \"l\"}\n実数型: result ← simRatio(array1, array2)\nresult を 出力する\n\n〇実数型: simRatio(文字型の配列: s1, 文字型の配列: s2)\n  整数型: i\n  整数型: cnt ← 0\n  if (s1の要素数 ≠ s2の要素数)\n    return -1\n  endif\n  for (i を 1 から s1の要素数 まで 1ずつ増やす)\n    if (A)                                        // 空白A\n      cnt ← cnt + 1\n    endif\n  endfor\n  return cnt ÷ s1の要素数         /* 実数として計算する */",
     "  次のプログラム中の 空白A に入れる正しい答えを、解答群の中から選べ。ここで、配列の要素番号は 1 から始まる。\n\n  関数 simRatioは、引数として与えられた要素数1以上の二つの文字型の配列 s1 と s2 を比較し、要素数が等しい場合は、配列の並びがどの程度似ているかの指標として、(要素番号が同じ要素の文字同士が一致する要素の組みの個数 ÷ s1の要素数)を実数型で返す。例えば、配列の全ての要素が一致する場合の戻り値は1, いずれの要素も一致しない場合の戻り値は0である。なお、二つの配列の要素数が等しくない場合は、 -1を返す。\n  関数simRatioに与える s1, s2 及び戻り値の例を表に示す。プログラムでは、配列の領域外を参照してはならないものとする。",
     [
-      { "id": "ア", "text": " \u00A0\u00A0\u00A0\u00A0s1[i] ≠ s2[cnt]", "answer": "incorrect" },
-      { "id": "イ", "text": " \u00A0\u00A0\u00A0\u00A0s1[i] ≠ s2[i]", "answer": "incorrect" },
-      { "id": "ウ", "text": " \u00A0\u00A0\u00A0\u00A0s1[i] = s2[cnt]", "answer": "incorrect" },
-      { "id": "エ", "text": " \u00A0\u00A0\u00A0\u00A0s1[i] = s2[i]", "answer": "correct" }
+      { "id": "ア", "text": "     s1[ i ] ≠ s2[ cnt ]", "answer": "incorrect" },
+      { "id": "イ", "text": "     s1[ i ] ≠ s2[ i ]", "answer": "incorrect" },
+      { "id": "ウ", "text": "     s1[ i ] = s2[ cnt ]", "answer": "incorrect" },
+      { "id": "エ", "text": "     s1[ i ] = s2[ i ]", "answer": "correct" }
     ],
     2,
     [
@@ -255,12 +303,12 @@
     "実数型の配列:a ← {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1}\n実数型の配列:result ← summarize(a)\nresult を 出力する\n\n〇実数型: findRank(実数型の配列: sortedData, 実数型: p)\n  整数型: i\n  i ← (p × (sortedDataの要素数 - 1))の小数点以下を切り上げた値\n  return sortedData[i + 1]\n\n〇実数型の配列: summarize(実数型の配列: sortedData)\n  実数型の配列: rankData ← {}                  // 要素数0の配列\n  実数型の配列: p ← {0, 0.25, 0.5, 0.75, 1}\n  整数型: i\n  for (i を 1 から pの要素数まで 1 ずつ増やす)\n    rankDataの末尾にfindRank(sortedData, p[i])の戻り値を追加する\n  endfor\n  return rankData\n\n//小数点以下が0の場合、画面右のパネルに小数点以下は表示されません。",
     "  次の記述中の【空欄】に入れる正しい答えを、解答群の中から選べ。ここで、配列の要素番号は 1 から始まる。\n\n  要素数が1以上で、昇順に整列済みの配列を基に、配列を特徴づける五つの値を変えすプログラムである\n  関数 summarize を summarize(a) として呼び出すと、戻り値は【空欄】である。",
     [
-      { "id": "ア", "text": " \u00A0\u00A0\u00A0\u00A0{0.1, 0.3, 0.5, 0.7, 1}", "answer": "incorrect" },
-      { "id": "イ", "text": " \u00A0\u00A0\u00A0\u00A0{0.1, 0.3, 0.5, 0.8, 1}", "answer": "incorrect" },
-      { "id": "ウ", "text": " \u00A0\u00A0\u00A0\u00A0{0.1, 0.3, 0.6, 0.8, 1}", "answer": "incorrect" },
-      { "id": "エ", "text": " \u00A0\u00A0\u00A0\u00A0{0.1, 0.4, 0.5, 0.7, 1}", "answer": "incorrect" },
-      { "id": "オ", "text": " \u00A0\u00A0\u00A0\u00A0{0.1, 0.4, 0.6, 0.7, 1}", "answer": "incorrect" },
-      { "id": "カ", "text": " \u00A0\u00A0\u00A0\u00A0{0.1, 0.4, 0.6, 0.8, 1}", "answer": "correct" }
+      { "id": "ア", "text": "     {0.1, 0.3, 0.5, 0.7, 1}", "answer": "incorrect" },
+      { "id": "イ", "text": "     {0.1, 0.3, 0.5, 0.8, 1}", "answer": "incorrect" },
+      { "id": "ウ", "text": "     {0.1, 0.3, 0.6, 0.8, 1}", "answer": "incorrect" },
+      { "id": "エ", "text": "     {0.1, 0.4, 0.5, 0.7, 1}", "answer": "incorrect" },
+      { "id": "オ", "text": "     {0.1, 0.4, 0.6, 0.7, 1}", "answer": "incorrect" },
+      { "id": "カ", "text": "     {0.1, 0.4, 0.6, 0.8, 1}", "answer": "correct" }
     ],
     2,
     null,
@@ -272,11 +320,11 @@
     "整数型の配列: result ← encode(12354)    // 3042(16) = 12354(10)\nresultを出力する\n\n〇整数型の配列: encode(整数型: codePoint)\n  // utf8Bytesの初期値は、ビットパターンの\"x\"を全て0に置き換え、\n  // 8桁ごとに区切って、それぞれを2進数とみなした時の値\n  整数型の配列: utf8Bytes ← {224, 128, 128}\n  整数型: cp ← codePoint\n  整数型: i\n  for (i をutf8Bytesの要素数 から 1 まで 1ずつ減らす)\n    utf8Bytes[i] ← utf8Bytes[i] + (cp ÷【空欄】の余り)   // 空欄\n    cp ← cp ÷【空欄】の商                                // 空欄\n  endfor\n  return utf8Bytes",
     "  次のプログラム中の【空欄】に入れる正しい答えを、解答群の中から選べ。二つの【空欄】には、同じ答えが入る。ここで、配列の要素番号は1から始まる。\n\n  Unicodeの符号位置を、UTF-8の符号に変換するプログラムである。本問で数値の後ろに\"(16)\"と記載した場合は、その数値が16進数であることを表す。\n  Unicodeの各文字には、符号位置と呼ばれる整数値が与えられている。UTF-8は、Unicodeの文字を符号化する方式の一つであり、符号位置が800(16)以上FFFF(16)以下の文字は、次のように3バイトの値に符号化する。\n  3バイトの長さのビットパターンを 1110xxxx 10xxxxxx 10xxxxxx とする。ビットパターンの下線の付いた\"x\"の箇所に、符号位置を2進数で表した値を右詰めで格納し、余った\"x\"の箇所に、0を格納する。\nこの3バイトの値がUTF-8の符号である。\n  例えば、ひらがなの\"あ\"の符号位置である 3042(16) を2進数で表すと 11000001000010 である。\nこれを、上に示したビットパターンの\"x\"の箇所に右詰めで格納すると、\n 1110xx11 10000001 10000010 となる。余った二つの\"x\"の箇所に0を格納すると、\"あ\"のUTF-8の符号 11100011 10000001 10000010 が得られる。\n  関数 encode は、引数で渡されたUnicodeの符号位置をUTF-8の符号に変換し、先頭から順に1バイトずつ要素に格納した整数型の配列を返す。encodeには、引数として、800(16)以上FFFF(16)以下の整数値だけが渡されるものとする。",
     [
-      { "id": "ア", "text": " \u00A0\u00A0\u00A0\u00A02", "answer": "incorrect" },
-      { "id": "イ", "text": " \u00A0\u00A0\u00A0\u00A06", "answer": "incorrect" },
-      { "id": "ウ", "text": " \u00A0\u00A0\u00A0\u00A016", "answer": "incorrect" },
-      { "id": "エ", "text": " \u00A0\u00A0\u00A0\u00A064", "answer": "correct" },
-      { "id": "オ", "text": " \u00A0\u00A0\u00A0\u00A0256", "answer": "incorrect" }  
+      { "id": "ア", "text": "     2  ", "answer": "incorrect" },
+      { "id": "イ", "text": "     6    ", "answer": "incorrect" },
+      { "id": "ウ", "text": "     16", "answer": "incorrect" },
+      { "id": "エ", "text": "     64", "answer": "correct" },
+      { "id": "オ", "text": "     256", "answer": "incorrect" }  
     ],
     3,
     [
@@ -309,10 +357,10 @@
     "funcWhile()\nfuncDoWhile()\n\n〇 funcWhile()\n  整数型: x ← 0\n  while (x < 0)\n    x ← x + 1\n  endwhile\n  x を出力する\n\n〇 funcDoWhile()\n  整数型: y ← 0\n  do\n    y ← y + 1\n  while (y < 0)\n  y を出力する\n",
     "このプログラムは、while 文を使用した関数 funcWhile と、do-while 文を使用した関数 funcDoWhile を順に呼び出すものである。\n\nこのプログラムを実行したときの出力の組合せとして、正しいものはどれか。",
     [
-      { "id": "ア", "text": " \u00A0funcWhileの出力：\u00A0 0 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 funcDoWhileの出力：\u00A0 0", "answer": "incorrect" },
-      { "id": "イ", "text": " \u00A0funcWhileの出力：\u00A0 0 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 funcDoWhileの出力：\u00A0 1", "answer": "correct" },
-      { "id": "ウ", "text": " \u00A0funcWhileの出力：\u00A0 1 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 funcDoWhileの出力：\u00A0 0", "answer": "incorrect" },
-      { "id": "エ", "text": " \u00A0funcWhileの出力：\u00A0 1 \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 funcDoWhileの出力：\u00A0 1", "answer": "incorrect" }
+      { "id": "ア", "text": "  funcWhileの出力：  0                 funcDoWhileの出力：  0", "answer": "incorrect" },
+      { "id": "イ", "text": "  funcWhileの出力：  0                 funcDoWhileの出力：  1", "answer": "correct" },
+      { "id": "ウ", "text": "  funcWhileの出力：  1                 funcDoWhileの出力：  0", "answer": "incorrect" },
+      { "id": "エ", "text": "  funcWhileの出力：  1                 funcDoWhileの出力：  1", "answer": "incorrect" }
     ],
     1,
     null,

@@ -28,7 +28,7 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
     // 初期化処理
     setResult({});                // グローバル変数を空に
     setglobalState({});           // グローバルスコープのステート
-    setOutput({});                // 出力を空に
+    setOutput([]);                // 出力を空に
     setFunctions({});             // 関数定義をリセット
     setText(problemCode);         // エディタのコードを最初に戻す
     setCurrentLine(0);            // 行番号を0に戻す
@@ -153,7 +153,7 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
   const resetState = () => {
     setResult({});          // グローバル変数を空に
     setglobalState({});     // グローバルスコープのステート
-    setOutput({});          // 出力を空に
+    setOutput([]);          // 出力を空に
     setFunctions({});       // 関数定義をリセット
     setCurrentLine(0);      // 行番号を0に戻す
     setcallStack([]);       // 関数呼び出しリセット
@@ -163,7 +163,7 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
   const resetAll = () => {
     setResult({});                // グローバル変数を空に
     setglobalState({});           // グローバルスコープのステート
-    setOutput({});                // 出力を空に
+    setOutput([]);                // 出力を空に
     setFunctions({});             // 関数定義をリセット
     setText(problemCode);         // エディタのコードを最初に戻す
     setCurrentLine(0);            // 行番号を0に戻す
