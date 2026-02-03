@@ -115,13 +115,17 @@ def parse(source):
     }
 
     # トークン（単語の種類）一覧
-    tokens = ('GLOBAL', 'CIRCLE', 'TYPE', 'ARRAY', 'VALUE', 'UNDEF', 'END', 'NAME', 'FLOAT', 'NUMBER', 'STRING', 'COLON', 'RSHIFT', 'LSHIFT', 'CONJUNCT', 'LOGICSUM', 'EQUAL', 'NOT', 'NOT2', 'LESS', 'GREATER', 'LESS_EQUAL', 'GREATER_EQUAL', 'HITOSHII', 'NOTHITOSHII', 'DIVISIBLE', 'INDIVISIBLE', 'ASSIGN', 'ADD',
-            'PLUS','MINUS', 'MULTI', 'ASTERISK', 'DIVID', 'SLASH', 'SHOW', 'REMAINDER', 'DIVREAL', 'OUT', 'INCREASE', 'DECREASE', 'RESULT', 'RETURN_VAL', 'ARR_LEN', 'DECIMAL_P', 'BELOW', 'ROUNDED_UP', 'KO', 'WO', 'NO', 'NI', 'GA', 'DE', 'TO', 'KARA', 'MADE', 'ZUTSU',  'L_S_BRACKET',
+    tokens = ('COMMENT' ,'GLOBAL', 'CIRCLE', 'TYPE', 'ARRAY', 'VALUE', 'UNDEF', 'END', 'NAME', 'FLOAT', 'NUMBER', 'STRING', 'COLON', 'RSHIFT', 'LSHIFT', 'CONJUNCT', 'LOGICSUM', 'EQUAL', 'NOT', 'NOT2', 'LESS', 'GREATER', 'LESS_EQUAL', 'GREATER_EQUAL', 'HITOSHII', 'NOTHITOSHII', 'DIVISIBLE', 'INDIVISIBLE', 'ASSIGN', 'ADD',
+            'PLUS','MINUS', 'MULTI', 'ASTERISK', 'DIVID', 'DIVREAL','SLASH', 'SHOW', 'REMAINDER', 'OUT', 'INCREASE', 'DECREASE', 'RESULT', 'RETURN_VAL', 'ARR_LEN', 'DECIMAL_P', 'BELOW', 'ROUNDED_UP', 'KO', 'WO', 'NO', 'NI', 'GA', 'DE', 'TO', 'KARA', 'MADE', 'ZUTSU',  'L_S_BRACKET',
             'R_S_BRACKET', 'L_C_BRACKET', 'R_C_BRACKET', 'L_PAREN', 'R_PAREN', 'COMMA', 'RETURN', 'IF', 'ELSEIF', 'ELSE','ENDIF', 'FOR', 'ENDFOR', 'WHILE', 'DO', 'POW')
 
     # PLY の字句解析ルール
     # (入力文字列からトークンを見つけると、それぞれの関数が呼び出される)
 
+
+    def t_COMMENT(t):                                   # コメントアウト(/ 除算より先に記述する)
+        r'//.*'                                         # //とそれ以降の改行以外の全ての文字  
+        pass
 
     def t_GLOBAL(t):
         r'大域'       
@@ -264,9 +268,14 @@ def parse(source):
         r'÷'
         return t
 
-    # def t_SLASH(t):                     # 除算
-    #     r'/'                            # コメントアウトとぶつかる為、一旦アウト 
-    #     return t
+    # SLASHより前に記述する!!
+    def t_DIVREAL(t):                   # 除算の後ろに付けると、整数同士でも実数を返す
+        r'/\*\s*実数として計算する\s*\*/' # /* 実数として計算する */                  
+        return t                        #  " /**/ " と "実数として計算する" 間のスペース数は自由
+
+    def t_SLASH(t):                     # 除算
+        r'/'                            # コメントアウトとぶつかる為、一旦アウト 
+        return t
 
 
     def t_SHOW(t):                     
@@ -277,10 +286,6 @@ def parse(source):
         r'余り'
         return t
     
-    def t_DIVREAL(t):                   # 除算の後ろに付けると、整数同士でも実数を返す
-        r'/\*\s*実数として計算する\s*\*/' # /* 実数として計算する */                  
-        return t                        #  " /**/ " と "実数として計算する" 間のスペース数は自由
-
     def t_OUT(t):                       # 出力
         r'出力する'
         return t
@@ -1951,35 +1956,35 @@ def parse(source):
 
     # 除算 ( / ) コメントアウトの // とぶつかる為一旦アウト
     
-    # def p_division2(p):
-    #     'value : value SLASH value division_tail'
-    #     valuea = p[1]
-    #     valueb = p[3]
-    #     tail = p[4]
+    def p_division2(p):
+        'value : value SLASH value division_tail'
+        valuea = p[1]
+        valueb = p[3]
+        tail = p[4]
 
-    #     # 値が未定義ならreturn (エラーメッセージはvalueに取得したときに作成済み)
-    #     if (valuea is None) or (valueb is None):
-    #         return
+        # 値が未定義ならreturn (エラーメッセージはvalueに取得したときに作成済み)
+        if (valuea is None) or (valueb is None):
+            return
         
-    #     # 0 で割ろうとしたらエラー
-    #     if valueb == 0:
-    #         message = f"エラー\n{currentLine + 1}行目:   0 で除算することはできません"
-    #         print(message, file=sys.stderr)
-    #         p.parser.error = message
-    #         return
+        # 0 で割ろうとしたらエラー
+        if valueb == 0:
+            message = f"エラー\n{currentLine + 1}行目:   0 で除算することはできません"
+            print(message, file=sys.stderr)
+            p.parser.error = message
+            return
 
 
-    #     if tail == 'show':      # 商のみ
-    #         p[0] = valuea // valueb
-    #     elif tail == 'remaind': # 余り
-    #         p[0] = valuea % valueb
-    #     elif tail == 'real':    # /* 実数として計算する */
-    #         p[0] = valuea / valueb
-    #     else:                   # 指定なし
-    #         if ((isinstance(valuea, float)) or (isinstance(valueb, float)) ):    # 実数を扱うなら、結果も実数に
-    #             p[0] = valuea / valueb
-    #         else:               # 実数値を扱わない
-    #             p[0] = valuea // valueb
+        if tail == 'show':      # 商のみ
+            p[0] = valuea // valueb
+        elif tail == 'remaind': # 余り
+            p[0] = valuea % valueb
+        elif tail == 'real':    # /* 実数として計算する */
+            p[0] = valuea / valueb
+        else:                   # 指定なし
+            if ((isinstance(valuea, float)) or (isinstance(valueb, float)) ):    # 実数を扱うなら、結果も実数に
+                p[0] = valuea / valueb
+            else:               # 実数値を扱わない
+                p[0] = valuea // valueb
 
 
 
