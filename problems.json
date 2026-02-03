@@ -300,7 +300,7 @@
   [
     "サンプル問題14",
     "配列の特徴値",
-    "実数型の配列:a ← {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1}\n実数型の配列:result ← summarize(a)\nresult を 出力する\n\n〇実数型: findRank(実数型の配列: sortedData, 実数型: p)\n  整数型: i\n  i ← (p × (sortedDataの要素数 - 1))の小数点以下を切り上げた値\n  return sortedData[i + 1]\n\n〇実数型の配列: summarize(実数型の配列: sortedData)\n  実数型の配列: rankData ← {}                  // 要素数0の配列\n  実数型の配列: p ← {0, 0.25, 0.5, 0.75, 1}\n  整数型: i\n  for (i を 1 から pの要素数まで 1 ずつ増やす)\n    rankDataの末尾にfindRank(sortedData, p[i])の戻り値を追加する\n  endfor\n  return rankData\n\n//小数点以下が0の場合、画面右のパネルに小数点以下は表示されません。",
+    "実数型の配列:a ← {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1}\n実数型の配列:result ← summarize(a)\nresult を 出力する\n\n〇実数型: findRank(実数型の配列: sortedData, 実数型: p)\n  整数型: i\n  i ← (p × (sortedDataの要素数 - 1))の小数点以下を切り上げた値\n  return sortedData[i + 1]\n\n〇実数型の配列: summarize(実数型の配列: sortedData)\n  実数型の配列: rankData ← {}                  // 要素数0の配列\n  実数型の配列: p ← {0, 0.25, 0.5, 0.75, 1}\n  整数型: i\n  for (i を 1 から pの要素数まで 1 ずつ増やす)\n    rankDataの末尾にfindRank(sortedData, p[i])の戻り値を追加する\n  endfor\n  return rankData",
     "  次の記述中の【空欄】に入れる正しい答えを、解答群の中から選べ。ここで、配列の要素番号は 1 から始まる。\n\n  要素数が1以上で、昇順に整列済みの配列を基に、配列を特徴づける五つの値を変えすプログラムである\n  関数 summarize を summarize(a) として呼び出すと、戻り値は【空欄】である。",
     [
       { "id": "ア", "text": "     {0.1, 0.3, 0.5, 0.7, 1}", "answer": "incorrect" },
