@@ -2161,31 +2161,20 @@ def parse(source):
     # print("breakPointArray:", breakPoint, file=sys.stderr)
 
 
-
-    # 現在の呼び出している関数の数を記録しておく（ステップオーバー、ステップアウト用）
-    beforeCallStack = len(callStack)
-
-    isbreak = False                 # 次がブレークポイントか
-
-    # 実行解析のループ開始
     while True:
-        isbreak = False                 # 次がブレークポイントか
         # 全て実行ボタンかつ次がブレークポイントなら抜ける
         if runButton == "all":  
+            isbreak = False
             for bp in breakPoint:
                 # デバッグ用
                 # print("currentLine:", currentLine, file=sys.stderr)
                 # print("breakPointArray:", breakPoint, file=sys.stderr)
                 if currentLine == bp:
                     isbreak = True
+            
             if isbreak == True:
                 break
                 
-        # 関数を実行中以外にステップアウトを押しても、止める
-        if runButton == "out":
-            if latest_local() == None:
-                break
-            
 
         # 実行
         code = codes[currentLine]                           # 実行する行の取得
@@ -2210,9 +2199,6 @@ def parse(source):
             delattr(parser, 'endLine')
             if hasattr(parser, 'funcAction'):
                 delattr(parser, 'funcAction')
-
-            # 関数を呼び出したことを保持（ステップオーバー用）
-            
 
 
         # 新しいif文を実行
@@ -2506,48 +2492,24 @@ def parse(source):
             else:               
                 break
 
-        # 構文解析のループ抜け出し処理
-
-        # errorがある or 全ての行を実行したなら抜ける
-        if hasattr(parser, 'error') or currentLine >= len(codes):
-            break
-        elif terror_message:                             # トークンエラー
-            break
-        elif oerror_message:                             # その他のエラー
-            break        
-        # ループ回数が10000を越えたら無限ループとして抜ける
-        elif loopcnt > 10000:
-            terror_message = "無限ループに入ったと思われるので実行を停止します"
-            break
-
+        
         # 最後まで実行中なら
-        # if runButton == "all":
-        # ステップオーバー
-        if runButton == "over":
-            # 現在呼び出している関数の数が実行前以下なら抜ける（次の行が関数でなかった or 実行した次の行の関数が終了）
-            if len(callStack) <= beforeCallStack:
+        if runButton == "all":
+            # errorがある or 全ての行を実行したなら抜ける
+            if hasattr(parser, 'error') or currentLine >= len(codes):
                 break
-            # ブレークポイントに到達
-            for bp in breakPoint:
-                if currentLine == bp:
-                    isbreak = True
-            if isbreak == True:
+            elif terror_message:                             # トークンエラー
                 break
-        # ステップアウト
-        elif runButton == "out":
-            # 現在呼び出している関数の数が実行前未満なら抜ける（関数が終了した）
-            if len(callStack) < beforeCallStack:
+            elif oerror_message:                             # その他のエラー
+                break        
+            # ループ回数が10000を越えたら無限ループとして抜ける
+            elif loopcnt > 10000:
+                terror_message = "無限ループに入ったと思われるので実行を停止します"
                 break
-            # ブレークポイントに到達
-            for bp in breakPoint:
-                if currentLine == bp:
-                    isbreak = True
-            if isbreak == True:
-                break
-        # 一行ずつ実行
-        elif runButton == "step":
-            break
 
+        # 一行ずつ実行
+        else:
+            break
 
         # breakしなかったら、ループ回数を +
         loopcnt += 1
