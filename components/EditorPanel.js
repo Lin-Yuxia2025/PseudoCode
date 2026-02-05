@@ -275,7 +275,7 @@ const iconButtonStyleMini = {
             left: 0,
             background: "#eee",
             // inset:0,
-            width: "98vw",
+            // width: "98vw",
             // height: "100vh",
             // display: "flex",
             // justifyContent: "center",
