@@ -6,6 +6,9 @@ import SelectProblem from './SelectProblem';
 import { FlagIcon } from '@heroicons/react/20/solid';
 import { ArrowUturnDownIcon } from '@heroicons/react/20/solid'
 import { ArrowRightOnRectangleIcon } from '@heroicons/react/20/solid'
+import { QuestionMarkCircleIcon } from '@heroicons/react/20/solid';
+
+
 
 
 // 親(index)から渡された props 中の値を分割代入
@@ -22,6 +25,9 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
   const [fontSize, setFontSize] = useState(16);           // エディタのフォントサイズ
   
   const fontSizeList = [10, 12, 14, 16, 18, 20, 22];      // フォントサイズ選択用リスト 
+  
+  const [guideOpen, setGuideOpen] = useState(false);      // 操作ガイド
+
 
   // プログラムを選択し直したら、新しいコードをセット
   useEffect(() => {
@@ -38,6 +44,7 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
     setinsertChoicedata(null);    // 置き換えデータ
     setinsertChoiceNumber(null)   // 置き換えボタン番号 （置き換えボタンが押された）
     setBreakPoint(new Set())      // ブレークポイント
+    
     
 
     
@@ -258,8 +265,43 @@ const iconButtonStyleMini = {
   return (
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
 
-      {/* プログラム選択メニュー, ブレークポイント切り替え */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '3.0rem' }}>
+      {/* モーダル */}
+      {guideOpen && (
+        <div
+          onClick={() => setGuideOpen(false)}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            background: "#eee",
+            // inset:0,
+            width: "98vw",
+            // height: "100vh",
+            // display: "flex",
+            // justifyContent: "center",
+            // alignItems: "center",
+            zIndex: 9000,            // ポップアップウウィンドウ(9999)の後ろに
+            // padding: 5,
+          }}
+        >
+          <div onClick={(e) => e.stopPropagation()}>
+            {/* <button onClick={() => setGuideOpen(false)}>× 閉じる</button> */}
+            {/* <p>説明</p> */}
+            {/* <div style={{ height: "200px", background: "#eee", marginTop: "12px" }}> */}
+            <div >
+              <img
+                src="images/Guide_左上.png"
+                alt="ガイド"
+                style={{ maxWidth: '100%', height: 'auto' }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+
+      {/* プログラム選択メニュー, ブレークポイント切り替え, フォントサイズ切替, 操作ガイド */}
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1.6rem' }}>
 
         {/* プログラム選択メニュー */}
         <div style={{ flex: '0 0 auto', marginLeft: '1rem' }}>
@@ -316,12 +358,33 @@ const iconButtonStyleMini = {
               </option>
             ))}
           </select>
-          <div style={{ fontSize: '0.7rem', marginBottom: '0.2rem', textAlign: 'center' }}>フォントサイズ切替</div>
+          <div style={{ fontSize: '0.7rem', marginTop: '0.1rem', textAlign: 'center' }}>フォントサイズ</div>
         </div>
-
-
+        {/* 操作ガイド */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'0.1rem'}}>
+          <button
+            type="button"
+            onClick={() => setGuideOpen(true)}
+            style={{
+              width: 50,
+              height: 30,
+              borderRadius: 8,
+              border: '1px solid #555',
+              background: '#ffffff',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 0,
+            }}
+          >
+            <QuestionMarkCircleIcon className="h-6 w-6" />
+          </button>
+          <div style={{ fontSize: '0.7rem', marginTop: '0.1rem', textAlign: 'center' }}>
+            操作ガイド
+          </div>
+        </div>
       </div>
-
 
 
       {/* AceEditor の伸縮用 (エディタだけ、サイズを固定しない) */}

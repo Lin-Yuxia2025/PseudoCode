@@ -4,6 +4,8 @@ import "ace-builds/src-noconflict/mode-gobstones";
 import "ace-builds/src-noconflict/theme-chrome";
 import SelectProblem from './SelectProblem';
 import { FlagIcon } from '@heroicons/react/20/solid';
+import { ArrowUturnDownIcon } from '@heroicons/react/20/solid'
+import { ArrowRightOnRectangleIcon } from '@heroicons/react/20/solid'
 
 
 // 親(index)から渡された props 中の値を分割代入
@@ -218,7 +220,7 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
   const buttonBarStyle = {
     marginTop: '0.6rem',
     display: 'flex',
-    gap: '4rem',
+    gap: '2rem',
     justifyContent: 'center',     // 横
     alignItems: 'center'          // 縦
   };
@@ -236,6 +238,21 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
     alignItems: 'center',
     justifyContent: 'center',
   };
+
+const iconButtonStyleMini = {
+    width: 50,
+    height: 40,
+    borderRadius: 8,
+    border: '1px solid #555',
+    background: '#ffffff',
+    color: '#111',          // 文字色を固定 (ダークモード対策)
+    cursor: 'pointer',
+    fontSize: '2rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  };
+
 
 
   return (
@@ -380,6 +397,45 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
             ステップ実行
           </span>
         </div>
+
+        {/* ステップオーバー*/}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <button
+            type="button"
+            onClick= {() => parseCode("over")}  // 実行ボタンを渡して解析
+            style={iconButtonStyleMini}
+            title="ステップオーバー"
+          >
+          <ArrowUturnDownIcon
+            className="h-5 w-5"
+            //  左右反転
+            style={{ transform: 'scaleX(-1)' }}            
+          />
+          </button>
+          <span style={{ fontSize: '0.7rem', marginTop: '0.4rem', textAlign: 'center' }}>
+            ステップ<br />
+            オーバー
+          </span>
+        </div>
+
+        {/* ステップアウト */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <button
+            type="button"
+            onClick= {() => parseCode("out")}  // 実行ボタンを渡して解析
+            style={iconButtonStyleMini}
+            title="ステップアウト"
+          >
+          <ArrowRightOnRectangleIcon
+            className="h-5 w-5"
+          />
+          </button>
+          <span style={{ fontSize: '0.7rem', marginTop: '0.4rem', textAlign: 'center' }}>
+            ステップ<br />
+            アウト
+          </span>
+        </div>
+
 
         {/* 全て実行 */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
