@@ -351,7 +351,7 @@ const iconButtonStyleMini = {
               padding: 0,
             }}
           >
-            <QuestionMarkCircleIcon className="h-6 w-6" />
+            <QuestionMarkCircleIcon className="h-6 w-6 text-gray-700" />
           </button>
           <div style={{ fontSize: '0.7rem', marginTop: '0.1rem', textAlign: 'center' }}>
             操作ガイド
@@ -403,6 +403,7 @@ const iconButtonStyleMini = {
                     background: "#fff",
                     fontSize: 32,
                     fontWeight: "bold",
+                    color: '#111',
                   }}
                 >
                   戻る
@@ -419,6 +420,7 @@ const iconButtonStyleMini = {
                     background: "#fff",
                     fontSize: 32,
                     fontWeight: "bold",
+                    color: '#111',
                   }}
                 >
                   次へ
@@ -437,6 +439,7 @@ const iconButtonStyleMini = {
                   background: "#fff",
                   fontSize: 32,
                   fontWeight: "bold",
+                  color: '#111',
                 }}
               >
                 閉じる
