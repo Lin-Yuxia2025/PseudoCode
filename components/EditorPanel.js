@@ -23,10 +23,18 @@ function EditorPanel({ problemCode, setResult, globalVars, setOutput, output, se
   const [popupMessage, setPopupMessage] = useState(null); //
   const [breakPoint, setBreakPoint] = useState(new Set());// BreakPointに設定した行をSetオブジェクトで管理
   const [fontSize, setFontSize] = useState(16);           // エディタのフォントサイズ
-  
   const fontSizeList = [10, 12, 14, 16, 18, 20, 22];      // フォントサイズ選択用リスト 
-  
   const [guideOpen, setGuideOpen] = useState(false);      // 操作ガイド
+  const guideImages = [                                   // 操作ガイドの画像リスト
+  "/images/Guide_1(左上).png",
+  "/images/Guide_2(エディタ).png",
+  "/images/Guide_3(左下1).png",
+  "/images/Guide_4(左下2).png",
+  "/images/Guide_5(右パネル).png",
+  ];
+  const [guideIndex, setGuideIndex] = useState(0);          // 表示するガイドの番号
+
+  
 
 
   // プログラムを選択し直したら、新しいコードをセット
@@ -265,41 +273,6 @@ const iconButtonStyleMini = {
   return (
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
 
-      {/* モーダル */}
-      {guideOpen && (
-        <div
-          onClick={() => setGuideOpen(false)}
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            background: "#eee",
-            // inset:0,
-            // width: "98vw",
-            // height: "100vh",
-            // display: "flex",
-            // justifyContent: "center",
-            // alignItems: "center",
-            zIndex: 9000,            // ポップアップウウィンドウ(9999)の後ろに
-            // padding: 5,
-          }}
-        >
-          <div onClick={(e) => e.stopPropagation()}>
-            {/* <button onClick={() => setGuideOpen(false)}>× 閉じる</button> */}
-            {/* <p>説明</p> */}
-            {/* <div style={{ height: "200px", background: "#eee", marginTop: "12px" }}> */}
-            <div >
-              <img
-                src="images/Guide_左上.png"
-                alt="ガイド"
-                style={{ maxWidth: '100%', height: 'auto' }}
-              />
-            </div>
-          </div>
-        </div>
-      )}
-
-
       {/* プログラム選択メニュー, ブレークポイント切り替え, フォントサイズ切替, 操作ガイド */}
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1.6rem' }}>
 
@@ -386,6 +359,104 @@ const iconButtonStyleMini = {
         </div>
       </div>
 
+      {/* モーダル */}
+      {guideOpen && (
+        <div
+          onClick={() => setGuideOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,0.8)",
+            width: "100vw",
+            height: "100vh",
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 9000,            // ポップアップウウィンドウ(9999)の後ろに
+          }}
+        >
+          {/* 画像、ボタン */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              position: "relative",
+            }}
+          >
+            {/* ボタン */}
+            <div 
+              style={{
+                position: "absolute",
+                top: "-0.5vh",
+                right: "10vw",
+                display: "flex",
+                gap: "14px",
+              }}
+            >
+              {/* 戻るボタン */}
+              {guideIndex > 0 && (
+                <button
+                  onClick={() => setGuideIndex(guideIndex - 1)}
+                  style={{
+                    width: 140,
+                    borderRadius: 8,
+                    border: "1px solid #fff",
+                    background: "#fff",
+                    fontSize: 32,
+                    fontWeight: "bold",
+                  }}
+                >
+                  戻る
+                </button>
+              )}
+              {/* 次へボタン */}
+              {guideIndex + 1 < guideImages.length && (
+                <button
+                  onClick={() => setGuideIndex(guideIndex + 1)}
+                  style={{
+                    width: 140,
+                    borderRadius: 8,
+                    border: "1px solid #fff",
+                    background: "#fff",
+                    fontSize: 32,
+                    fontWeight: "bold",
+                  }}
+                >
+                  次へ
+                </button>
+              )}
+              {/* 閉じるボタン */}
+              <button
+                onClick={() => {
+                  setGuideOpen(false); 
+                  setGuideIndex(0)} 
+                }
+                style={{
+                  width: 140,
+                  borderRadius: 8,
+                  border: "1px solid #fff",
+                  background: "#fff",
+                  fontSize: 32,
+                  fontWeight: "bold",
+                }}
+              >
+                閉じる
+              </button>
+            </div>
+            {/* 画像 */}
+            <img
+              src= {guideImages[guideIndex]}
+              alt="ガイド"
+              style={{  maxWidth: '90vw', 
+                        maxHeight: '90vh', 
+                        height: 'auto',
+                        borderRadius: 8,
+                        marginTop: "8vh",
+                        border: '6px solid #fff',
+              }}
+            />
+          </div>
+        </div>
+      )}
 
       {/* AceEditor の伸縮用 (エディタだけ、サイズを固定しない) */}
       <div style={{ flex: 1, marginTop: '0.2rem' }}>
