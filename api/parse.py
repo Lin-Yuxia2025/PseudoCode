@@ -518,13 +518,15 @@ def parse(source):
             for name in names_list: 
                 localvars[name] = {                     # localに宣言
                     "value": "未定義",
-                    "kind": "scalar"
+                    "kind": "scalar",
+                    "type": p[1],
                 }
         else:                                           # 関数が呼び出されてない
             for name in names_list:
                 globalVars[name] = {                    # globalに宣言
                     "value": "未定義",
-                    "kind": "scalar"
+                    "kind": "scalar",
+                    "type": p[1],
                 }
                 
 
@@ -563,12 +565,14 @@ def parse(source):
         if localvars is not None:                   # 関数が呼び出されている
             localvars[name] = {                     # localに宣言
                 "value": value,
-                "kind": "scalar"
+                "kind": "scalar",
+                "type": p[1],
             }
         else:                                       # 関数が呼び出されてない
             globalVars[name] = {                    # globalに宣言
                 "value": value,
-                "kind": "scalar"
+                "kind": "scalar",
+                "type": p[1],
             }
             
 
@@ -610,12 +614,14 @@ def parse(source):
         if localvars is not None:        # 関数が呼び出されている
             localvars[name] = {         # localに宣言
                 "value": value,
-                "kind": "array"
+                "kind": "array",
+                "type": p[1],
             }
         else:                            # 関数が呼び出されてない
             globalVars[name] = {         # globalに宣言
                 "value": value,
-                "kind": "array"
+                "kind": "array",
+                "type": p[1],
             }
             
 
@@ -725,19 +731,21 @@ def parse(source):
         if localvars is not None:        # 関数が呼び出されている
             localvars[name] = {         # localに宣言
                 "value": value,
-                "kind": "array"
+                "kind": "array",
+                "type": p[1],
             }
         else:                            # 関数が呼び出されてない
             globalVars[name] = {         # globalに宣言
                 "value": value,
-                "kind": "array"
+                "kind": "array",
+                "type": p[1],
             }
 
     # 2次元配列を宣言して代入　(問題用に、ここのみ大域:に対応)
     # 大域: 整数型配列の配列: tree ← {{2, 3}, {4, 5}, {6, 7}}
     def p_declaration_assign_array_2d_global(p):
         # 整数型配列の配列: name ← {{2, 3}, {4, 5}, {6, 7}}
-        # p[1]TYPE, p[2]ARRAY, p[3]NO p[4]ARRAY, p[5]COLON, p[6]NAME, p[7]ASSIGN, p[8]init_array2d
+        # 未更新 p[1]TYPE, p[2]ARRAY, p[3]NO p[4]ARRAY, p[5]COLON, p[6]NAME, p[7]ASSIGN, p[8]init_array2d
         'statement : GLOBAL COLON TYPE ARRAY NO ARRAY COLON NAME ASSIGN init_array2d'
 
         name = p[8]
@@ -748,12 +756,14 @@ def parse(source):
         if localvars is not None:        # 関数が呼び出されている
             localvars[name] = {         # localに宣言
                 "value": value,
-                "kind": "array"
+                "kind": "array",
+                "type": p[3],
             }
         else:                            # 関数が呼び出されてない
             globalVars[name] = {         # globalに宣言
                 "value": value,
-                "kind": "array"
+                "kind": "array",
+                "type": p[3],
             }
 
 
@@ -890,6 +900,7 @@ def parse(source):
             # ptypeに"配列"が含まれていたら配列として扱う
             if "配列" in ptype:
                 kind = "array"
+                
             else:
                 kind = "scalar"
 
@@ -902,7 +913,9 @@ def parse(source):
             # 仮の辞書に実引数を入れる
             new_local[pname] = {
                 "value": value,
-                "kind": kind
+                "kind": kind,
+                "type": ptype,
+                
             }
 
         p.parser.funcName = name
@@ -961,7 +974,8 @@ def parse(source):
 
             new_local[pname] = {
                 "value": value,
-                "kind": kind
+                "kind": kind,
+                "type": ptype,
             }
 
         p.parser.funcName = f_name
@@ -991,14 +1005,16 @@ def parse(source):
         if localvars is not None:                   # 関数が呼び出されている
             localvars[name] = {                     # localに宣言
                 "value": "未定義",
-                "kind": "scalar"
+                "kind": "scalar",
+                "type": p[1],
             }
             scope = "local"
             scope_ref = localvars
         else:                                       # 関数が呼び出されてない
             globalVars[name] = {                    # globalに宣言
                 "value": "未定義",
-                "kind": "scalar"
+                "kind": "scalar",
+                "type": p[1],
             }
             scope = "global"
             scope_ref = "global"
@@ -1032,7 +1048,9 @@ def parse(source):
 
             new_local[pname] = {                    
                 "value": value,
-                "kind": kind
+                "kind": kind,
+                "type": ptype,
+
             }
 
         p.parser.funcName = f_name
@@ -1062,14 +1080,16 @@ def parse(source):
         if localvars is not None:                   # 関数が呼び出されている
             localvars[name] = {                     # localに宣言
                 "value": "未定義",
-                "kind": "scalar"
+                "kind": "scalar",
+                "type": p[1],
             }
             scope = "local"
             scope_ref = localvars
         else:                                       # 関数が呼び出されてない
             globalVars[name] = {                    # globalに宣言
                 "value": "未定義",
-                "kind": "scalar"
+                "kind": "scalar",
+                "type": p[1],
             }
             scope = "global"
             scope_ref = "global"
@@ -1097,7 +1117,8 @@ def parse(source):
 
             new_local[pname] = {                    
                 "value": value,
-                "kind": kind
+                "kind": kind,
+                "type": ptype,
             }
 
         p.parser.funcName = f_name
@@ -1157,7 +1178,8 @@ def parse(source):
 
             new_local[pname] = {
                 "value": value,
-                "kind": kind
+                "kind": kind,
+                "type": ptype,
             }
 
         p.parser.funcName = f_name

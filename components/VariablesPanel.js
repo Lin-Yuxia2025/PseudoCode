@@ -46,7 +46,7 @@ function VariablesPanel({ globalVars, callStack, problemText, problemImage, answ
 
   // 共通ボックスデザイン（スカラ用）
   const varBoxStyle = {
-    width: 110,
+    minWidth: 110,              // 変数名が長い時に伸ばすため、最小幅のみ
     border: '1px solid #ccc',
     borderRadius: 6,
     marginRight: '0.4rem',
@@ -139,10 +139,11 @@ function VariablesPanel({ globalVars, callStack, problemText, problemImage, answ
   // スカラ
   const renderScalarBox = (name, variable) => {
     const value = variable.value;
+    const type = variable.type.replace("型", "");
 
     return (
       <div key={name} style={varBoxStyle}>
-        <div style={varNameStyle}>{name}</div>
+        <div style={varNameStyle}>{name} [{type}]</div>
         <div style={varValueStyle}>{String(value)}</div>
       </div>
     );
@@ -151,6 +152,7 @@ function VariablesPanel({ globalVars, callStack, problemText, problemImage, answ
   // 配列
   const renderArrayBox = (name, variable) => {
     const arr_val = variable.value;
+    const arr_type = variable.type.replace("型", "");
 
     // 配列のボックスは中身の幅に合わせて伸びるようにする
     const arrayBoxStyle = {
@@ -204,7 +206,7 @@ function VariablesPanel({ globalVars, callStack, problemText, problemImage, answ
 
     return (
       <div key={name} style={arrayBoxStyle}>
-        <div style={varNameStyle}>{name}</div>
+        <div style={varNameStyle}>{name} [{arr_type}]</div>
         <div style={arrayValueWrapperStyle}>
           <div style={tableWrapperStyle}>
             <table style={arrayTableStyle}>
