@@ -299,233 +299,236 @@ function VariablesPanel({ globalVars, callStack, problemText, problemImage, answ
 
       
   return (
-    <div
-      style={{
-        border: '1px solid #ddd',
-        borderRadius: 8,
-        padding: '0.6rem 0.8rem 1.4rem 0.8rem', // 下を少し広めに
-        background: '#fafafa',
-        height: '100%',
-        overflow: 'visible',                     // はみ出しOKに
-        display: 'flex',
-        flexDirection: 'column',
-        position: 'relative',                    // 絶対配置の基準
-        color: '#111',
-      }}
-    >
-      {/* 中身：変数一覧 or 問題文（領域を最大限使う） */}
-      <div style={{ flex: 1, overflow: 'auto' }}>
-        {/* 変数 */}
-        {activeTab === 'variables' && (
-          <>
-            {/* グローバル変数 */}
-            {globalentries.length > 0 && (
-              <>
-                <h4>グローバル変数</h4>
-                {renderScopeVars(globalentries)}
-              </>
-            )}
-
-            {/* ローカル変数（関数ごと） */}
-            {localentries.map((local, i) => (
-              <div key={i} style={{ marginBottom: '1rem' }}>
-                <h4>{local.name}</h4>
-                {renderScopeVars(local.variables)}
-              </div>
-            ))}
-          </>
-        )}
-
-        {/* 問題文と解答 */}
-        {/* タブが問題文なら表示 */}
-        {activeTab === 'problem' && (
-          <div style={{ padding: '0.5rem 0', fontSize: '0.9rem', color: '#111', lineHeight: 1.6 }}>
-            {/* 問題文 */}
-            {/* 問題文があるなら表示 */}
-            {problemText && (
-              <div style={{ marginBottom: '0.75rem', whiteSpace: 'pre-wrap' }}>
-                {problemText}
-              </div>
-            )}
-            {/* 問題に画像があるなら表示 */}
-            {problemImage && (
-              <div style={{
-                display: 'flex',
-                justifyContent: 'center', // 水平中央
-              }}>
-                <img
-                  src={problemImage}
-                  alt="問題画像"
-                  style={{ maxWidth: '100%', height: 'auto' }}
-                />
-              </div>
-            )}
-
-
-            {/* 解答ボタン */}
-            {/* 解答群があるなら表示 */}
-            {answerChoices && answerChoices.length > 0 && (
-              <div>
-                <div style={{ fontWeight: 'bold', marginBottom: '0.3rem' }}>解答群</div>
-                {/* 選択肢全体 */}
-                <div
-                  style={{
-                    display: "flex",
-                    gap: `${choiceGapRem}rem`,
-                    flexWrap: "wrap",
-                  }}
-                >
-                  {/* 選択肢一つ一つ */}
-                  {answerChoices.map((choice, idx) => (
-                    <div
-                      key={choice.id}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "0.3rem",
-                        width: choiceItemWidth,
-                      }}
-                    >
-                      {/* ボタン "ア"  */}
-                      <button
-                        type="button"
-                        onClick={() => handleChoiceClick(choice)}
-                        style={{
-                          padding: '0.35rem 0.7rem',
-                          borderRadius: '5px',
-                          border: '1px solid #ccc',
-                          cursor: 'pointer',
-                          fontSize: '0.85rem',
-                          background: '#c0ffc3ff',
-                        }}
-                      >
-                        {choice.id}
-                      </button>
-                      {/* ボタンの右に内容 */}
-                      <span style={{ fontSize: "0.9rem", whiteSpace: "pre-wrap"}}>{choice.text}</span>
-                      {/* 内容の右に置き換えボタン(あるなら) */}
-                      {insertChoiceList.length > 0 && (
-                        <button
-                          type="button"
-                          onClick={() => setinsertChoiceNumber(idx)}  // 押した選択肢番号をindexに返す
-                          style={{
-                            marginLeft: '1.0rem',
-                            padding: '0.2rem 0.6rem',
-                            fontSize: '0.75rem',
-                            borderRadius: 4,
-                            border: '1px solid #666',
-                            cursor: 'pointer',
-                            // background: '#f0f0f0',
-                            background: '#cde2e0ff',
-                          }}
-                        >
-                          置換
-                        </button>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-
-      {/* 右下にタブ切り替えボタンを生やす */}
+    <>
       <div
+        className="varsZoom"
         style={{
-          position: 'absolute',
-          right: '0.15rem',
-          bottom: '-2.17rem', // マイナスで外側にはみ出させる
+          border: '1px solid #ddd',
+          borderRadius: 8,
+          padding: '0.6rem 0.8rem 1.4rem 0.8rem', // 下を少し広めに
+          background: '#fafafa',
+          height: '100%',
+          overflow: 'visible',                     // はみ出しOKに
+          display: 'flex',
+          flexDirection: 'column',
+          position: 'relative',                    // 絶対配置の基準
           color: '#111',
         }}
       >
-        <div style={tabWrapperStyle}>
-          {/* 左タブ（変数） */}
-          <button
-            onClick={() => setActiveTab('variables')}
-            style={
-              activeTab === 'variables'
-                ? { ...tabButtonActive, ...tabButtonLeft }
-                : { ...tabButtonInactive, ...tabButtonLeft }
-            }
-          >
-            変数・配列の表示
-          </button>
+        {/* 中身：変数一覧 or 問題文（領域を最大限使う） */}
+        <div style={{ flex: 1, overflow: 'auto' }}>
+          {/* 変数 */}
+          {activeTab === 'variables' && (
+            <>
+              {/* グローバル変数 */}
+              {globalentries.length > 0 && (
+                <>
+                  <h4>グローバル変数</h4>
+                  {renderScopeVars(globalentries)}
+                </>
+              )}
 
-          {/* 右タブ（問題文） */}
-          <button
-            onClick={() => setActiveTab('problem')}
-            style={
-              activeTab === 'problem'
-                ? { ...tabButtonActive, ...tabButtonRight, }
-                : { ...tabButtonInactive, ...tabButtonRight, }
-            }
-          >
-            問題文を表示
-          </button>
+              {/* ローカル変数（関数ごと） */}
+              {localentries.map((local, i) => (
+                <div key={i} style={{ marginBottom: '1rem' }}>
+                  <h4>{local.name}</h4>
+                  {renderScopeVars(local.variables)}
+                </div>
+              ))}
+            </>
+          )}
+
+          {/* 問題文と解答 */}
+          {/* タブが問題文なら表示 */}
+          {activeTab === 'problem' && (
+            <div style={{ padding: '0.5rem 0', fontSize: '0.9rem', color: '#111', lineHeight: 1.6 }}>
+              {/* 問題文 */}
+              {/* 問題文があるなら表示 */}
+              {problemText && (
+                <div style={{ marginBottom: '0.75rem', whiteSpace: 'pre-wrap' }}>
+                  {problemText}
+                </div>
+              )}
+              {/* 問題に画像があるなら表示 */}
+              {problemImage && (
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'center', // 水平中央
+                }}>
+                  <img
+                    src={problemImage}
+                    alt="問題画像"
+                    style={{ maxWidth: '100%', height: 'auto' }}
+                  />
+                </div>
+              )}
+
+
+              {/* 解答ボタン */}
+              {/* 解答群があるなら表示 */}
+              {answerChoices && answerChoices.length > 0 && (
+                <div>
+                  <div style={{ fontWeight: 'bold', marginBottom: '0.3rem' }}>解答群</div>
+                  {/* 選択肢全体 */}
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: `${choiceGapRem}rem`,
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    {/* 選択肢一つ一つ */}
+                    {answerChoices.map((choice, idx) => (
+                      <div
+                        key={choice.id}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "0.3rem",
+                          width: choiceItemWidth,
+                        }}
+                      >
+                        {/* ボタン "ア"  */}
+                        <button
+                          type="button"
+                          onClick={() => handleChoiceClick(choice)}
+                          style={{
+                            padding: '0.35rem 0.7rem',
+                            borderRadius: '5px',
+                            border: '1px solid #ccc',
+                            cursor: 'pointer',
+                            fontSize: '0.85rem',
+                            background: '#c0ffc3ff',
+                          }}
+                        >
+                          {choice.id}
+                        </button>
+                        {/* ボタンの右に内容 */}
+                        <span style={{ fontSize: "0.9rem", whiteSpace: "pre-wrap"}}>{choice.text}</span>
+                        {/* 内容の右に置き換えボタン(あるなら) */}
+                        {insertChoiceList.length > 0 && (
+                          <button
+                            type="button"
+                            onClick={() => setinsertChoiceNumber(idx)}  // 押した選択肢番号をindexに返す
+                            style={{
+                              marginLeft: '1.0rem',
+                              padding: '0.2rem 0.6rem',
+                              fontSize: '0.75rem',
+                              borderRadius: 4,
+                              border: '1px solid #666',
+                              cursor: 'pointer',
+                              // background: '#f0f0f0',
+                              background: '#cde2e0ff',
+                            }}
+                          >
+                            置換
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
-      </div>
-      {/* 結果表示(ポップアップ） */}
-      {resultPopup && (
+
+        {/* 右下にタブ切り替えボタンを生やす */}
         <div
           style={{
-            position: 'fixed',                 // 画面全体に固定
-            top: 0,                            // 左上基準
-            left: 0,
-            width: '100vw',                    // 画面横全て
-            height: '100vh',                   // 画面縦全て
-            background: 'rgba(0,0,0,0.35)',  // 半透明の黒背景
-            display: 'flex',
-            alignItems: 'center',              // 上下
-            justifyContent: 'center',          // 左右
-            zIndex: 9999,                      // 他より前面に
+            position: 'absolute',
+            right: '0.15rem',
+            bottom: '-2.17rem', // マイナスで外側にはみ出させる
+            color: '#111',
           }}
         >
-          <div
-            style={{
-              background: '#ffffff',
-              padding: '1.2rem 1.6rem',
-              borderRadius: 10,
-              minWidth: 260,
-              textAlign: 'center',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
-              // 結果で枠の色を変える   正解:赤   不正解:青
-              border: resultPopup.isCorrect ? '2px solid #e53935' : '2px solid #1e40af',
-            }}
-          >
-            {/* メッセージ */}
-            <div
-              style={{
-                fontSize: '1.1rem',
-                fontWeight: 'bold',
-                marginBottom: '0.8rem',
-                // 結果で文字の色を変える   正解:赤   不正解:青
-                color: resultPopup.isCorrect ? '#e53935' : '#1e40af',
-              }}
-            >
-              {resultPopup.message}
-            </div>
-            
-            {/* 結果確認ボタン OK */}
+          <div style={tabWrapperStyle}>
+            {/* 左タブ（変数） */}
             <button
-              type="button"
-              onClick={() => setResultPopup(null)}    // 押したら解答結果をリセット
-              style={{
-                padding: '0.35rem 1.2rem',
-                borderRadius: 6,
-                border: '1px solid #555',
-                cursor: 'pointer',
-                fontSize: '0.9rem',
-                background: '#f5f5f5',
-              }}
+              onClick={() => setActiveTab('variables')}
+              style={
+                activeTab === 'variables'
+                  ? { ...tabButtonActive, ...tabButtonLeft }
+                  : { ...tabButtonInactive, ...tabButtonLeft }
+              }
             >
-              OK
+              変数・配列の表示
+            </button>
+
+            {/* 右タブ（問題文） */}
+            <button
+              onClick={() => setActiveTab('problem')}
+              style={
+                activeTab === 'problem'
+                  ? { ...tabButtonActive, ...tabButtonRight, }
+                  : { ...tabButtonInactive, ...tabButtonRight, }
+              }
+            >
+              問題文を表示
             </button>
           </div>
         </div>
-      )}
-    </div>
+      </div>
+        {/* 結果表示(ポップアップ） */}
+        {resultPopup && (
+          <div
+            style={{
+              position: 'fixed',                 // 画面全体に固定
+              top: 0,                            // 左上基準
+              left: 0,
+              width: '100vw',                    // 画面横全て
+              height: '100vh',                   // 画面縦全て
+              background: 'rgba(0,0,0,0.35)',  // 半透明の黒背景
+              display: 'flex',
+              alignItems: 'center',              // 上下
+              justifyContent: 'center',          // 左右
+              zIndex: 9999,                      // 他より前面に
+            }}
+          >
+            <div
+              style={{
+                background: '#ffffff',
+                padding: '1.2rem 1.6rem',
+                borderRadius: 10,
+                minWidth: 260,
+                textAlign: 'center',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.25)',
+                // 結果で枠の色を変える   正解:赤   不正解:青
+                border: resultPopup.isCorrect ? '2px solid #e53935' : '2px solid #1e40af',
+              }}
+            >
+              {/* メッセージ */}
+              <div
+                style={{
+                  fontSize: '1.1rem',
+                  fontWeight: 'bold',
+                  marginBottom: '0.8rem',
+                  // 結果で文字の色を変える   正解:赤   不正解:青
+                  color: resultPopup.isCorrect ? '#e53935' : '#1e40af',
+                }}
+              >
+                {resultPopup.message}
+              </div>
+              
+              {/* 結果確認ボタン OK */}
+              <button
+                type="button"
+                onClick={() => setResultPopup(null)}    // 押したら解答結果をリセット
+                style={{
+                  padding: '0.35rem 1.2rem',
+                  borderRadius: 6,
+                  border: '1px solid #555',
+                  cursor: 'pointer',
+                  fontSize: '0.9rem',
+                  background: '#f5f5f5',
+                }}
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        )}
+    </>
   );
 }
 

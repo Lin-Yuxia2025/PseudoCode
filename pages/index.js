@@ -32,7 +32,7 @@ export default function Home() {
   
   
 
-  // 選択肢から挿入ボタンが押されたら、内容を押された番号の内容を取得して、エディタに渡す
+  // 選択肢から置換ボタンが押されたら、内容を押された番号の内容を取得して、エディタに渡す
   useEffect(() => {
     if (insertChoiceNumber == null)
       return 
@@ -46,7 +46,7 @@ export default function Home() {
   return (
     <div style={{ display: 'flex', gap: '1rem', height: "100vh" }}>
       {/* 左側 Editor*/}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', flex: '1 1 50%' }}>  
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', flex: '1 1 50%', minWidth: 0 }}>  
         <EditorPanel problemCode={problemCode} setResult={setglobalVars} globalVars={globalVars} setOutput={setOutput} output={output} 
           setcallStack={setcallStack} callStack={callStack} insertChoicedata={insertChoicedata} setinsertChoicedata={setinsertChoicedata} setinsertChoiceNumber={setinsertChoiceNumber}
           selectedProblemIndex={selectedProblemIndex} setSelectedProblemIndex={setSelectedProblemIndex} 
@@ -55,19 +55,20 @@ export default function Home() {
 
       {/* 右側：上に変数一覧、下に出力*/}
       <div
+        className='rightPanelGap'
         style={{
           flex: '1 1 50%',         // エディタとの横幅
           display: 'flex',
           flexDirection: 'column', // 縦並び
-          gap: '3.0rem',
           minHeight: 0,            // 縮めるように（出力パネルを押し出さない）
+          minWidth:0,
         }}>
         {/* 変数一覧に載せる、globalVars, callStack(local変数が入ってる)を渡す */}
         <div style={{ flex: 1, minHeight: 0}}>
           <VariablesPanel globalVars={globalVars} callStack={callStack} problemText={problemText} problemImage = {problemImage}
            answerChoices={answerChoices} choiceitemsRow={choiceitemsRow} setinsertChoiceNumber={setinsertChoiceNumber} insertChoiceList={insertChoiceList}/>
         </div>
-        <div style={{height: 140}}>
+        <div style={{}}>
           <OutputPanel output={output} />
         </div>
       </div>

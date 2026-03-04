@@ -12,8 +12,10 @@ function OutputPanel({ output }) {
 
 
   return (
-    <div style={{ border: '1px solid #ddd', borderRadius: 8, padding: '1rem', background: '#fafafa', color: '#111',   
-      height: 140,
+    <div className="varsZoom" style={{ border: '1px solid #ddd', borderRadius: 8, padding: '1rem', background: '#fafafa', color: '#111',   
+      // height: 140,
+      height: '30vh',
+      maxHeight: 140,
       overflow: 'auto',           // はみ出したらスクロール
       }}>  
       <div style={{ background: '#fafafa',

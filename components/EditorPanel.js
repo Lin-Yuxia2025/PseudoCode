@@ -274,87 +274,89 @@ const iconButtonStyleMini = {
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
 
       {/* プログラム選択メニュー, ブレークポイント切り替え, フォントサイズ切替, 操作ガイド */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1.6rem' }}>
+      <div style={{width: '100%',}}>
+        <div className= "buttonBarScaleTop" style={{ display: 'flex', alignItems: 'flex-start', gap: '1.6rem', }}>
 
-        {/* プログラム選択メニュー */}
-        <div style={{ flex: '0 0 auto', marginLeft: '1rem' }}>
-          <SelectProblem
-            selectedProblemIndex={selectedProblemIndex}
-            setSelectedProblemIndex={setSelectedProblemIndex}
-          />
-        </div>
-
-        {/* BreakPoint切り替え */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'0.1rem'}}>
-          <button
-            type="button"
-            onClick={switchingBreakPoint}
-            style={{
-              width: 50,
-              height: 30,
-              borderRadius: 8,
-              border: '1px solid #555',
-              background: '#ffffff',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: 0,
-            }}
-          >
-            <FlagIcon className="h-6 w-6 text-gray-700" />
-          </button>
-
-          <div style={{ fontSize: '0.7rem', marginTop: '0.1rem', textAlign: 'center' }}>
-            ブレークポイント切替
+          {/* プログラム選択メニュー */}
+          <div style={{ flex: '0 0 auto', marginLeft: '1rem', }}>
+            <SelectProblem
+              selectedProblemIndex={selectedProblemIndex}
+              setSelectedProblemIndex={setSelectedProblemIndex}
+            />
           </div>
-        </div>
 
-        {/* Font Size 切替 */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '0.1rem' }}>
-          <select
-            value={fontSize}
-            onChange={(e) => setFontSize(Number(e.target.value))}
-            style={{
-              height: 30,
-              borderRadius: 8,
-              border: '1px solid #555',
-              background: '#ffffff',
-              color: '#111',
-              cursor: 'pointer',
-              padding: '0 0.5rem',
-            }}
-          >
-            {fontSizeList.map((size) => (
-              <option key={size} value={size}>
-                {size}
-              </option>
-            ))}
-          </select>
-          <div style={{ fontSize: '0.7rem', marginTop: '0.1rem', textAlign: 'center' }}>フォントサイズ</div>
-        </div>
-        {/* 操作ガイド */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'0.1rem'}}>
-          <button
-            type="button"
-            onClick={() => setGuideOpen(true)}
-            style={{
-              width: 50,
-              height: 30,
-              borderRadius: 8,
-              border: '1px solid #555',
-              background: '#ffffff',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: 0,
-            }}
-          >
-            <QuestionMarkCircleIcon className="h-6 w-6 text-gray-700" />
-          </button>
-          <div style={{ fontSize: '0.7rem', marginTop: '0.1rem', textAlign: 'center' }}>
-            操作ガイド
+          {/* BreakPoint切り替え */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'0.1rem'}}>
+            <button
+              type="button"
+              onClick={switchingBreakPoint}
+              style={{
+                width: 50,
+                height: 30,
+                borderRadius: 8,
+                border: '1px solid #555',
+                background: '#ffffff',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: 0,
+              }}
+            >
+              <FlagIcon className="h-6 w-6 text-gray-700" />
+            </button>
+
+            <div style={{ fontSize: '0.7rem', marginTop: '0.1rem', textAlign: 'center' }}>
+              ブレークポイント切替
+            </div>
+          </div>
+
+          {/* Font Size 切替 */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '0.1rem' }}>
+            <select
+              value={fontSize}
+              onChange={(e) => setFontSize(Number(e.target.value))}
+              style={{
+                height: 30,
+                borderRadius: 8,
+                border: '1px solid #555',
+                background: '#ffffff',
+                color: '#111',
+                cursor: 'pointer',
+                padding: '0 0.5rem',
+              }}
+            >
+              {fontSizeList.map((size) => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
+              ))}
+            </select>
+            <div style={{ fontSize: '0.7rem', marginTop: '0.1rem', textAlign: 'center' }}>フォントサイズ</div>
+          </div>
+          {/* 操作ガイド */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:'0.1rem'}}>
+            <button
+              type="button"
+              onClick={() => setGuideOpen(true)}
+              style={{
+                width: 50,
+                height: 30,
+                borderRadius: 8,
+                border: '1px solid #555',
+                background: '#ffffff',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: 0,
+              }}
+            >
+              <QuestionMarkCircleIcon className="h-6 w-6 text-gray-700" />
+            </button>
+            <div style={{ fontSize: '0.7rem', marginTop: '0.1rem', textAlign: 'center' }}>
+              操作ガイド
+            </div>
           </div>
         </div>
       </div>
@@ -384,6 +386,7 @@ const iconButtonStyleMini = {
           >
             {/* ボタン */}
             <div 
+              className="guideButtonZoom"
               style={{
                 position: "absolute",
                 top: "-0.5vh",
@@ -462,7 +465,7 @@ const iconButtonStyleMini = {
       )}
 
       {/* AceEditor の伸縮用 (エディタだけ、サイズを固定しない) */}
-      <div style={{ flex: 1, marginTop: '0.2rem' }}>
+      <div style={{ flex: 1, marginTop: '0.2rem', }}>
         <AceEditor
           ref={editorRef}
           markers={aceMarkers}
@@ -484,118 +487,119 @@ const iconButtonStyleMini = {
       </div>
 
       {/* 実行ボタン */}
-      <div style={buttonBarStyle}>
-        {/* 完全リセット */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <button
-            type="button"
-            onClick={resetAll}
-            style={iconButtonStyle}
-            title="コード初期化"
-          >
-            ↻
-          </button>
-          <span style={{ fontSize: '0.75rem', marginTop: '0.7rem' }}>
-            コードを初期化する
-          </span>
+      <div style={{width: '100%'}}>
+        <div className="buttonBarScaleDown" style={buttonBarStyle}>
+          {/* 完全リセット */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <button
+              type="button"
+              onClick={resetAll}
+              style={iconButtonStyle}
+              title="コード初期化"
+            >
+              ↻
+            </button>
+            <span style={{ fontSize: '0.75rem', marginTop: '0.7rem' }}>
+              コードを初期化する
+            </span>
+          </div>
+
+          {/* リセット □ */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <button
+              type="button"
+              onClick={resetState}
+              style={iconButtonStyle}
+              title="リセット"
+            >
+              {/* リセットボタン内側 ■ のスタイル */}
+              <div style={{
+                width: '23px',
+                height: '23px',
+                backgroundColor: '#111',
+              }}></div>
+            </button>
+            <span style={{ fontSize: '0.75rem', marginTop: '0.7rem' }}>
+              実行前に戻す
+            </span>
+          </div>
+
+          {/* 一行ずつ実行 ▶ */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <button
+              type="button"
+              onClick= {() => parseCode("step")}  // 実行ボタンを渡して解析
+              style={iconButtonStyle}
+              title="ステップ実行"
+            >
+              ▶
+            </button>
+            <span style={{ fontSize: '0.75rem', marginTop: '0.7rem' }}>
+              ステップ実行
+            </span>
+          </div>
+
+          {/* ステップオーバー*/}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <button
+              type="button"
+              onClick= {() => parseCode("over")}  // 実行ボタンを渡して解析
+              style={iconButtonStyleMini}
+              title="ステップオーバー"
+            >
+            <ArrowUturnDownIcon
+              className="h-5 w-5"
+              //  左右反転
+              style={{ transform: 'scaleX(-1)' }}            
+            />
+            </button>
+            <span style={{ fontSize: '0.7rem', marginTop: '0.4rem', textAlign: 'center' }}>
+              ステップ<br />
+              オーバー
+            </span>
+          </div>
+
+          {/* ステップアウト */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <button
+              type="button"
+              onClick= {() => parseCode("out")}  // 実行ボタンを渡して解析
+              style={iconButtonStyleMini}
+              title="ステップアウト"
+            >
+            <ArrowRightOnRectangleIcon
+              className="h-5 w-5"
+            />
+            </button>
+            <span style={{ fontSize: '0.7rem', marginTop: '0.4rem', textAlign: 'center' }}>
+              ステップ<br />
+              アウト
+            </span>
+          </div>
+
+
+          {/* 全て実行 */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <button
+              type="button"
+              onClick= {() => parseCode("all")}   // 実行ボタンを渡して解析
+              style={{
+                ...iconButtonStyle,
+                letterSpacing: "-0.9rem"
+              }
+
+              }
+              title="全て実行"
+            >
+              ▶┃
+            </button>
+            <span style={{ fontSize: '0.75rem', marginTop: '0.7rem' }}>
+              全て実行
+            </span>
+          </div>
+
         </div>
-
-        {/* リセット □ */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <button
-            type="button"
-            onClick={resetState}
-            style={iconButtonStyle}
-            title="リセット"
-          >
-            {/* リセットボタン内側 ■ のスタイル */}
-            <div style={{
-              width: '23px',
-              height: '23px',
-              backgroundColor: '#111',
-            }}></div>
-          </button>
-          <span style={{ fontSize: '0.75rem', marginTop: '0.7rem' }}>
-            実行前に戻す
-          </span>
-        </div>
-
-        {/* 一行ずつ実行 ▶ */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <button
-            type="button"
-            onClick= {() => parseCode("step")}  // 実行ボタンを渡して解析
-            style={iconButtonStyle}
-            title="ステップ実行"
-          >
-            ▶
-          </button>
-          <span style={{ fontSize: '0.75rem', marginTop: '0.7rem' }}>
-            ステップ実行
-          </span>
-        </div>
-
-        {/* ステップオーバー*/}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <button
-            type="button"
-            onClick= {() => parseCode("over")}  // 実行ボタンを渡して解析
-            style={iconButtonStyleMini}
-            title="ステップオーバー"
-          >
-          <ArrowUturnDownIcon
-            className="h-5 w-5"
-            //  左右反転
-            style={{ transform: 'scaleX(-1)' }}            
-          />
-          </button>
-          <span style={{ fontSize: '0.7rem', marginTop: '0.4rem', textAlign: 'center' }}>
-            ステップ<br />
-            オーバー
-          </span>
-        </div>
-
-        {/* ステップアウト */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <button
-            type="button"
-            onClick= {() => parseCode("out")}  // 実行ボタンを渡して解析
-            style={iconButtonStyleMini}
-            title="ステップアウト"
-          >
-          <ArrowRightOnRectangleIcon
-            className="h-5 w-5"
-          />
-          </button>
-          <span style={{ fontSize: '0.7rem', marginTop: '0.4rem', textAlign: 'center' }}>
-            ステップ<br />
-            アウト
-          </span>
-        </div>
-
-
-        {/* 全て実行 */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <button
-            type="button"
-            onClick= {() => parseCode("all")}   // 実行ボタンを渡して解析
-            style={{
-              ...iconButtonStyle,
-              letterSpacing: "-0.9rem"
-            }
-
-            }
-            title="全て実行"
-          >
-            ▶┃
-          </button>
-          <span style={{ fontSize: '0.75rem', marginTop: '0.7rem' }}>
-            全て実行
-          </span>
-        </div>
-
       </div>
-
 
       {/* メッセージがあれば表示(ポップアップ） */}
       {popupMessage && (
