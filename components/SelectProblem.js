@@ -61,6 +61,8 @@ function SelectProblem({selectedProblemIndex, setSelectedProblemIndex,}) {
                         <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-gray-200 text-left shadow-md sm:text-sm">
                             <Combobox.Input
                                 ref={programInputRef}
+                                readOnly                // 一旦、メニューに入力して検索する機能を停止
+                                inputMode="none"        //              〃
                                 className="w-full border-none py-2 pl-3 pr-10 bg-[#F7F4F9] text-sm leading-5 text-gray-900 focus:outline-none focus:ring-0"
                                 displayValue={(item) => item?.name ?? ''}
                                 onChange={(event) => setProgramQuery(event.target.value)}
