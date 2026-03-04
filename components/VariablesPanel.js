@@ -518,6 +518,7 @@ function VariablesPanel({ globalVars, callStack, problemText, problemImage, answ
                   padding: '0.35rem 1.2rem',
                   borderRadius: 6,
                   border: '1px solid #555',
+                  color: '#111',
                   cursor: 'pointer',
                   fontSize: '0.9rem',
                   background: '#f5f5f5',
